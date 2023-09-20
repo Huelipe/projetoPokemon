@@ -10,4 +10,7 @@
 
 
 
-● Links: [API Pokemon](https://pokeapi.co/). [Pokedex Oficial](https://www.pokemon.com/br/pokedex/). [Showdown](https://pokemonshowdown.com/).
+● Links: [API Pokemon](https://pokeapi.co/),
+[Pokedex Oficial](https://www.pokemon.com/br/pokedex/),
+[Showdown](https://pokemonshowdown.com/),
+[Showdown Calculator](https://calc.pokemonshowdown.com/).
