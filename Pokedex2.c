@@ -52,7 +52,13 @@ int main(){
     }
     fclose(arquivo);
 
-    printf("%s", listaPokemon[151].nome);
+printf("%s\n", listaPokemon[6].nome);
+    printf("HP: %i\n", listaPokemon[6].hp);
+        printf("ATK: %i\n", listaPokemon[6].atk);
+            printf("DEF: %i\n", listaPokemon[6].def);
+                printf("ATK.SP: %i\n", listaPokemon[6].spatack);
+                    printf("DEF.SP: %i\n", listaPokemon[6].spdef);
+                        printf("Speed: %i\n", listaPokemon[6].speed);
 
     return 0;
 }
