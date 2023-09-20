@@ -1,0 +1,8 @@
+echo "# petshop" >> README.md
+git init
+git status
+git add README.md
+git status
+git commit -m "comit inicial"
+git remote add origin hhttps://github.com/UTFPR-Felipe-Sorrilha/projetoPokemon.git
+git push -u origin main
