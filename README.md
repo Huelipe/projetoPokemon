@@ -6,11 +6,4 @@
 **Alunos: Caio Vinícius Maciel Delgado, Felipe Ferrer Sorrilha e João Pedro Garcia Bronharo**
 
 
-
-
-
-
-● Links: [API Pokemon](https://pokeapi.co/),
-[Pokedex Oficial](https://www.pokemon.com/br/pokedex/),
-[Showdown](https://pokemonshowdown.com/),
-[Showdown Calculator](https://calc.pokemonshowdown.com/).
+● Links: [API Pokemon](https://pokeapi.co/), [Pokedex Oficial](https://www.pokemon.com/br/pokedex/), [Showdown](https://pokemonshowdown.com/), [Showdown Calculator](https://calc.pokemonshowdown.com/).
