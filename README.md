@@ -5,7 +5,8 @@
 ### Prof. Muriel de Souza Godoi
 ### Alunos: Caio Vinícius Maciel Delgado, Felipe Ferrer Sorrilha e João Pedro Garcia Bronharo
 
-● Links: [API Pokemon](https://pokeapi.co/), [Pokedex Oficial](https://www.pokemon.com/br/pokedex/), [Showdown](https://pokemonshowdown.com/), [Showdown Calculator](https://calc.pokemonshowdown.com/).
+● Links Github: [Sintaxe read.me](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+● Links Pokemon: [API Pokemon](https://pokeapi.co/), [Pokedex Oficial](https://www.pokemon.com/br/pokedex/), [Showdown](https://pokemonshowdown.com/), [Showdown Calculator](https://calc.pokemonshowdown.com/).
 
 **Obrigatório:**
 + Gerenciamento de Pokedex
