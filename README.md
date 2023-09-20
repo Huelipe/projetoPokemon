@@ -8,7 +8,12 @@
 ● Links: [API Pokemon](https://pokeapi.co/), [Pokedex Oficial](https://www.pokemon.com/br/pokedex/), [Showdown](https://pokemonshowdown.com/), [Showdown Calculator](https://calc.pokemonshowdown.com/).
 
 **Obrigatório:**
-> Gerenciamento de Pokedex, Estrutura de Coleção, Estrutura de Mochila, menu, visualização de pokémon, save de arquivos no HD, 
++ Gerenciamento de Pokedex
++ Estrutura de Coleção
++ Estrutura de Mochila
++ Menu
++ Visualização dos Pokémons
++ Save de arquivos no HD (em binário)
 
 **Parte Criativa:**
 > Sendo discutido...
