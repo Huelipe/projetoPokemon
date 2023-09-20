@@ -5,5 +5,9 @@
 ### Prof. Muriel de Souza Godoi
 ### Alunos: Caio Vinícius Maciel Delgado, Felipe Ferrer Sorrilha e João Pedro Garcia Bronharo
 
+**Obrigatório:**
+<sub>Criação De uma Pokedex<sub>
+
+
 
 ● Links: [API Pokemon](https://pokeapi.co/), [Pokedex Oficial](https://www.pokemon.com/br/pokedex/), [Showdown](https://pokemonshowdown.com/), [Showdown Calculator](https://calc.pokemonshowdown.com/).
