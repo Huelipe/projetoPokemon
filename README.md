@@ -26,8 +26,11 @@
 + Com o passar do tempo, o jogador poderá ter acesso a diferentes Pokébolas que podem facilitar a captura ou causar efeitos no Pokémon.
 + Minigames:
 > Desafios de Pesca
+
 > Corrida Pokémon
+
 > Desafio pulo mais alto
+
 + Sistema de plantação:
 > Apricorns (responsáveis pela fabricação de pokébolas)
 > Berries (frutas que podem ajudar na captura de pokémons e também podem ser vendidas).
