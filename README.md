@@ -33,6 +33,7 @@
 
 + Sistema de plantação:
 > Apricorns (responsáveis pela fabricação de pokébolas)
+
 > Berries (frutas que podem ajudar na captura de pokémons e também podem ser vendidas).
 
 **Sistema de Batalha**
