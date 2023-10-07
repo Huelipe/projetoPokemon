@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
+#include <time.h>
 
 typedef struct Pokemon{
     int nPokedex; // Número na pokedex
@@ -26,27 +27,27 @@ typedef struct Pokemon{
 
 typedef struct PokemonCapturado{
     char apelido[30];
-    int ivsHP;
-    int ivsAtk;
-    int ivsDef;
-    int ivsSpatack;
-    int ivsSpDef;
-    int ivsSpeed;
-    int evsHP;
-    int evsAtk;
-    int evsDef;
-    int evsSpatack;
-    int evsSpDef;
-    int evsSpeed;
-    int HP;
-    int HPFULL;
-    int HPATUAL;
-    int Atk;
-    int Def;
-    int Spatack;
-    int SpDef;
-    int Speed;
-    int LvlAtual; // Level atual
+    float ivsHP;
+    float ivsAtk;
+    float ivsDef;
+    float ivsSpatack;
+    float ivsSpDef;
+    float ivsSpeed;
+    float evsHP;
+    float evsAtk;
+    float evsDef;
+    float evsSpatack;
+    float evsSpDef;
+    float evsSpeed;
+    float HP;
+    float HPFULL;
+    float HPATUAL;
+    float Atk;
+    float Def;
+    float Spatack;
+    float SpDef;
+    float Speed;
+    float LvlAtual; // Level atual
     char move1[20]; // Ataque 1
     char move2[20]; // Ataque 2
     char move3[20]; // Ataque 3
@@ -76,18 +77,18 @@ float modSpeed;
 
 void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl, nature natures[25]){
 
-    pselvagem.ivsHP = rand() % 31;
-    pselvagem.ivsAtk = rand() % 31;
-    pselvagem.ivsDef = rand() % 31;
-    pselvagem.ivsSpatack = rand() % 31;
-    pselvagem.ivsSpDef = rand() % 31;
-    pselvagem.ivsSpeed = rand() % 31;
+    pselvagem.ivsHP = rand() % 32;
+    pselvagem.ivsAtk = rand() % 32;
+    pselvagem.ivsDef = rand() % 32;
+    pselvagem.ivsSpatack = rand() % 32;
+    pselvagem.ivsSpDef = rand() % 32;
+    pselvagem.ivsSpeed = rand() % 32;
 
     pselvagem.LvlAtual = lvl;
     pselvagem.HPFULL = pselvagem.HP;
     pselvagem.HPATUAL = pselvagem.HP;
 
-    int r = rand() % 25; //randomizador nature
+    int r = rand() % 26; //randomizador nature
     char nature[20];
     strcpy(nature, natures[r].nome);
 
@@ -111,10 +112,12 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl, nat
 
 void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
 // Ao apertar o botão de tentar capturar
+
+
 float chance =  (( 1 + (pselvagem.HPFULL - pselvagem.HPATUAL * 2 ) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3 )) / 256;
 printf("%.2f\n", chance);
 
-float numSorteado = (rand() % 100);
+float numSorteado = (rand() % 100) + 1;
 printf("%f\n", numSorteado);
 
 if(numSorteado <= chance){
@@ -126,6 +129,9 @@ if(numSorteado <= chance){
 }
 
 int main(){
+
+    srand(time(NULL));
+
     FILE *arquivo;
     char linha[512]; 
     Pokemon listaPokemon[MAX_POKEMON];
