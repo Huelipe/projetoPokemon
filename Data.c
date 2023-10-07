@@ -56,7 +56,7 @@ typedef struct PokemonCapturado{
     union{
         char tipo[10];
         int id;
-        int atual; // (1 ou 10), (esta com status ou não)
+        float atual; // (1 ou 10), (esta com status ou não)
     } Status;
 } pokemonCapturado;
 #define MAX_POKEMON 722 
@@ -75,50 +75,63 @@ float modSpdef;
 float modSpeed;
 } nature;
 
-void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl, nature natures[25]){
+void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, nature natures[25]) {
 
-    pselvagem.ivsHP = rand() % 32;
-    pselvagem.ivsAtk = rand() % 32;
-    pselvagem.ivsDef = rand() % 32;
-    pselvagem.ivsSpatack = rand() % 32;
-    pselvagem.ivsSpDef = rand() % 32;
-    pselvagem.ivsSpeed = rand() % 32;
+    pselvagem->ivsHP = rand() % 32;
+    pselvagem->ivsAtk = rand() % 32;
+    pselvagem->ivsDef = rand() % 32;
+    pselvagem->ivsSpatack = rand() % 32;
+    pselvagem->ivsSpDef = rand() % 32;
+    pselvagem->ivsSpeed = rand() % 32;
 
-    pselvagem.LvlAtual = lvl;
-    pselvagem.HPFULL = pselvagem.HP;
-    pselvagem.HPATUAL = pselvagem.HP;
+    pselvagem->LvlAtual = lvl;
 
-    int r = rand() % 26; //randomizador nature
+    int r = rand() % 26; // randomizador nature
     char nature[20];
     strcpy(nature, natures[r].nome);
 
-    pselvagem.evsHP = 0;
-    pselvagem.evsAtk = 0;
-    pselvagem.evsDef = 0;
-    pselvagem.evsSpatack = 0;
-    pselvagem.evsSpDef = 0;
-    pselvagem.evsSpeed = 0;
+    pselvagem->evsHP = 0;
+    pselvagem->evsAtk = 0;
+    pselvagem->evsDef = 0;
+    pselvagem->evsSpatack = 0;
+    pselvagem->evsSpDef = 0;
+    pselvagem->evsSpeed = 0;
 
-    pselvagem.HP = ((pselvagem.LvlAtual * ((pokemonNaDex.hp * 2) + pselvagem.ivsHP + (pselvagem.evsHP / 4))) / 100) + 10 + pselvagem.LvlAtual;
-    pselvagem.Atk = (((pselvagem.LvlAtual * ((pokemonNaDex.atk * 2) + pselvagem.ivsAtk + (pselvagem.evsAtk/4))) / 100) + 5) * natures[r].modAtk;
-    pselvagem.Def = (((pselvagem.LvlAtual * ((pokemonNaDex.def * 2) + pselvagem.ivsDef + (pselvagem.evsDef/4))) / 100) + 5) * natures[r].modDef;
-    pselvagem.Spatack = (((pselvagem.LvlAtual * ((pokemonNaDex.spatack * 2) + pselvagem.ivsSpatack + (pselvagem.evsSpatack/4))) / 100) + 5) * natures[r].modSpatack;
-    pselvagem.SpDef = (((pselvagem.LvlAtual * ((pokemonNaDex.spdef * 2) + pselvagem.ivsSpDef + (pselvagem.evsSpDef/4))) / 100) + 5) * natures[r].modSpdef;
-    pselvagem.Speed = (((pselvagem.LvlAtual * ((pokemonNaDex.speed * 2) + pselvagem.ivsSpeed + (pselvagem.evsSpeed/4))) / 100) + 5) * natures[r].modSpeed;
+    pselvagem->HP = ((pselvagem->LvlAtual * ((pokemonNaDex.hp * 2) + pselvagem->ivsHP + (pselvagem->evsHP / 4))) / 100) + 10 + pselvagem->LvlAtual;
+    pselvagem->Atk = (((pselvagem->LvlAtual * ((pokemonNaDex.atk * 2) + pselvagem->ivsAtk + (pselvagem->evsAtk / 4))) / 100) + 5) * natures[r].modAtk;
+    pselvagem->Def = (((pselvagem->LvlAtual * ((pokemonNaDex.def * 2) + pselvagem->ivsDef + (pselvagem->evsDef / 4))) / 100) + 5) * natures[r].modDef;
+    pselvagem->Spatack = (((pselvagem->LvlAtual * ((pokemonNaDex.spatack * 2) + pselvagem->ivsSpatack + (pselvagem->evsSpatack / 4))) / 100) + 5) * natures[r].modSpatack;
+    pselvagem->SpDef = (((pselvagem->LvlAtual * ((pokemonNaDex.spdef * 2) + pselvagem->ivsSpDef + (pselvagem->evsSpDef / 4))) / 100) + 5) * natures[r].modSpdef;
+    pselvagem->Speed = (((pselvagem->LvlAtual * ((pokemonNaDex.speed * 2) + pselvagem->ivsSpeed + (pselvagem->evsSpeed / 4))) / 100) + 5) * natures[r].modSpeed;
 
-    pselvagem.Status.atual = 1;
+    pselvagem->HPFULL = pselvagem->HP;
+    pselvagem->HPATUAL = pselvagem->HP;
 
+    pselvagem->Status.atual = 1;
 }
+
 
 void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
 // Ao apertar o botão de tentar capturar
 
+printf("\n\n");
+printf("%f\n", pselvagem.HPFULL);
+printf("%f\n", pselvagem.HPATUAL);
+printf("%f\n", pokemonNaDex.captura);
+printf("%f\n", pokeball[qualpokebola].catchRate);
+printf("%f\n", pselvagem.Status.atual);
+printf("\n\n");
 
-float chance =  (( 1 + (pselvagem.HPFULL - pselvagem.HPATUAL * 2 ) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3 )) / 256;
-printf("%.2f\n", chance);
+float chance;
+//if (pselvagem.HPFULL != 0 && pselvagem.HPATUAL != 0 && pokeball[qualpokebola].catchRate != 0 && pselvagem.Status.atual != 0) {
+    chance = ((1 + (pselvagem.HPFULL - (pselvagem.HPATUAL * 2)) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3)) / 256;
+    printf("%.2f\n", chance);
+/*} else {
+    printf("Divisão por zero evitada. Verifique os valores das variáveis.\n");
+} */
 
 float numSorteado = (rand() % 100) + 1;
-printf("%f\n", numSorteado);
+printf("%.0f\n", numSorteado);
 
 if(numSorteado <= chance){
     (*resultado) = 1;
@@ -233,6 +246,7 @@ int main(){
     printf("ATK.SP: %i\n", listaPokemon[6].spatack);
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
+    printf("Speed: %f\n", listaPokemon[6].captura);
 
     nature natures[25];
     strcpy(natures[1].nome, "Hardy");
@@ -353,6 +367,7 @@ int main(){
 
     for(int i = 0; i < 722; i++){
         if(strcmp(nome, listaPokemon[i].nome) == 0){
+        printf("Nome do Pokémon encontrado: %s\n", listaPokemon[i].nome);
         selvagagemNaDex.altura = listaPokemon[i].altura;
         selvagagemNaDex.peso = listaPokemon[i].peso;
         strcpy(selvagagemNaDex.tipo1, listaPokemon[i].tipo1);
@@ -370,8 +385,11 @@ int main(){
         selvagagemNaDex.captura = listaPokemon[i].captura;
         selvagagemNaDex.preEvo = listaPokemon[i].preEvo;
         selvagagemNaDex.prxEvo = listaPokemon[i].prxEvo;
+        break;
         }
     }
+
+    printf("%f kakeison \n", selvagagemNaDex.captura);
 
     printf("Pokebola que vai utilizar: ");
     char pokebola[20];
@@ -396,8 +414,7 @@ int main(){
     pokemonCapturado pselvagem;
 
 
-
-    criarPokemon(selvagagemNaDex, pselvagem, 10, natures);
+    criarPokemon(selvagagemNaDex, &pselvagem, 10, natures);
 
     capturarPokemon(pokebolas, &resultado, selvagagemNaDex, pselvagem, qualPokebola);
 
