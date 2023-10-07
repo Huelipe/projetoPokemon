@@ -40,6 +40,7 @@ typedef struct PokemonCapturado{
     int evsSpeed;
     int HP;
     int HPFULL;
+    int HPATUAL;
     int Atk;
     int Def;
     int Spatack;
@@ -54,7 +55,7 @@ typedef struct PokemonCapturado{
     union{
         char tipo[10];
         int id;
-        int status; // (1 ou 10), (esta com status ou não)
+        int atual; // (1 ou 10), (esta com status ou não)
     } Status;
 } pokemonCapturado;
 #define MAX_POKEMON 722 
@@ -62,7 +63,6 @@ typedef struct PokemonCapturado{
 typedef struct Pokebola{
 float catchRate;
 char nome[20];
-int id;
 } Pokebola;
 
 typedef struct natureza{
@@ -74,7 +74,7 @@ float modSpdef;
 float modSpeed;
 } nature;
 
-void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl){
+void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl, nature natures[25]){
 
     pselvagem.ivsHP = rand() % 31;
     pselvagem.ivsAtk = rand() % 31;
@@ -84,6 +84,12 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl){
     pselvagem.ivsSpeed = rand() % 31;
 
     pselvagem.LvlAtual = lvl;
+    pselvagem.HPFULL = pselvagem.HP;
+    pselvagem.HPATUAL = pselvagem.HP;
+
+    int r = rand() % 25; //randomizador nature
+    char nature[20];
+    strcpy(nature, natures[r].nome);
 
     pselvagem.evsHP = 0;
     pselvagem.evsAtk = 0;
@@ -92,24 +98,31 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado pselvagem, int lvl){
     pselvagem.evsSpDef = 0;
     pselvagem.evsSpeed = 0;
 
-    pselvagem.HP = ((pselvagem.LvlAtual * ((pokemonNaDex.hp x 2) + pselvagem.ivsHP + (pselvagem.evsHP / 4))) / 100) + 10 + pselvagem.LvlAtual;
-    pselvagem.Atk = (((pselvagem.LvlAtual * ((pokemonNaDex.atk x 2) + pselvagem.ivsAtk + (pselvagem.evsAtk/4))) / 100) + 5) * /*nature*/;
+    pselvagem.HP = ((pselvagem.LvlAtual * ((pokemonNaDex.hp * 2) + pselvagem.ivsHP + (pselvagem.evsHP / 4))) / 100) + 10 + pselvagem.LvlAtual;
+    pselvagem.Atk = (((pselvagem.LvlAtual * ((pokemonNaDex.atk * 2) + pselvagem.ivsAtk + (pselvagem.evsAtk/4))) / 100) + 5) * natures[r].modAtk;
+    pselvagem.Def = (((pselvagem.LvlAtual * ((pokemonNaDex.def * 2) + pselvagem.ivsDef + (pselvagem.evsDef/4))) / 100) + 5) * natures[r].modDef;
+    pselvagem.Spatack = (((pselvagem.LvlAtual * ((pokemonNaDex.spatack * 2) + pselvagem.ivsSpatack + (pselvagem.evsSpatack/4))) / 100) + 5) * natures[r].modSpatack;
+    pselvagem.SpDef = (((pselvagem.LvlAtual * ((pokemonNaDex.spdef * 2) + pselvagem.ivsSpDef + (pselvagem.evsSpDef/4))) / 100) + 5) * natures[r].modSpdef;
+    pselvagem.Speed = (((pselvagem.LvlAtual * ((pokemonNaDex.speed * 2) + pselvagem.ivsSpeed + (pselvagem.evsSpeed/4))) / 100) + 5) * natures[r].modSpeed;
 
+    pselvagem.Status.atual = 1;
 
 }
 
-void capturarPokemon(int idPokebola, float taxaCaptura, int* resultado){
+void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
 // Ao apertar o botão de tentar capturar
-//float chance =  (( 1 + (pokemonSelvagem.HPFULL - pokemonSelvagem.HP * 2 ) * pokemon.captura * pokebola.catchRate * pokemonSelvagem.Status.status) / (pokemonSelvagem.HPFULL x 3 )) / 256
+float chance =  (( 1 + (pselvagem.HPFULL - pselvagem.HPATUAL * 2 ) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3 )) / 256;
+printf("%.2f\n", chance);
 
-/*float numSorteado = (rand() % 100);
+float numSorteado = (rand() % 100);
+printf("%f\n", numSorteado);
 
-if(numSorteado >= chance){
-    resultado = 1;
+if(numSorteado <= chance){
+    (*resultado) = 1;
 }else{
-    resultado = 0;
+    (*resultado) = 0;
 }
-*/
+
 }
 
 int main(){
@@ -295,10 +308,10 @@ int main(){
                 natures[19].modAtk = natures[19].modSpatack = natures[19].modSpeed = comum;
         natures[20].modSpatack = mais;
             natures[20].modSpdef = menos;
-                natures[20].modAtk = natures[20].modAtk = natures[20].modSpeed = comum;
+                natures[20].modAtk = natures[20].modDef = natures[20].modSpeed = comum;
         natures[21].modSpeed = mais;
             natures[21].modSpdef = menos;
-                natures[21].modAtk = natures[21].modAtk = natures[21].modSpatack = comum;
+                natures[21].modAtk = natures[21].modDef = natures[21].modSpatack = comum;
         natures[22].modAtk = mais;
             natures[22].modSpeed = menos;
                 natures[22].modSpdef = natures[22].modSpatack = natures[22].modDef = comum;
@@ -312,19 +325,80 @@ int main(){
             natures[25].modSpeed = menos;
                 natures[25].modAtk = natures[25].modSpatack = natures[25].modDef = comum;
 
-    printf("Digite o nome do pokemon que você está batalhando!");
+    Pokebola pokebolas[4];
+    strcpy(pokebolas[1].nome, "Pokebola");
+    strcpy(pokebolas[2].nome, "Grande Bola");
+    strcpy(pokebolas[3].nome, "Ultra Bola");
+    strcpy(pokebolas[4].nome, "Bola mestre");
+
+    pokebolas[1].catchRate = 1;
+    pokebolas[2].catchRate = 1.5;
+    pokebolas[3].catchRate = 2;
+    pokebolas[4].catchRate = 1000;
+
+
+    printf("Digite o nome do pokemon que você está batalhando: ");
     char nome[40];
     setbuf(stdin, NULL);
     fgets(nome, 39, stdin);
     nome[strcspn(nome, "\n")] = '\0';
 
     Pokemon selvagagemNaDex;
-    pokemonCapturado selvagem;
 
-    for(int i = 0; i++; i < 722){
+    for(int i = 0; i < 722; i++){
         if(strcmp(nome, listaPokemon[i].nome) == 0){
-
+        selvagagemNaDex.altura = listaPokemon[i].altura;
+        selvagagemNaDex.peso = listaPokemon[i].peso;
+        strcpy(selvagagemNaDex.tipo1, listaPokemon[i].tipo1);
+        strcpy(selvagagemNaDex.tipo2, listaPokemon[i].tipo2);
+        selvagagemNaDex.total = listaPokemon[i].total;
+        selvagagemNaDex.hp = listaPokemon[i].hp;
+        selvagagemNaDex.atk = listaPokemon[i].atk;
+        selvagagemNaDex.def = listaPokemon[i].def;
+        selvagagemNaDex.spatack = listaPokemon[i].spatack;
+        selvagagemNaDex.spdef = listaPokemon[i].spdef;
+        selvagagemNaDex.speed = listaPokemon[i].speed;
+        selvagagemNaDex.geracao = listaPokemon[i].geracao;
+        selvagagemNaDex.lendario = listaPokemon[i].lendario;
+        strcpy(selvagagemNaDex.cor, listaPokemon[i].cor);
+        selvagagemNaDex.captura = listaPokemon[i].captura;
+        selvagagemNaDex.preEvo = listaPokemon[i].preEvo;
+        selvagagemNaDex.prxEvo = listaPokemon[i].prxEvo;
         }
+    }
+
+    printf("Pokebola que vai utilizar: ");
+    char pokebola[20];
+    setbuf(stdin, NULL);
+    fgets(pokebola, 19, stdin);
+    pokebola[strcspn(pokebola, "\n")] = '\0';
+
+    int qualPokebola;
+
+    if(strcmp(pokebola, "Pokebola") == 0 || strcmp(pokebola, "pokebola") == 0){
+        qualPokebola = 0;
+    }else if(strcmp(pokebola, "Grande Bola") == 0 || strcmp(pokebola, "grande bola") == 0){
+        qualPokebola = 1;
+    }else if(strcmp(pokebola, "Ultra Bola") == 0 || strcmp(pokebola, "ultra bola") == 0){
+        qualPokebola = 2;
+    }else if(strcmp(pokebola, "Bola Mestre") == 0 || strcmp(pokebola, "bola mestre") == 0){
+        qualPokebola = 3;
+    }
+
+    int resultado;
+
+    pokemonCapturado pselvagem;
+
+
+
+    criarPokemon(selvagagemNaDex, pselvagem, 10, natures);
+
+    capturarPokemon(pokebolas, &resultado, selvagagemNaDex, pselvagem, qualPokebola);
+
+    if(resultado == 1){
+        printf("Parabéns, você capturou o pokémon!\n");
+    }else{
+        printf("Que pena! Você não conseguiu\n");
     }
 
     return 0;
