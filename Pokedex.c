@@ -39,6 +39,7 @@ typedef struct PokemonCapturado{
     int evsSpDef;
     int evsSpeed;
     int HP;
+    int HPFULL;
     int Atk;
     int Def;
     int Spatack;
@@ -60,7 +61,7 @@ int id;
 
 void capturarPokemon(int idPokebola, float taxaCaptura, int* resultado){
 // Ao apertar o botão de tentar capturar
-// (( 1 + ( MaxHP x 3 - HP atual x 2 ) x catch rate do pokémon x catch rate da pokéball x status ) / ( MaxHP x 3 )) / 256
+// (( 1 + (pokemonSelvagem.HPFULL - pokemonSelvagem.HP * 2 ) x catch rate do pokémon x catch rate da pokéball x status ) / ( MaxHP x 3 )) / 256
 
 float chance = 1;
 
