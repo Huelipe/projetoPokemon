@@ -22,13 +22,34 @@ typedef struct Pokemon{
     float captura; // Taxa de captura
     int preEvo; // Pré evolução
     int prxEvo; // Próxima evolução
-    int lvlAtual; // Level atual
+} Pokemon;
+
+typedef struct PokemonCapturado{
+    char apelido[30];
+    int ivsHP;
+    int ivsAtk;
+    int ivsDef;
+    int ivsSpatack;
+    int ivsSpDef;
+    int ivsSpeed;
+    int evsHP;
+    int evsAtk;
+    int evsDef;
+    int evsSpatack;
+    int evsSpDef;
+    int evsSpeed;
+    int HP;
+    int Atk;
+    int Def;
+    int Spatack;
+    int SpDef;
+    int Speed;
+    int Atual; // Level atual
     char move1[20]; // Ataque 1
     char move2[20]; // Ataque 2
     char move3[20]; // Ataque 3
     char move4[20]; // Ataque 4
-} Pokemon;
-
+} pokemonCapturado;
 #define MAX_POKEMON 722 
 
 typedef struct Pokebola{
@@ -41,7 +62,7 @@ void capturarPokemon(int idPokebola, float taxaCaptura, int* resultado){
 // Ao apertar o botão de tentar capturar
 // (( 1 + ( MaxHP x 3 - HP atual x 2 ) x catch rate do pokémon x catch rate da pokéball x status ) / ( MaxHP x 3 )) / 256
 
-float chance = 1 + ();
+float chance = 1;
 
     return;
 }
