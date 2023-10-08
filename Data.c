@@ -422,7 +422,6 @@ int main(){
     }else{
         printf("Que pena! Você não conseguiu\n");
     }
- // jao é um bobao
 
     return 0;
 }
