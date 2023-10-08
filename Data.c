@@ -365,8 +365,8 @@ int main(){
 
     Pokemon selvagagemNaDex;
 
-    for(int i = 0; i < 722; i++){
-        if(strcmp(nome, listaPokemon[i].nome) == 0){
+    for(int i = 1; i < 722; i++){
+        if(strcasecmp(nome, listaPokemon[i].nome) == 0){
         printf("Nome do Pokémon encontrado: %s\n", listaPokemon[i].nome);
         selvagagemNaDex.altura = listaPokemon[i].altura;
         selvagagemNaDex.peso = listaPokemon[i].peso;
@@ -413,7 +413,6 @@ int main(){
 
     pokemonCapturado pselvagem;
 
-
     criarPokemon(selvagagemNaDex, &pselvagem, 10, natures);
 
     capturarPokemon(pokebolas, &resultado, selvagagemNaDex, pselvagem, qualPokebola);
@@ -423,6 +422,7 @@ int main(){
     }else{
         printf("Que pena! Você não conseguiu\n");
     }
+ // jao é um bobao
 
     return 0;
 }
