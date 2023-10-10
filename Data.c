@@ -124,11 +124,14 @@ printf("\n\n");
 
 float chance;
 //if (pselvagem.HPFULL != 0 && pselvagem.HPATUAL != 0 && pokeball[qualpokebola].catchRate != 0 && pselvagem.Status.atual != 0) {
-    chance = ((1 + (pselvagem.HPFULL - (pselvagem.HPATUAL * 2)) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3)) / 256;
-    printf("%.2f\n", chance);
+    // chance = ((1 + (pselvagem.HPFULL - (pselvagem.HPATUAL * 2)) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3)) / 256;
+    
+    chance = ((1 + (3 * pselvagem.HPFULL - (2 * pselvagem.HPATUAL)) * (pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual)) / (3 * pselvagem.HPFULL)) / 2.56;
+    //Taxa de Captura = ((3 * Máximo de Pontos de Vida - 2 * Pontos de Vida Atuais) * Taxa de Captura da Poké Bola * Status do Status (Status Condition) * Modificador de Captura) / (3 * Máximo de Pontos de Vida)
 /*} else {
     printf("Divisão por zero evitada. Verifique os valores das variáveis.\n");
 } */
+    printf("%.5f\n", chance);
 
 float numSorteado = (rand() % 100) + 1;
 printf("%.0f\n", numSorteado);
@@ -346,16 +349,15 @@ int main(){
                 natures[25].modAtk = natures[25].modSpatack = natures[25].modDef = comum;
 
     Pokebola pokebolas[4];
-    strcpy(pokebolas[1].nome, "Pokebola");
-    strcpy(pokebolas[2].nome, "Grande Bola");
-    strcpy(pokebolas[3].nome, "Ultra Bola");
-    strcpy(pokebolas[4].nome, "Bola mestre");
+    strcpy(pokebolas[0].nome, "Pokebola");
+    strcpy(pokebolas[1].nome, "Grande Bola");
+    strcpy(pokebolas[2].nome, "Ultra Bola");
+    strcpy(pokebolas[3].nome, "Bola mestre");
 
-    pokebolas[1].catchRate = 1;
-    pokebolas[2].catchRate = 1.5;
-    pokebolas[3].catchRate = 2;
-    pokebolas[4].catchRate = 1000;
-
+    pokebolas[0].catchRate = 1;
+    pokebolas[1].catchRate = 1.5;
+    pokebolas[2].catchRate = 2;
+    pokebolas[3].catchRate = 1000;
 
     printf("Digite o nome do pokemon que você está batalhando: ");
     char nome[40];
@@ -388,8 +390,6 @@ int main(){
         break;
         }
     }
-
-    printf("%f kakeison \n", selvagagemNaDex.captura);
 
     printf("Pokebola que vai utilizar: ");
     char pokebola[20];
