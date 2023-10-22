@@ -26,19 +26,32 @@ typedef struct Pokemon{
 } Pokemon;
 
 typedef struct PokemonCapturado{
-    char apelido[30];
-    float ivsHP;
+    char apelido[30]; // Cada pokémon pode ter um apelido, definido pelo dano após capturar
+    float ivsHP; 
     float ivsAtk;
     float ivsDef;
     float ivsSpatack;
     float ivsSpDef;
     float ivsSpeed;
+    // As ivs são valores que vão de 0 a 31, esse valor é somado ao atributo respectivo do pokémon
+    // Por exemplo: Um pokemon com 31 de ivs em Atack vai ter +31 de atack, enquanto um com 0 de ivs, não vai ter nada adicional
+    // Isso define, por exemplo, como um pikachu lvl 10 pode ser mais rapido que outro pikachu também nivel 10, é a mesma especie mas sempre há um melhor
     float evsHP;
     float evsAtk;
     float evsDef;
     float evsSpatack;
     float evsSpDef;
     float evsSpeed;
+    float evstotal;
+    /*
+    As evs são valores que vão de 0 a 252, esse valor é dividido por 4 e depois também somado ao atributo respectivo do pokémon
+    Todos os pokémons capturados vem com suas EVs zeradas, para ganhar EVs, os pokémons poderão comer as frutas que discutimos ou ganhar em batalha
+    No sistema original, um pokemon ganharia as evs em batalha dependendo do pokemon que estivesse contra, por exemplo:
+    Ao batalhar contra um pikachu, o pokémon ganharia EVs de speed, pois o atributo mais alto do pikachu é a velocidade, ou seja, o pokémon estaria treinando a sua velocidade
+    Então aumentar evs de pokémon é algo que temos definir como fazer, mas é como levar o pokémon pra academia
+    Obs: Cada evs pode ir de 0 a 252, mas, um pokemon pode ter, no maximo, somando todas, 508 evs
+    Então só da pra maximizar 2 evs e colocar mais uns 4 pontos em qualquer outra (para competitivo)
+    */ 
     float HP;
     float HPFULL;
     float HPATUAL;
@@ -58,13 +71,17 @@ typedef struct PokemonCapturado{
         int id;
         float atual; // (1 ou 10), (esta com status ou não)
     } Status;
+    // Union para definir se um pokémon está paralisado, intoxicado, com sono ou congelado, condições que facilitam na batalha e a capturar
 } pokemonCapturado;
+
+
 #define MAX_POKEMON 722 
 
 typedef struct Pokebola{
 float catchRate;
 char nome[20];
 } Pokebola;
+// Estrutura da pokebola, vai ter seu nome e taxa de captura
 
 typedef struct natureza{
 char nome[20];
@@ -74,8 +91,15 @@ float modSpatack;
 float modSpdef;
 float modSpeed;
 } nature;
+// Estrutura da natureza, explicadas na linha 279 mais ou menos
 
 void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, nature natures[25]) {
+
+    /*
+    O Código a seguir cria e randomiza um pokemon
+    As ivs do pokemon são aleatorizadas de 0 a 31 e seu lvl é recebido pela função, pois cada área vai ser um nivel maior
+    A natureza também é randomizada e zera suas evs
+    */
 
     pselvagem->ivsHP = rand() % 32;
     pselvagem->ivsAtk = rand() % 32;
@@ -97,6 +121,11 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, na
     pselvagem->evsSpDef = 0;
     pselvagem->evsSpeed = 0;
 
+    /*
+    Aqui a magia acontece, finalmente os numeros são definidos através dessas formulas tiradas da net
+    A vida total do pokemon, seria definida nessa primeira linha ai, utilizando evs, ivs, nvl e etc
+    As outras linhas tem um adendo que é o modficador da natureza
+    */
     pselvagem->HP = ((pselvagem->LvlAtual * ((pokemonNaDex.hp * 2) + pselvagem->ivsHP + (pselvagem->evsHP / 4))) / 100) + 10 + pselvagem->LvlAtual;
     pselvagem->Atk = (((pselvagem->LvlAtual * ((pokemonNaDex.atk * 2) + pselvagem->ivsAtk + (pselvagem->evsAtk / 4))) / 100) + 5) * natures[r].modAtk;
     pselvagem->Def = (((pselvagem->LvlAtual * ((pokemonNaDex.def * 2) + pselvagem->ivsDef + (pselvagem->evsDef / 4))) / 100) + 5) * natures[r].modDef;
@@ -106,6 +135,7 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, na
 
     pselvagem->HPFULL = pselvagem->HP;
     pselvagem->HPATUAL = pselvagem->HP;
+    // HP atual e HP full tão assim aqui só pra testes, tem de ser feito um sistema pra reduzir o hp atual
 
     pselvagem->Status.atual = 1;
 }
@@ -113,40 +143,30 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, na
 
 void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
 // Ao apertar o botão de tentar capturar
-/*
-printf("\n\n");
-printf("%f\n", pselvagem.HPFULL);
-printf("%f\n", pselvagem.HPATUAL);
-printf("%f\n", pokemonNaDex.captura);
-printf("%f\n", pokeball[qualpokebola].catchRate);
-printf("%f\n", pselvagem.Status.atual);
-printf("\n\n"); */
 
 float chance;
-//if (pselvagem.HPFULL != 0 && pselvagem.HPATUAL != 0 && pokeball[qualpokebola].catchRate != 0 && pselvagem.Status.atual != 0) {
-    // chance = ((1 + (pselvagem.HPFULL - (pselvagem.HPATUAL * 2)) * pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual) / (pselvagem.HPFULL * 3)) / 256;
-    
+
     chance = ((1 + (3 * pselvagem.HPFULL - (2 * pselvagem.HPATUAL)) * (pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual)) / (3 * pselvagem.HPFULL)) / 2.56;
-    //Taxa de Captura = ((3 * Máximo de Pontos de Vida - 2 * Pontos de Vida Atuais) * Taxa de Captura da Poké Bola * Status do Status (Status Condition) * Modificador de Captura) / (3 * Máximo de Pontos de Vida)
-/*} else {
-    printf("Divisão por zero evitada. Verifique os valores das variáveis.\n");
-} */
+    // Aqui é feita a tentativa de capturar um pokémon (formula retirada da internet)
     printf("%.5f\n", chance);
 
 float numSorteado = (rand() % 100) + 1;
-printf("%.0f\n", numSorteado);
+// A linha acima define um numero de 0 a 100, se o numero for menor que a chance calculada, você captura o pokemon
+// Por exemplo, a chance é de 40%, se o numero sorteado foi 40 ou menor você captura, pois a chance de tirar um numero 40 ou menor de 0 a 100 é 40% também
+
+// printf("%.0f\n", numSorteado);
 
 if(numSorteado <= chance){
     (*resultado) = 1;
 }else{
     (*resultado) = 0;
 }
-
 }
 
 int main(){
 
     srand(time(NULL));
+    // Código necessário para funcionamento do randomizador
 
     FILE *arquivo;
     char linha[512]; 
@@ -154,6 +174,7 @@ int main(){
     int contador = 0;
 
     arquivo = fopen("C:/Users/Huelipe/Documents/GitHub/projetoPokemon/pokedex.csv", "r");
+    // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
 
     if (arquivo == NULL) {
         perror("Erro ao abrir o arquivo");
@@ -241,6 +262,7 @@ int main(){
         contador++;
     }
     fclose(arquivo);
+    // Código feito pelo chatgpt para salvar os dados do .csv no struct pokemon
 
     printf("Nome: %s\n", listaPokemon[6].nome);
     printf("HP: %i\n", listaPokemon[6].hp);
@@ -250,7 +272,19 @@ int main(){
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
     printf("Speed: %f\n", listaPokemon[6].captura);
+    // Exemplo de comandos pra ver se ta tudo certin
 
+    /*
+    O parte a seguir que vai até a linha 393 mais ou menos define as naturezas do pokémon
+    Como dito anteriormente, um pokemon tem HP, atack, defesa, atack especial, defesa especial e velocidade
+    Existe uma tabela que define 25 naturezas, que definem que um pokémon pode ser melhor em um atributo X e pior em um atributo Y
+    Por exemplo, a nature "Timid", listada na posição 10 ("9") do vetor faz com que o pokémon tenha 10% a mais de velocidade, mas, em compensação, -10% de atack
+    As 5 primeiras naturezas não mudam absolutamente nada no pokemon
+    Eis um link com a tabela: https://aminoapps.com/c/pokemon-amino-ptbr/page/blog/natures-certas-para-os-pokemons/wPkB_rMIourbDLoV3Z8Vk3JXvMx5R172xG
+    Obs: Nenhuma natureza interfere no HP do pokemon, apenas nos outros 5 atributos
+    */
+
+    //Aqui temos um vetor de tamanho 25 com o nome das 25 natures de acordo com a tabela
     nature natures[25];
     strcpy(natures[1].nome, "Hardy");
     strcpy(natures[2].nome, "Docile");
@@ -278,9 +312,18 @@ int main(){
     strcpy(natures[24].nome, "Quiet");
     strcpy(natures[25].nome, "Sassy");
 
+    /*
+    Os próximos 3 floats são valores para multiplicar
+    A nature timid, por exemplo, define que o modificado de Speed é = mais e o atack = menos
+    Isso quer dizer que, quando criar um pokemon, sua speed vai ter um valor de modificar *1.1 e o atack * 0.9
+    Ou seja, o pokemon vai ter mais 10% de speed e -10% de atack, assim como na tabela
+    O float comum define que os outros atributos não serão modificados, assim, na criação de pokemon, vai multiplicar por 1, deixando inalteravel 
+    As 5 primeiras linhas definem as 5 naturezas que não mudam nada, as outras, as naturezas que aumentam um valor e diminuem outra
+    */
     float comum = 1;
     float mais = 1.1;
     float menos = 0.9;
+
 
     natures[1].modAtk = natures[1].modDef = natures[1].modSpatack = natures[1].modSpdef = natures[1].modSpeed = comum;
     natures[2].modAtk = natures[2].modDef = natures[2].modSpatack = natures[2].modSpdef = natures[2].modSpeed = comum;
@@ -353,17 +396,29 @@ int main(){
     strcpy(pokebolas[1].nome, "Grande Bola");
     strcpy(pokebolas[2].nome, "Ultra Bola");
     strcpy(pokebolas[3].nome, "Bola mestre");
+    /*
+    Aqui defino as 4 pokebolas mais comuns do jogo, cada pokebola tem um nome e um catch rate
+    A bola mestre tem 100% de chance de captura, por isso seu modificador é 10 mil, mas podemos mudar pra simplesmente um if
+    */
 
     pokebolas[0].catchRate = 1;
     pokebolas[1].catchRate = 1.5;
     pokebolas[2].catchRate = 2;
-    pokebolas[3].catchRate = 1000;
+    pokebolas[3].catchRate = 10000;
 
     printf("Digite o nome do pokemon que você está batalhando: ");
     char nome[40];
     setbuf(stdin, NULL);
     fgets(nome, 39, stdin);
     nome[strcspn(nome, "\n")] = '\0';
+    /*
+    Aqui é o começo de um código pra ver se ta tudo certo
+    Você digita o nome de um pokemon, ele vai buscar na lista do .csv e pegar os atributos e salvar em selvagemNaDex
+    Obs: O código está com erro ao buscar o nome do pokemon porque salvou as barras de espaço
+    Então, para testar por enquanto, conte quantas letras tem no nome do pokemon, subtraia de 12
+    dai por exemplo charizard tem 9 letras, 12-9 = 3
+    Digita charizard e da 3 barras de espaço e vai funcionar
+    */
 
     Pokemon selvagagemNaDex;
 
@@ -396,6 +451,7 @@ int main(){
     setbuf(stdin, NULL);
     fgets(pokebola, 19, stdin);
     pokebola[strcspn(pokebola, "\n")] = '\0';
+    // Aqui digita qual pokebola vai utilizar para tentar capturar
 
     int qualPokebola;
 
@@ -408,20 +464,25 @@ int main(){
     }else if(strcmp(pokebola, "Bola Mestre") == 0 || strcmp(pokebola, "bola mestre") == 0){
         qualPokebola = 3;
     }
+    // Aqui define o valor da pokebola
 
     int resultado;
 
     pokemonCapturado pselvagem;
 
     criarPokemon(selvagagemNaDex, &pselvagem, 10, natures);
+    // Cria o pokemon nvl 10 com o código
 
     capturarPokemon(pokebolas, &resultado, selvagagemNaDex, pselvagem, qualPokebola);
+    // Tenta capturar um pokemon 
 
     if(resultado == 1){
         printf("Parabéns, você capturou o pokémon!\n");
     }else{
         printf("Que pena! Você não conseguiu\n");
     }
+    // Retorna o resultado
 
+printf("oi");
     return 0;
 }
