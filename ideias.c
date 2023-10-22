@@ -49,5 +49,10 @@ Raylib vai ser preciso para o menu, botoes e etc, é essencial pra ver a progres
 Por enquanto penso nisso, sei que algumas coisas podem parecer chatas, mas temos que lembrar que é um trabalho de faculdade, não iria ser 100% legal e facil de se fazer
 bora pra cima!
 
+
+Obs: Como salvar código no github
+-> Seleciona no github na esquerda 1 linha de cada vez e commit to main
+-> Depois, la em cima, push to origin
+pronto
 */
 
