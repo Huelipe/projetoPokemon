@@ -43,6 +43,9 @@ O sistema deverá exibir no menu uma opção de exportar ao dados das estruturas
 um arquivo texto no formato .CSV (separados por vírgula);
 //// Texto copiado e colado do arquivo do muriel, pra fazer essas duas coisas ai é vendo as proximas aulas
 
+8) Raylib
+Raylib vai ser preciso para o menu, botoes e etc, é essencial pra ver a progressão do jogo e seria legar começar por ele
+
 Por enquanto penso nisso, sei que algumas coisas podem parecer chatas, mas temos que lembrar que é um trabalho de faculdade, não iria ser 100% legal e facil de se fazer
 bora pra cima!
 
