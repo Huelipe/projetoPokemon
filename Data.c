@@ -113,14 +113,14 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, na
 
 void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
 // Ao apertar o botão de tentar capturar
-
+/*
 printf("\n\n");
 printf("%f\n", pselvagem.HPFULL);
 printf("%f\n", pselvagem.HPATUAL);
 printf("%f\n", pokemonNaDex.captura);
 printf("%f\n", pokeball[qualpokebola].catchRate);
 printf("%f\n", pselvagem.Status.atual);
-printf("\n\n");
+printf("\n\n"); */
 
 float chance;
 //if (pselvagem.HPFULL != 0 && pselvagem.HPATUAL != 0 && pokeball[qualpokebola].catchRate != 0 && pselvagem.Status.atual != 0) {
