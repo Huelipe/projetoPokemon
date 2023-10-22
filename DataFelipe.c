@@ -483,6 +483,5 @@ int main(){
     }
     // Retorna o resultado
 
-printf("oi");
     return 0;
 }
