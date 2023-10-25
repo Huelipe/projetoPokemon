@@ -59,6 +59,8 @@ pronto
 
 Anotações:
 https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_species.csv
+Obter: Id, numero para qual pokemon evolui e ?
+https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_evolution.csv
 Para evoluções por nivel
 As que não tiver nível serão evoluidas em um nivel x
 */
