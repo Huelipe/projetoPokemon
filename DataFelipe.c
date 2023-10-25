@@ -271,7 +271,7 @@ int main(){
     printf("ATK.SP: %i\n", listaPokemon[6].spatack);
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
-    printf("Speed: %f\n", listaPokemon[6].captura);
+    printf("Speed: %i\n", listaPokemon[6].captura);
     // Exemplo de comandos pra ver se ta tudo certin
 
     /*
