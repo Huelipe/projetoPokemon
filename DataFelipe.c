@@ -173,7 +173,7 @@ int main(){
     Pokemon listaPokemon[MAX_POKEMON];
     int contador = 0;
 
-    arquivo = fopen("C:/Users/Huelipe/Documents/GitHub/projetoPokemon/pokedex.csv", "r");
+    arquivo = fopen("../pokedex.csv", "r+");
     // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
 
     if (arquivo == NULL) {
@@ -285,7 +285,7 @@ int main(){
     */
 
     //Aqui temos um vetor de tamanho 25 com o nome das 25 natures de acordo com a tabela
-    nature natures[25];
+    nature natures[26];
     strcpy(natures[1].nome, "Hardy");
     strcpy(natures[2].nome, "Docile");
     strcpy(natures[3].nome, "Bashful");
