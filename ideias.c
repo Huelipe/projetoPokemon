@@ -54,5 +54,12 @@ Obs: Como salvar código no github
 -> Seleciona no github na esquerda 1 linha de cada vez e commit to main
 -> Depois, la em cima, push to origin
 pronto
+
+
+
+Anotações:
+https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_species.csv
+Para evoluções por nivel
+As que não tiver nível serão evoluidas em um nivel x
 */
 
