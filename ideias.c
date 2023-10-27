@@ -61,5 +61,11 @@ Anotações:
 https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_species.csv
 Obter: Id, numero para qual pokemon evolui e ?
 Definir numero base para evolução 1 e 2 
+
+gcc -o teste testandoraylib.c -lraylib
+./teste
+
+teste = nome do arquivo no output
+testandoraylib.c = nome do arquivo atual onde ta o código
 */
 
