@@ -181,6 +181,7 @@ int main(){
         return 1;
     }
 
+    // Substituir por fscanf
     while (fgets(linha, sizeof(linha), arquivo)) {
         char *token = strtok(linha, ",");
         if (token != NULL) {

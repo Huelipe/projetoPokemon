@@ -54,5 +54,18 @@ Obs: Como salvar código no github
 -> Seleciona no github na esquerda 1 linha de cada vez e commit to main
 -> Depois, la em cima, push to origin
 pronto
+
+
+
+Anotações:
+https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_species.csv
+Obter: Id, numero para qual pokemon evolui e ?
+Definir numero base para evolução 1 e 2 
+
+gcc -o teste testandoraylib.c -lraylib
+./teste
+
+teste = nome do arquivo no output
+testandoraylib.c = nome do arquivo atual onde ta o código
 */
 
