@@ -3,15 +3,19 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <unistd.h>
 
 typedef enum GameScreen { MENU, NOVOJOGO, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
 
-int main()
-{
+int main(){
+
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
     InitWindow(screenWidth, screenHeight, "Pokémon");
+    Texture2D menu = LoadTexture("imagens/wallpaper.png");
+    Texture2D novojogo = LoadTexture("imagens/campusApucarana.png");
+    Texture2D professor = LoadTexture("imagens/professorOak");
     int targetfps = 60;
 
     GameScreen currentScreen = MENU;
@@ -21,19 +25,16 @@ int main()
 
     switch(currentScreen){
         case MENU:
-
-        if(IsKeyPressed(KEY_N) ){
-            GameScreen currentScreen = NOVOJOGO;
-        }else if(IsKeyPressed(KEY_S)){
-            // carrega o jogo
-        }else if(IsKeyPressed(KEY_C)){
-            // acessa configurações
-            // -> mudar fps, lista dos pokémons, etc
+        if(IsKeyPressed(KEY_Q) ){
+            currentScreen = NOVOJOGO;
+        }else if(IsKeyPressed(KEY_W)){
+            currentScreen = CARREGARJOGO;
+        }else if(IsKeyPressed(KEY_E)){
+            currentScreen = CONFIGURACOES;
         }
         break;
 
         case NOVOJOGO:
-        // novoJogo();
         break;
 
         case CARREGARJOGO:
@@ -51,30 +52,56 @@ int main()
             //Configurar lista de pokémons
         }else if(IsKeyPressed(KEY_W)){
             //Configurar Som
-        }else if(IsKeyPressed(KEY_E)){
-            //Configurar FPS
-            scanf("%i", &targetfps);
         }
         break;
 
+        case ESC:
+        break;
+
+        default:
+        break;
 
     }
 
 
-
-
-
-
-
     BeginDrawing();
-        ClearBackground(SKYBLUE);
 
-        DrawText("Pokémon: Caio's Adventure", 200, 230, 65, VIOLET);
-        DrawText("| N |Começar uma nova aventura", 200, 300, 45, LIME);
-        DrawText("| S |Carregar seu jogo", 200, 370, 45, LIME);
-        DrawText("| C |Configurações", 200, 440, 45, LIME);
-        DrawFPS(10, 10);
+    switch(currentScreen){
+        case MENU:
+        ClearBackground(WHITE);
+        DrawTexture(menu, 0, 0, WHITE);
         
+        DrawText("Pokémon: Caio's Adventure", 120, 130, 65, PINK);
+        DrawText("| Q | Começar uma nova aventura", 120, 200, 45, GOLD);
+        DrawText("| W | Carregar seu jogo", 120, 270, 45, GOLD);
+        DrawText("| E | Configurações", 120, 340, 45, GOLD);
+        DrawFPS(10, 10);
+        break;
+
+        case NOVOJOGO:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTexture(professor, 600, 400, WHITE);
+        DrawText("Olá, bem vindo ao mundo Pokémon!", 100, 100, 50, BLACK);
+        sleep(2);
+        break;
+
+        case CARREGARJOGO:
+        break;
+
+        case CONFIGURACOES:
+        DrawTexture(menu, 0, 0, WHITE);
+        DrawText("| Q | Editar lista de pokémons", 120, 130, 45, GOLD);
+        DrawText("| W | Configurar Som", 120, 200, 45, GOLD);
+        break;
+
+        case ESC:
+        break;
+
+        default:
+        break;
+
+    }
+
     EndDrawing();
 
     }
