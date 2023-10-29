@@ -169,9 +169,7 @@ int main(){
     // Código necessário para funcionamento do randomizador
 
     FILE *arquivo;
-    char linha[512]; 
     Pokemon listaPokemon[MAX_POKEMON];
-    int contador = 0;
     int tamanhoPrimeiraLinhaCSV;
 
     arquivo = fopen("../pokedex.csv", "r+");
@@ -186,7 +184,7 @@ int main(){
 
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
 
-    for(int i = 1; i < 721; i++){
+    for(int i = 1; i < 722; i++){
         fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
     }//for
 
@@ -199,7 +197,7 @@ int main(){
     printf("ATK.SP: %i\n", listaPokemon[6].spatack);
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
-    printf("Captura: %f\n", listaPokemon[6].captura);
+    printf("Captura: %.2f\n", listaPokemon[6].captura);
     // Exemplo de comandos pra ver se ta tudo certin
 
     /*
