@@ -480,6 +480,12 @@ typedef struct{
     float DinheiroAtual;
 }JogadorStruct;
 
+typedef struct{
+    int Bananinha;
+    int Moranguinho;
+    int Laranjinha;
+}Frutas;
+
 void Jogador(){//so entrara nessa funcao ao iniciar o jogo
 
     JogadorStruct Jogador;
@@ -560,11 +566,6 @@ float Economia(float DinheiroAtual, int ConfereVitoria, int ConfereMinigameVenci
     return;
 }//Economia
 
-typedef struct{
-    int Bananinha;
-    int Moranguinho;
-    int Laranjinha;
-}Frutas;
 
 void Pokedoca(float Pokemoeda, int Bananinha, int Moranguinho, int Laranjinha, char genero){
 
