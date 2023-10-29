@@ -425,25 +425,7 @@ int main(){
 
     for(int i = 1; i < 722; i++){
         if(strcasecmp(nome, listaPokemon[i].nome) == 0){
-        printf("Nome do Pokémon encontrado: %s\n", listaPokemon[i].nome);
-        selvagagemNaDex.altura = listaPokemon[i].altura;
-        selvagagemNaDex.peso = listaPokemon[i].peso;
-        strcpy(selvagagemNaDex.tipo1, listaPokemon[i].tipo1);
-        strcpy(selvagagemNaDex.tipo2, listaPokemon[i].tipo2);
-        selvagagemNaDex.total = listaPokemon[i].total;
-        selvagagemNaDex.hp = listaPokemon[i].hp;
-        selvagagemNaDex.atk = listaPokemon[i].atk;
-        selvagagemNaDex.def = listaPokemon[i].def;
-        selvagagemNaDex.spatack = listaPokemon[i].spatack;
-        selvagagemNaDex.spdef = listaPokemon[i].spdef;
-        selvagagemNaDex.speed = listaPokemon[i].speed;
-        selvagagemNaDex.geracao = listaPokemon[i].geracao;
-        selvagagemNaDex.lendario = listaPokemon[i].lendario;
-        strcpy(selvagagemNaDex.cor, listaPokemon[i].cor);
-        selvagagemNaDex.captura = listaPokemon[i].captura;
-        selvagagemNaDex.preEvo = listaPokemon[i].preEvo;
-        selvagagemNaDex.prxEvo = listaPokemon[i].prxEvo;
-        break;
+        selvagagemNaDex = listaPokemon[i];
         }
     }
 
@@ -485,6 +467,140 @@ int main(){
     // Retorna o resultado
 
     
+
+    return 0;
+}
+
+//COMECEI A PARTIR DAQUI AMIGOS
+
+typedef struct{
+    char nome[21];
+    char genero[11];
+    float nivel;
+    float DinheiroAtual;
+}JogadorStruct;
+
+void Jogador(){//so entrara nessa funcao ao iniciar o jogo
+
+    JogadorStruct Jogador;
+    Frutas EstoqueFrutas;
+    int EscolheGenero;
+    int ConfereVitoria = 0;
+    int ConfereMinigameVencido = 0; 
+
+    printf("Seja bem vindo(a)! Digite seu nome para começar sua jornada: ");   
+
+    fgets(Jogador.nome, 20, stdin);//o jogador ira digitar o seu nome de exibicao do jogo 
+    Jogador.nome[strcspn(Jogador.nome,"\n")]='\0';
+    setbuf(stdin,NULL);
+
+    printf("\n");
+
+    printf("Digite seu genero:\n1 -> Masculino\n2 -> Feminino\n");
+
+    scanf("%d", &EscolheGenero);//1 para masculino e 2 para feminino
+
+    switch(EscolheGenero){
+        case '1':
+            strcpy(Jogador.genero, "masculino");
+            break;
+
+        case '2':
+            strcpy(Jogador.genero, "feminino");    
+            break;
+
+        default:
+            //genero nao identificado
+            scanf("%d", &EscolheGenero);//escolhe novamente
+            break;
+    }//switch
+
+    Jogador.nivel = 1;
+
+    Jogador.DinheiroAtual = 0;
+
+    EstoqueFrutas.Bananinha = 0;
+    EstoqueFrutas.Moranguinho = 0;
+    EstoqueFrutas.Laranjinha = 0;
+
+
+}//Jogador
+
+float Economia(float DinheiroAtual, int ConfereVitoria, int ConfereMinigameVencido, float GastosPokedoca, float GastosPokecentro, char JogadorNome){//sera executada ao vencer batalha, minigame ou ao gastar
+
+    float Pokemoeda;
+    int ConfereIniciante = 1;
+    int X;
+    int Y;
+
+    if(ConfereIniciante == 1){
+        //aqui seria legal se nos mostrassemos algumas das formas de se obter pokemoedas
+        printf("Ola %s! Este jogo possui um sistema de economia, aqui estão algumas das formas de se obter Pokemoedas:", JogadorNome);
+        printf("\nVencendo Batalhas\nVencendo Minigames\nVendendo Itens");
+    }else{
+        if(ConfereVitoria == 1){
+            Pokemoeda= Pokemoeda + X;//recebe por ter saido vitorioso de uma batalha
+        }
+        if(ConfereMinigameVencido == 1){
+            Pokemoeda = Pokemoeda + Y;//Recebe por ter vencido minigame
+        }
+        if(GastosPokedoca > 0 || GastosPokecentro > 0){
+            Pokemoeda = Pokemoeda - GastosPokedoca - GastosPokecentro;//Analisa todos os gastos e atualiza o dinheiro atual
+        }
+
+    }
+
+    //a parte abaixo atualiza as variaveis para nao ocorrer uma mudanca errada na moeda atual
+    GastosPokecentro = 0;
+    GastosPokedoca = 0;
+    ConfereIniciante = 0;
+    ConfereMinigameVencido = 0;
+    ConfereVitoria = 0;
+
+    return;
+}//Economia
+
+typedef struct{
+    int Bananinha;
+    int Moranguinho;
+    int Laranjinha;
+}Frutas;
+
+void Pokedoca(float Pokemoeda, int Bananinha, int Moranguinho, int Laranjinha, char genero){
+
+    int EscolheGasto;
+    char Escolha;
+    char pronome[1];
+
+    if(strcmp(genero, "masculino")==0){
+        strcpy(pronome, "o");
+    }else{
+        strcpy(pronome, "a");
+    }
+    printf("Seja bem vind%c a Pokedoca! Aqui você pode comprar Pokebolas, Frutas e muitos outros itens!\n", pronome);
+
+    printf("Você está interessado em comprar algo? (Digite 'S' para sim e 'N' para não)\n");
+
+    scanf("%c", &Escolha);
+
+    switch(Escolha){
+        case 'S':
+        case 's':
+
+            break;
+
+        case 'N':
+        case 'n':
+
+            break;
+
+        default:
+            printf("escolha não identificada, digite novamente: ('S' para sim e 'N' para não)\n");
+            scanf("%c", &Escolha);
+
+    }
+
+    printf("oi");
 
     return 0;
 }
