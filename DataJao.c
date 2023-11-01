@@ -169,9 +169,8 @@ int main(){
     // Código necessário para funcionamento do randomizador
 
     FILE *arquivo;
-    char linha[512]; 
     Pokemon listaPokemon[MAX_POKEMON];
-    int contador = 0;
+    int tamanhoPrimeiraLinhaCSV;
 
     arquivo = fopen("../pokedex.csv", "r+");
     // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
@@ -181,89 +180,15 @@ int main(){
         return 1;
     }
 
-    // Substituir por fscanf
-    while (fgets(linha, sizeof(linha), arquivo)) {
-        char *token = strtok(linha, ",");
-        if (token != NULL) {
-            listaPokemon[contador].nPokedex = atoi(token);
-            token = strtok(NULL, ",");
-            if (token != NULL) {
-                strncpy(listaPokemon[contador].nome, token, sizeof(listaPokemon[contador].nome));
-                token = strtok(NULL, ",");
-                if (token != NULL) {
-                    strncpy(listaPokemon[contador].tipo1, token, sizeof(listaPokemon[contador].tipo1));
-                    token = strtok(NULL, ",");
-                    if (token != NULL) {
-                        strncpy(listaPokemon[contador].tipo2, token, sizeof(listaPokemon[contador].tipo2));
-                        token = strtok(NULL, ",");
-                        if (token != NULL) {
-                            listaPokemon[contador].total = atoi(token);
-                            token = strtok(NULL, ",");
-                            if (token != NULL) {
-                                listaPokemon[contador].hp = atoi(token);
-                                token = strtok(NULL, ",");
-                                if (token != NULL) {
-                                    listaPokemon[contador].atk = atoi(token);
-                                    token = strtok(NULL, ",");
-                                    if (token != NULL) {
-                                        listaPokemon[contador].def = atoi(token);
-                                        token = strtok(NULL, ",");
-                                        if (token != NULL) {
-                                            listaPokemon[contador].spatack = atoi(token);
-                                            token = strtok(NULL, ",");
-                                            if (token != NULL) {
-                                                listaPokemon[contador].spdef = atoi(token);
-                                                token = strtok(NULL, ",");
-                                                if (token != NULL) {
-                                                    listaPokemon[contador].speed = atoi(token);
-                                                    token = strtok(NULL, ",");
-                                                    if (token != NULL) {
-                                                        listaPokemon[contador].geracao = atoi(token);
-                                                        token = strtok(NULL, ",");
-                                                        if (token != NULL) {
-                                                            listaPokemon[contador].lendario = atoi(token);
-                                                            token = strtok(NULL, ",");
-                                                            if (token != NULL) {
-                                                                strncpy(listaPokemon[contador].cor, token, sizeof(listaPokemon[contador].cor));
-                                                                token = strtok(NULL, ",");
-                                                                if (token != NULL) {
-                                                                    listaPokemon[contador].altura = atof(token);
-                                                                    token = strtok(NULL, ",");
-                                                                    if (token != NULL) {
-                                                                        listaPokemon[contador].peso = atof(token);
-                                                                        token = strtok(NULL, ",");
-                                                                        if (token != NULL) {
-                                                                            listaPokemon[contador].captura = atoi(token);
-                                                                            token = strtok(NULL, ",");
-                                                                            if (token != NULL) {
-                                                                                listaPokemon[contador].preEvo = atoi(token);
-                                                                                token = strtok(NULL, ",");
-                                                                                if (token != NULL) {
-                                                                                    listaPokemon[contador].prxEvo = atoi(token);
-                                                                                    // Continue para os outros campos da estrutura...
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        contador++;
-    }
+    tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
+
+    fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
+
+    for(int i = 1; i < 722; i++){
+        fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
+    }//for
+
     fclose(arquivo);
-    // Código feito pelo chatgpt para salvar os dados do .csv no struct pokemon
 
     printf("Nome: %s\n", listaPokemon[6].nome);
     printf("HP: %i\n", listaPokemon[6].hp);
@@ -272,7 +197,7 @@ int main(){
     printf("ATK.SP: %i\n", listaPokemon[6].spatack);
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
-    printf("Speed: %i\n", listaPokemon[6].captura);
+    printf("Captura: %.2f\n", listaPokemon[6].captura);
     // Exemplo de comandos pra ver se ta tudo certin
 
     /*
