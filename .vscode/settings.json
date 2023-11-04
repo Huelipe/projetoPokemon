@@ -1,4 +1,13 @@
 {
+<<<<<<< HEAD
+    "files.associations": {
+        "time.h": "c",
+        "stdio.h": "c",
+        "string.h": "c",
+        "math.h": "c",
+        "unistd.h": "c"
+    }
+=======
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
@@ -56,4 +65,5 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false
+>>>>>>> 1e4d7c8cca3ee2e4188ca6d43fc5780d60ddf8aa
 }

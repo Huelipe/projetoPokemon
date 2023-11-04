@@ -272,7 +272,7 @@ int main(){
     printf("ATK.SP: %i\n", listaPokemon[6].spatack);
     printf("DEF.SP: %i\n", listaPokemon[6].spdef);
     printf("Speed: %i\n", listaPokemon[6].speed);
-    printf("Speed: %i\n", listaPokemon[6].captura);
+    printf("Captura: %.2f\n", listaPokemon[6].captura);
     // Exemplo de comandos pra ver se ta tudo certin
 
     /*
@@ -426,23 +426,7 @@ int main(){
     for(int i = 1; i < 722; i++){
         if(strcasecmp(nome, listaPokemon[i].nome) == 0){
         printf("Nome do Pokémon encontrado: %s\n", listaPokemon[i].nome);
-        selvagagemNaDex.altura = listaPokemon[i].altura;
-        selvagagemNaDex.peso = listaPokemon[i].peso;
-        strcpy(selvagagemNaDex.tipo1, listaPokemon[i].tipo1);
-        strcpy(selvagagemNaDex.tipo2, listaPokemon[i].tipo2);
-        selvagagemNaDex.total = listaPokemon[i].total;
-        selvagagemNaDex.hp = listaPokemon[i].hp;
-        selvagagemNaDex.atk = listaPokemon[i].atk;
-        selvagagemNaDex.def = listaPokemon[i].def;
-        selvagagemNaDex.spatack = listaPokemon[i].spatack;
-        selvagagemNaDex.spdef = listaPokemon[i].spdef;
-        selvagagemNaDex.speed = listaPokemon[i].speed;
-        selvagagemNaDex.geracao = listaPokemon[i].geracao;
-        selvagagemNaDex.lendario = listaPokemon[i].lendario;
-        strcpy(selvagagemNaDex.cor, listaPokemon[i].cor);
-        selvagagemNaDex.captura = listaPokemon[i].captura;
-        selvagagemNaDex.preEvo = listaPokemon[i].preEvo;
-        selvagagemNaDex.prxEvo = listaPokemon[i].prxEvo;
+        selvagagemNaDex = listaPokemon[i];
         break;
         }
     }
