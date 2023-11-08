@@ -15,16 +15,25 @@ int main(){
     char input[MAX_CHARS + 1] = { 0 }; // String para armazenar a palavra
     int charCount = 0; // Contador de caracteres
 
+
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
     Rectangle profOak = {0, 0, 120, 256};
     Vector2 posicaoOak = {800, 270};
+    Vector2 posicaoB = {550, 500};
+    Vector2 posicaoS = {750, 500};
+    Vector2 posicaoC = {950, 500};
+    float scale = 3;
 
     InitWindow(screenWidth, screenHeight, "Pokémon");
     Texture2D menu = LoadTexture("imagens/wallpaper.png");
     Texture2D novojogo = LoadTexture("imagens/frenteUtfpr.png");
     Texture2D professor = LoadTexture("imagens/professorOak.png");
+    Texture2D bulbassauro = LoadTexture("imagens/imagens_pokedex/001.png");
+    Texture2D squirtle = LoadTexture("imagens/imagens_pokedex/007.png");
+    Texture2D charmander = LoadTexture("imagens/imagens_pokedex/004.png");
+
     int targetfps = 60;
 
     GameScreen currentScreen = MENU;
@@ -96,6 +105,7 @@ int main(){
         break;
 
         case NOVOJOGO6:
+
         break;
 
         case CARREGARJOGO:
@@ -177,7 +187,10 @@ int main(){
         DrawTexture(novojogo, 0, 0, WHITE);
         DrawTextureRec(professor, profOak, posicaoOak, WHITE);
         DrawText("Qual desses três mais lhe agrada?", 50, 650, 30, GRAY);
-
+        DrawTextureEx(squirtle, posicaoS, 0.0f, scale, WHITE);
+        DrawTextureEx(bulbassauro, posicaoB, 0.0f, scale, WHITE);
+        DrawTextureEx(charmander, posicaoC, 0.0f, scale, WHITE);
+        DrawText("| Q |            | W |            | E |", 570, 600, 30, GRAY);
         break;
 
 
