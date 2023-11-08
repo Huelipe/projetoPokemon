@@ -147,7 +147,7 @@ int main(){
 
     fclose(arquivo);
 
- nature natures[26];
+    nature natures[26];
     strcpy(natures[1].nome, "Hardy");
     strcpy(natures[2].nome, "Docile");
     strcpy(natures[3].nome, "Bashful");
@@ -258,7 +258,7 @@ int main(){
 	pokemonCapturado pokemons[1000];
 
 	printf("Menu");
-	int opção
+	int opção;
 	/*
 	Mochila // max 6
 	Q
@@ -276,7 +276,6 @@ int main(){
 			pedir nome
 			pedir a poha toda
 			MAX_POKEMON++;
- 			
 			
 		> Excluir pokemon
 			MAX_POKEMON--;
@@ -286,7 +285,7 @@ int main(){
 	// Sair do jogo
 
 */
-
+return 0;
 }
 
 
@@ -309,9 +308,9 @@ int main(){
 
     pokemonCapturado pselvagem;
  
-   int nivel;
-   printf(digite o nivel dele:);
-   scanf("%i", &nivel);
+    int nivel;
+    printf(digite o nivel dele:);
+    scanf("%i", &nivel);
 
     criarPokemon(selvagagemNaDex, &pselvagem, 10, natures);
 
