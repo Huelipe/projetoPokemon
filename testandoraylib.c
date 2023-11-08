@@ -5,10 +5,13 @@
 #include <string.h>
 #include <unistd.h>
 
-typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
+typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
+typedef enum GameLoad { LOADGAME, BATALHA, AVENTURA, POKEDOCA, CENTRO, CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
 int main(){
+
+    int screensAtuais = 0;
 
     char frase[60] = "Então seu nome é ";
 
@@ -37,9 +40,9 @@ int main(){
     int targetfps = 60;
 
     GameScreen currentScreen = MENU;
+    SetTargetFPS(targetfps); 
 
     while(!WindowShouldClose()){
-    SetTargetFPS(targetfps); 
 
     switch(currentScreen){
         case MENU:
@@ -99,16 +102,43 @@ int main(){
         break;
 
         case NOVOJOGO5:
-                if(IsKeyPressed(KEY_ENTER)){
-                    currentScreen = NOVOJOGO6;
-                }
+        int opcaoGenero;
+            if(IsKeyPressed(KEY_Q)){
+                opcaoGenero = 1;
+                currentScreen = NOVOJOGO6;
+            }else if(IsKeyPressed(KEY_W)){
+                opcaoGenero = 2;
+                currentScreen = NOVOJOGO6;
+            }        
         break;
 
         case NOVOJOGO6:
-
+                if(IsKeyPressed(KEY_ENTER)){
+                    currentScreen = NOVOJOGO7;
+                }
         break;
 
+        case NOVOJOGO7:
+            int opcaoPokemon;
+            if(IsKeyPressed(KEY_Q)){
+                opcaoPokemon = 1;
+                currentScreen = NOVOJOGO8;
+            }else if(IsKeyPressed(KEY_W)){
+                opcaoPokemon = 2;
+                currentScreen = NOVOJOGO8;
+            }else if(IsKeyPressed(KEY_E)){
+                opcaoPokemon = 3;
+                currentScreen = NOVOJOGO8;
+            }
+        break;
+
+        case NOVOJOGO8:
+            if(IsKeyPressed(KEY_ENTER)){
+                screensAtuais = 1;
+            }
+        break;
         case CARREGARJOGO:
+
         break;
 
         case CONFIGURACOES:
@@ -175,15 +205,23 @@ int main(){
         DrawText("| Q | - Sim!", 50, 650, 30, GRAY);
         DrawText("| W | - Não!", 50, 685, 30, GRAY);
         break;
-
+        
         case NOVOJOGO5:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTextureRec(professor, profOak, posicaoOak, WHITE);
+        DrawText("E você é menina ou Menino?", 50, 600, 30, GRAY);
+        DrawText("| Q | Menino", 50, 650, 30, GRAY);
+        DrawText("| W | Menina", 50, 685, 30, GRAY);
+        break;
+
+        case NOVOJOGO6:
         DrawTexture(novojogo, 0, 0, WHITE);
         DrawTextureRec(professor, profOak, posicaoOak, WHITE);
         DrawText("Muito bem!", 50, 600, 30, GRAY);
         DrawText("Agora, para iniciar sua jornada, voce precisa escolher um Pokémon...", 50, 650, 30, GRAY);
         break;
 
-        case NOVOJOGO6:
+        case NOVOJOGO7:
         DrawTexture(novojogo, 0, 0, WHITE);
         DrawTextureRec(professor, profOak, posicaoOak, WHITE);
         DrawText("Qual desses três mais lhe agrada?", 50, 650, 30, GRAY);
@@ -193,8 +231,15 @@ int main(){
         DrawText("| Q |            | W |            | E |", 570, 600, 30, GRAY);
         break;
 
+        case NOVOJOGO8:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTextureRec(professor, profOak, posicaoOak, WHITE);
+        DrawText("Beleza! Agora, não perca tempo, vá se aventurar!", 50, 600, 30, GRAY);
+        DrawText("Se precisar de ajuda em algo, venha me visitar aqui na universidade!", 50, 650, 30, GRAY);
+        break;
 
         case CARREGARJOGO:
+
         break;
 
         case CONFIGURACOES:
@@ -214,6 +259,35 @@ int main(){
 
     EndDrawing();
 
+    if(screensAtuais == 1){
+        break;
+    }
+    }
+
+    GameLoad screenLoad = CIDADE1;
+    Texture2D cidade1 = LoadTexture("imagens/palletTown.png");
+
+    while(!WindowShouldClose()){
+
+    switch(screenLoad){
+
+    case CIDADE1:
+    break;
+
+    }
+
+    BeginDrawing();
+    ClearBackground(WHITE);
+
+    switch(screenLoad){
+
+    case CIDADE1:
+        DrawTexture(cidade1, 0, 0, WHITE);
+    break;
+
+    }
+
+    EndDrawing();
     }
 
     return 0;
