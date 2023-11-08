@@ -563,7 +563,7 @@ float Economia(float DinheiroAtual, int ConfereVitoria, int ConfereMinigameVenci
     ConfereMinigameVencido = 0;
     ConfereVitoria = 0;
 
-    return;
+    return Pokemoeda;
 }//Economia
 
 
@@ -601,7 +601,5 @@ void Pokedoca(float Pokemoeda, int Bananinha, int Moranguinho, int Laranjinha, c
 
     }
 
-    printf("oi");
-
-    return 0;
+    return;
 }
