@@ -6,12 +6,14 @@
 #include <unistd.h>
 
 typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
-typedef enum GameLoad { LOADGAME, BATALHA, AVENTURA, POKEDOCA, CENTRO, CIDADE1 } GameLoad;
+typedef enum GameLoad { CIDADE1, LOADGAME, BATALHA, AVENTURA, POKEDOCA, CENTRO,  } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
 int main(){
 
     int screensAtuais = 0;
+    int opcaoGenero;
+    int opcaoPokemon;
 
     char frase[60] = "Então seu nome é ";
 
@@ -102,7 +104,6 @@ int main(){
         break;
 
         case NOVOJOGO5:
-        int opcaoGenero;
             if(IsKeyPressed(KEY_Q)){
                 opcaoGenero = 1;
                 currentScreen = NOVOJOGO6;
@@ -119,7 +120,6 @@ int main(){
         break;
 
         case NOVOJOGO7:
-            int opcaoPokemon;
             if(IsKeyPressed(KEY_Q)){
                 opcaoPokemon = 1;
                 currentScreen = NOVOJOGO8;
@@ -266,6 +266,15 @@ int main(){
 
     GameLoad screenLoad = CIDADE1;
     Texture2D cidade1 = LoadTexture("imagens/palletTown.png");
+    if(opcaoGenero == 1){
+        //DrawTexture(); menino
+    }else{
+        //DrawTexture(); menina
+    }
+
+    if(opcaoPokemon == 1){
+        //criarpokemon(bulbasaur, nvl 5, etc)
+    }
 
     while(!WindowShouldClose()){
 
