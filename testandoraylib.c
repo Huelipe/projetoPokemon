@@ -5,11 +5,15 @@
 #include <string.h>
 #include <unistd.h>
 
-typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
-
-#define MAX_CHARS 20
+typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
+#define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
 int main(){
+
+    char frase[60] = "Então seu nome é ";
+
+    char input[MAX_CHARS + 1] = { 0 }; // String para armazenar a palavra
+    int charCount = 0; // Contador de caracteres
 
     const int screenWidth = 1280;
     const int screenHeight = 720;
@@ -52,6 +56,46 @@ int main(){
         break;
 
         case NOVOJOGO3:
+            if (charCount < MAX_CHARS) {
+            // Verifica as teclas pressionadas
+            int key = GetKeyPressed();
+            if (key > 0 && key != KEY_ENTER && key != KEY_BACKSPACE) {
+                // Se uma tecla válida (não enter nem backspace) for pressionada, adicione-a à string
+                input[charCount] = (char)key;
+                charCount++;
+            } else if (key == KEY_BACKSPACE && charCount > 0) {
+                // Se a tecla de backspace for pressionada e houver caracteres na string, remova o último caractere
+                charCount--;
+                input[charCount] = '\0';
+            } else if (key == KEY_ENTER) {
+                // Se a tecla Enter for pressionada, mostra a palavra digitada e reinicia a entrada
+                strcat(frase, input);
+
+                if(IsKeyPressed(KEY_ENTER)){
+                    currentScreen = NOVOJOGO4;
+                }
+            }
+        }
+        break;
+
+        case NOVOJOGO4:
+                if(IsKeyPressed(KEY_Q)){
+                    currentScreen = NOVOJOGO5;
+                }else if(IsKeyPressed(KEY_W)){
+                    memset(input, 0, sizeof(input));
+                    charCount = 0;
+                    strcpy(frase, "Então seu nome é ");
+                    currentScreen = NOVOJOGO3;
+                }      
+        break;
+
+        case NOVOJOGO5:
+                if(IsKeyPressed(KEY_ENTER)){
+                    currentScreen = NOVOJOGO6;
+                }
+        break;
+
+        case NOVOJOGO6:
         break;
 
         case CARREGARJOGO:
@@ -111,6 +155,29 @@ int main(){
         DrawTexture(novojogo, 0, 0, WHITE);
         DrawTextureRec(professor, profOak, posicaoOak, WHITE); 
         DrawText("- Poderia me dizer seu nome?", 50, 600, 30, GRAY);
+        DrawText(input, 50, 650, 30, GRAY);
+        break;
+
+        case NOVOJOGO4:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTextureRec(professor, profOak, posicaoOak, WHITE); 
+        DrawText(frase, 50, 600, 30, GRAY);
+        DrawText("| Q | - Sim!", 50, 650, 30, GRAY);
+        DrawText("| W | - Não!", 50, 685, 30, GRAY);
+        break;
+
+        case NOVOJOGO5:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTextureRec(professor, profOak, posicaoOak, WHITE);
+        DrawText("Muito bem!", 50, 600, 30, GRAY);
+        DrawText("Agora, para iniciar sua jornada, voce precisa escolher um Pokémon...", 50, 650, 30, GRAY);
+        break;
+
+        case NOVOJOGO6:
+        DrawTexture(novojogo, 0, 0, WHITE);
+        DrawTextureRec(professor, profOak, posicaoOak, WHITE);
+        DrawText("Qual desses três mais lhe agrada?", 50, 650, 30, GRAY);
+
         break;
 
 
