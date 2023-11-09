@@ -72,4 +72,13 @@ float modSpdef;
 float modSpeed;
 } nature;
 
+typedef struct tipos{
+int idTipo;
+char nome[10];
+int resistencias[8];
+int fraquezas[8];
+int imunidades[3];
+} tipos;
+
+
 #endif

@@ -117,3 +117,82 @@ void vetorDePokebolas(struct Pokebola pokebolas[4]) {
     pokebolas[2].catchRate = 2;
     pokebolas[3].catchRate = 10000;
 }
+
+void vetorDeTiposDePokemon(struct Tipos tipos[18]) {
+
+strcpy(tipos[0].nome, "Inseto");
+strcpy(tipos[1].nome, "Normal");
+strcpy(tipos[2].nome, "Fogo");
+strcpy(tipos[3].nome, "Agua");
+strcpy(tipos[4].nome, "Dragao");
+strcpy(tipos[5].nome, "Venenoso");
+strcpy(tipos[6].nome, "Elétrico");
+strcpy(tipos[7].nome, "Voador");
+strcpy(tipos[8].nome, "Gelo");
+strcpy(tipos[9].nome, "Psiquico");
+strcpy(tipos[10].nome, "Obscuro");
+strcpy(tipos[11].nome, "Fantasma");
+strcpy(tipos[12].nome, "Fada");
+strcpy(tipos[13].nome, "Grama");
+strcpy(tipos[14].nome, "Terra");
+strcpy(tipos[15].nome, "Pedra");
+strcpy(tipos[16].nome, "Lutador");
+strcpy(tipos[17].nome, "Aço");
+
+for(int i = 0; i < 18; i++){
+    tipos[i].idTipo = i;
+}
+
+// Tipo inseto
+int fraq[] = {2, 7, 15};
+int res[] = {13, 14, 16};
+int imuni[] = {};
+for (int i = 0; i < 8; i++) {
+    tipos[0].fraquezas[i] = fraq[i];
+    tipos[0].resistencias[i] = res[i];
+    tipos[0].imunidades[i] = imuni[i];
+};
+
+// Tipo normal
+int fraq[] = {16};
+int res[] = {};
+int imuni[] = {16};
+for (int i = 0; i < 8; i++) {
+    tipos[1].fraquezas[i] = fraq[i];
+    tipos[1].resistencias[i] = res[i];
+    tipos[1].imunidades[i] = imuni[i];
+};
+
+// Tipo fogo
+int fraq[] = {14, 15, 3};
+int res[] = {2, 12, 0, 13, 8, 17};
+int imuni[] = {};
+for (int i = 0; i < 8; i++) {
+    tipos[2].fraquezas[i] = fraq[i];
+    tipos[2].resistencias[i] = res[i];
+    tipos[2].imunidades[i] = imuni[i];
+};
+
+// Tipo agua
+int fraq[] = {13, 6};
+int res[] = {17, 8, 2, 3};
+int imuni[] = {};
+for (int i = 0; i < 8; i++) {
+    tipos[3].fraquezas[i] = fraq[i];
+    tipos[3].resistencias[i] = res[i];
+    tipos[3].imunidades[i] = imuni[i];
+};
+
+// Tipo dragao
+int fraq[] = {4, 8, 12};
+int res[] = {13, 6, 2, 3};
+int imuni[] = {};
+for (int i = 0; i < 8; i++) {
+    tipos[4].fraquezas[i] = fraq[i];
+    tipos[4].resistencias[i] = res[i];
+    tipos[4].imunidades[i] = imuni[i];
+};
+
+// continuar...
+
+}
