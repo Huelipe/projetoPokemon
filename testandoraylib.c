@@ -4,12 +4,268 @@
 #include <math.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
-typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
-typedef enum GameLoad { CIDADE1, LOADGAME, BATALHA, AVENTURA, POKEDOCA, CENTRO,  } GameLoad;
+typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, NOVOJOGO9, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
+typedef enum GameLoad { CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
+// Início das definições de estruturas do jogo
+typedef struct Pokemon{
+    int nPokedex; // Número na pokedex
+    char nome[40]; // Nome do pokémon
+    char tipo1[10]; // Primeiro tipo do pokémon
+    char tipo2[10]; // Segundo tipo do pokémon (deve ser registrado "NULL" caso não tenha)
+    int total; // Soma total dos status base
+    int hp; // Tanto de vida
+    int atk; // Tanto de ataque
+    int def; // Tanto de defesa
+    int spatack; // Tanto de ataque especial
+    int spdef; // Tanto de defesa especial
+    int speed; // Tanto de velocidade
+    int geracao; // Geração a qual pertence o pokemon
+    int lendario; // Define se é lendario ou não a partir de booleano
+    char cor[10]; // Cor do pokemon
+    float altura; // Altura do pokemon
+    float peso; // Peso do pokemon
+    float captura; // Taxa de captura
+    int preEvo; // Pré evolução
+    int prxEvo; // Próxima evolução
+} Pokemon; // Estrutura que define o pokemon na pokedex
+
+typedef struct PokemonCapturado{
+    float ivsHP; 
+    float ivsAtk;
+    float ivsDef;
+    float ivsSpatack;
+    float ivsSpDef;
+    float ivsSpeed;
+    float evsHP;
+    float evsAtk;
+    float evsDef;
+    float evsSpatack;
+    float evsSpDef;
+    float evsSpeed;
+    float evstotal; 
+    float HP;
+    float HPATUAL;
+    float Atk;
+    float Def;
+    float Spatack;
+    float SpDef;
+    float Speed;
+    float LvlAtual; // Level atual
+    char move1[20]; // Ataque 1
+    char move2[20]; // Ataque 2
+    char move3[20]; // Ataque 3
+    char move4[20]; // Ataque 4
+    char nature[20];
+    union{
+        char tipo[10];
+        int id;
+        float atual; // (1 ou 10), (esta com status ou não)
+    } Status;
+    // Union para definir se um pokémon está paralisado, intoxicado, com sono ou congelado, condições que facilitam na batalha e a capturar
+} pokemonCapturado;
+
+typedef struct Pokebola{
+float catchRate;
+char nome[20];
+} Pokebola;
+
+typedef struct natureza{
+char nome[20];
+float modAtk;
+float modDef;
+float modSpatack;
+float modSpdef;
+float modSpeed;
+} nature;
+
+// Início das funções 
+void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, nature natures[25]) {
+
+    pselvagem->ivsHP = rand() % 32;
+    pselvagem->ivsAtk = rand() % 32;
+    pselvagem->ivsDef = rand() % 32;
+    pselvagem->ivsSpatack = rand() % 32;
+    pselvagem->ivsSpDef = rand() % 32;
+    pselvagem->ivsSpeed = rand() % 32;
+
+    pselvagem->LvlAtual = lvl;
+
+    int r = rand() % 26; // randomizador nature
+    char nature[20];
+    strcpy(nature, natures[r].nome);
+
+    pselvagem->evsHP = 0;
+    pselvagem->evsAtk = 0;
+    pselvagem->evsDef = 0;
+    pselvagem->evsSpatack = 0;
+    pselvagem->evsSpDef = 0;
+    pselvagem->evsSpeed = 0;
+
+    pselvagem->HP = ((pselvagem->LvlAtual * ((pokemonNaDex.hp * 2) + pselvagem->ivsHP + (pselvagem->evsHP / 4))) / 100) + 10 + pselvagem->LvlAtual;
+    pselvagem->Atk = (((pselvagem->LvlAtual * ((pokemonNaDex.atk * 2) + pselvagem->ivsAtk + (pselvagem->evsAtk / 4))) / 100) + 5) * natures[r].modAtk;
+    pselvagem->Def = (((pselvagem->LvlAtual * ((pokemonNaDex.def * 2) + pselvagem->ivsDef + (pselvagem->evsDef / 4))) / 100) + 5) * natures[r].modDef;
+    pselvagem->Spatack = (((pselvagem->LvlAtual * ((pokemonNaDex.spatack * 2) + pselvagem->ivsSpatack + (pselvagem->evsSpatack / 4))) / 100) + 5) * natures[r].modSpatack;
+    pselvagem->SpDef = (((pselvagem->LvlAtual * ((pokemonNaDex.spdef * 2) + pselvagem->ivsSpDef + (pselvagem->evsSpDef / 4))) / 100) + 5) * natures[r].modSpdef;
+    pselvagem->Speed = (((pselvagem->LvlAtual * ((pokemonNaDex.speed * 2) + pselvagem->ivsSpeed + (pselvagem->evsSpeed / 4))) / 100) + 5) * natures[r].modSpeed;
+
+    pselvagem->HPATUAL = pselvagem->HP;
+
+    pselvagem->Status.atual = 1;
+}
+
+void capturarPokemon(Pokebola pokeball[4], int* resultado, Pokemon pokemonNaDex, pokemonCapturado pselvagem, int qualpokebola){
+// Ao apertar o botão de tentar capturar
+
+float chance;
+
+    chance = ((1 + (3 * pselvagem.HP - (2 * pselvagem.HPATUAL)) * (pokemonNaDex.captura * pokeball[qualpokebola].catchRate * pselvagem.Status.atual)) / (3 * pselvagem.HP)) / 2.56;
+    //printf("%.5f\n", chance);
+
+float numSorteado = (rand() % 100) + 1;
+
+if(numSorteado <= chance){
+    (*resultado) = 1;
+}else{
+    (*resultado) = 0;
+}
+}
+
+#define MAX_POKEMON 722 
+
 int main(){
+
+    srand(time(NULL));
+
+    //Carrega a pokedex
+    FILE *arquivo;
+    Pokemon listaPokemon[MAX_POKEMON];
+
+    arquivo = fopen("pokedex.csv", "r+");
+
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    }
+
+    for(int i = 1; i < 722; i++){
+        fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
+    }
+
+    fclose(arquivo);
+
+//Define todas as 25 naturezas do jogo
+    nature natures[26];
+    strcpy(natures[1].nome, "Hardy");
+    strcpy(natures[2].nome, "Docile");
+    strcpy(natures[3].nome, "Bashful");
+    strcpy(natures[4].nome, "Quirky");
+    strcpy(natures[5].nome, "Serious");;
+    strcpy(natures[6].nome, "Bold");
+    strcpy(natures[7].nome, "Modest");
+    strcpy(natures[8].nome, "Calm");
+    strcpy(natures[9].nome, "Timid");
+    strcpy(natures[10].nome, "Lonely");
+    strcpy(natures[11].nome, "Mild");
+    strcpy(natures[12].nome, "Gentle");
+    strcpy(natures[13].nome, "Hasty");
+    strcpy(natures[14].nome, "Adamant");
+    strcpy(natures[15].nome, "Impish");
+    strcpy(natures[16].nome, "Careful");
+    strcpy(natures[17].nome, "Jolly");
+    strcpy(natures[18].nome, "Naughty");
+    strcpy(natures[19].nome, "Lax");
+    strcpy(natures[20].nome, "Rash");
+    strcpy(natures[21].nome, "Naive");
+    strcpy(natures[22].nome, "Brave");
+    strcpy(natures[23].nome, "Relaxed");
+    strcpy(natures[24].nome, "Quiet");
+    strcpy(natures[25].nome, "Sassy");
+
+    float comum = 1;
+    float mais = 1.1;
+    float menos = 0.9;
+
+    natures[1].modAtk = natures[1].modDef = natures[1].modSpatack = natures[1].modSpdef = natures[1].modSpeed = comum;
+    natures[2].modAtk = natures[2].modDef = natures[2].modSpatack = natures[2].modSpdef = natures[2].modSpeed = comum;
+    natures[3].modAtk = natures[3].modDef = natures[3].modSpatack = natures[3].modSpdef = natures[3].modSpeed = comum;
+    natures[4].modAtk = natures[4].modDef = natures[4].modSpatack = natures[4].modSpdef = natures[4].modSpeed = comum;
+    natures[5].modAtk = natures[5].modDef = natures[5].modSpatack = natures[5].modSpdef = natures[5].modSpeed = comum;
+        natures[6].modDef = mais;
+            natures[6].modAtk = menos;
+                natures[6].modSpdef = natures[6].modSpatack = natures[6].modSpeed = comum;
+        natures[7].modSpatack = mais;
+            natures[7].modAtk = menos;
+                natures[7].modSpdef = natures[7].modDef = natures[7].modSpeed = comum;
+        natures[8].modSpdef = mais;
+            natures[8].modAtk = menos;
+                natures[8].modDef = natures[8].modSpatack = natures[8].modSpeed = comum;
+        natures[9].modSpeed = mais;
+            natures[9].modAtk = menos;
+                natures[9].modSpdef = natures[9].modSpatack = natures[9].modDef = comum;
+        natures[10].modAtk = mais;
+            natures[10].modDef = menos;
+                natures[10].modSpdef = natures[10].modSpatack = natures[10].modSpeed = comum;       
+        natures[11].modSpatack = mais;
+            natures[11].modDef = menos;
+                natures[11].modSpdef = natures[11].modAtk = natures[11].modSpeed = comum;
+        natures[12].modSpdef = mais;
+            natures[12].modDef = menos;
+                natures[12].modAtk = natures[12].modSpatack = natures[12].modSpeed = comum;
+        natures[13].modSpeed = mais;
+            natures[13].modDef = menos;
+                natures[13].modSpdef = natures[13].modSpatack = natures[13].modAtk = comum;
+        natures[14].modAtk = mais;
+            natures[14].modSpatack = menos;
+                natures[14].modSpdef = natures[14].modDef = natures[14].modSpeed = comum;
+        natures[15].modDef = mais;
+            natures[15].modSpatack = menos;
+                natures[15].modSpdef = natures[15].modAtk = natures[15].modSpeed = comum;
+        natures[16].modSpdef = mais;
+            natures[16].modSpatack = menos;
+                natures[16].modDef = natures[16].modAtk = natures[16].modSpeed = comum;
+        natures[17].modSpeed = mais;
+            natures[17].modSpatack = menos;
+                natures[17].modSpdef = natures[17].modAtk = natures[17].modDef = comum;
+        natures[18].modAtk = mais;
+            natures[18].modSpdef = menos;
+                natures[18].modDef = natures[18].modSpatack = natures[18].modSpeed = comum;
+        natures[19].modDef = mais;
+            natures[19].modSpdef = menos;
+                natures[19].modAtk = natures[19].modSpatack = natures[19].modSpeed = comum;
+        natures[20].modSpatack = mais;
+            natures[20].modSpdef = menos;
+                natures[20].modAtk = natures[20].modDef = natures[20].modSpeed = comum;
+        natures[21].modSpeed = mais;
+            natures[21].modSpdef = menos;
+                natures[21].modAtk = natures[21].modDef = natures[21].modSpatack = comum;
+        natures[22].modAtk = mais;
+            natures[22].modSpeed = menos;
+                natures[22].modSpdef = natures[22].modSpatack = natures[22].modDef = comum;
+        natures[23].modDef = mais;
+            natures[23].modSpeed = menos;
+                natures[23].modSpdef = natures[23].modSpatack = natures[23].modAtk = comum;
+        natures[24].modSpatack = mais;
+            natures[24].modSpeed = menos;
+                natures[24].modSpdef = natures[24].modAtk = natures[24].modDef = comum;
+        natures[25].modSpdef = mais;
+            natures[25].modSpeed = menos;
+                natures[25].modAtk = natures[25].modSpatack = natures[25].modDef = comum;
+
+    //Define as pokébolas e seus Catch
+    Pokebola pokebolas[4];
+    strcpy(pokebolas[0].nome, "Pokebola");
+    strcpy(pokebolas[1].nome, "Grande Bola");
+    strcpy(pokebolas[2].nome, "Ultra Bola");
+    strcpy(pokebolas[3].nome, "Bola mestre");
+
+    pokebolas[0].catchRate = 1;
+    pokebolas[1].catchRate = 1.5;
+    pokebolas[2].catchRate = 2;
+    pokebolas[3].catchRate = 10000;
 
     int screensAtuais = 0;
     int opcaoGenero;
@@ -20,7 +276,6 @@ int main(){
     char input[MAX_CHARS + 1] = { 0 }; // String para armazenar a palavra
     int charCount = 0; // Contador de caracteres
 
-
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
@@ -30,6 +285,7 @@ int main(){
     Vector2 posicaoS = {750, 500};
     Vector2 posicaoC = {950, 500};
     float scale = 3;
+    float scalePersonagem = 0.5;
 
     InitWindow(screenWidth, screenHeight, "Pokémon");
     Texture2D menu = LoadTexture("imagens/wallpaper.png");
@@ -38,14 +294,18 @@ int main(){
     Texture2D bulbassauro = LoadTexture("imagens/imagens_pokedex/001.png");
     Texture2D squirtle = LoadTexture("imagens/imagens_pokedex/007.png");
     Texture2D charmander = LoadTexture("imagens/imagens_pokedex/004.png");
+    Texture2D creditos = LoadTexture("imagens/fundoazul.png");
 
     int targetfps = 60;
 
     GameScreen currentScreen = MENU;
     SetTargetFPS(targetfps); 
 
+
+
     while(!WindowShouldClose()){
 
+    if(screensAtuais == 0){
     switch(currentScreen){
         case MENU:
         if(IsKeyPressed(KEY_Q) ){
@@ -134,9 +394,16 @@ int main(){
 
         case NOVOJOGO8:
             if(IsKeyPressed(KEY_ENTER)){
+                currentScreen = NOVOJOGO9;
+            }
+        break;
+
+        case NOVOJOGO9:
+            if(IsKeyPressed(KEY_ENTER)){
                 screensAtuais = 1;
             }
         break;
+
         case CARREGARJOGO:
 
         break;
@@ -209,7 +476,7 @@ int main(){
         case NOVOJOGO5:
         DrawTexture(novojogo, 0, 0, WHITE);
         DrawTextureRec(professor, profOak, posicaoOak, WHITE);
-        DrawText("E você é menina ou Menino?", 50, 600, 30, GRAY);
+        DrawText("E você é Menino ou Menina?", 50, 600, 30, GRAY);
         DrawText("| Q | Menino", 50, 650, 30, GRAY);
         DrawText("| W | Menina", 50, 685, 30, GRAY);
         break;
@@ -238,6 +505,17 @@ int main(){
         DrawText("Se precisar de ajuda em algo, venha me visitar aqui na universidade!", 50, 650, 30, GRAY);
         break;
 
+        case NOVOJOGO9:
+        DrawTexture(creditos, 0, 0, WHITE);
+        DrawText("- Projeto de Fundamentos de Programação 2 - ", 50, 200, 50, MAGENTA);
+        DrawText("> Pokémon: Uma aventura por Apucarana", 50, 270, 50, MAGENTA);
+        DrawText("> Prof. Muriel de Souza Godoi", 50, 340, 35, PURPLE);
+        DrawText("> Alunos:", 50, 380, 35, PURPLE);
+        DrawText("> Caio Vinícius Maciel Delgado", 50, 420, 35, PURPLE);
+        DrawText("> Felipe Ferrer Sorrilha", 50, 460, 35, PURPLE);
+        DrawText("> João Pedro Garcia Bronharo", 50, 500, 35, PURPLE);
+        break;
+
         case CARREGARJOGO:
 
         break;
@@ -258,29 +536,31 @@ int main(){
     }
 
     EndDrawing();
+    }
 
     if(screensAtuais == 1){
-        break;
-    }
-    }
+
+    Vector2 posicaoPersonagem = {550, 320};
 
     GameLoad screenLoad = CIDADE1;
     Texture2D cidade1 = LoadTexture("imagens/palletTown.png");
+    Texture2D opcoes = LoadTexture("imagens/opcoes.png");
+    Texture2D personagem;
     if(opcaoGenero == 1){
-        //DrawTexture(); menino
+        personagem = LoadTexture("imagens/ash.png");
     }else{
-        //DrawTexture(); menina
+        personagem = LoadTexture("imagens/amy.png");
     }
+    
 
     if(opcaoPokemon == 1){
         //criarpokemon(bulbasaur, nvl 5, etc)
     }
 
-    while(!WindowShouldClose()){
-
     switch(screenLoad){
 
     case CIDADE1:
+
     break;
 
     }
@@ -292,13 +572,17 @@ int main(){
 
     case CIDADE1:
         DrawTexture(cidade1, 0, 0, WHITE);
+        DrawTexture(opcoes, 0, 520, WHITE);
+        DrawTextureEx(personagem, posicaoPersonagem, 0.0f, scalePersonagem, WHITE);
     break;
 
     }
 
     EndDrawing();
+
     }
 
+}
     return 0;
 
 }
