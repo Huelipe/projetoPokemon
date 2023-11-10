@@ -74,9 +74,6 @@ typedef struct PokemonCapturado{
     // Union para definir se um pokémon está paralisado, intoxicado, com sono ou congelado, condições que facilitam na batalha e a capturar
 } pokemonCapturado;
 
-
-#define MAX_POKEMON 722 
-
 typedef struct Pokebola{
 float catchRate;
 char nome[20];
@@ -92,6 +89,15 @@ float modSpdef;
 float modSpeed;
 } nature;
 // Estrutura da natureza, explicadas na linha 279 mais ou menos
+
+void leString(char string[], int tamanho){
+
+    setbuf(stdin,NULL);
+    fgets(string, tamanho - 1, stdin);
+    string[strcspn(string, "\n")] = '\0';
+
+    return;
+}//leString
 
 void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, nature natures[25]) {
 
@@ -163,13 +169,185 @@ if(numSorteado <= chance){
 }
 }
 
+void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
+
+    listaPokemon = (Pokemon*) realloc(listaPokemon, ((*numeroDePokemons) + 1) * sizeof(Pokemon));
+
+    printf("\nDigite o nome do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) + 1].nome, 40);
+
+    printf("\nDigite o tipo 1 do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) + 1].tipo1, 10);
+
+    printf("\nDigite o tipo 2 do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) + 1].tipo2, 10);
+
+    printf("\nDigite os pontos de vida (hp) do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].hp);
+
+    printf("\nDigite os pontos de ataque do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].atk);
+
+    printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].def);
+
+    printf("\nDigite os pontos de ataque especial do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].spatack);
+
+    printf("\nDigite os pontos de defesa especial do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].spdef);
+
+    printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].def);
+
+    printf("\nDigite os pontos de velocidade do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].speed);
+
+    printf("\nDigite a geração do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].geracao);
+
+    printf("\nDigite se o pokémon a ser adicionado é lendário(digite 1) ou não(digite 0):");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].lendario);
+
+    printf("\nDigite a cor do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) + 1].cor, 10);
+
+    printf("\nDigite a altura do pokémon a ser adicionado:")
+    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].altura);
+
+    printf("\nDigite o peso do pokémon a ser adicionado:");
+    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].peso);
+
+    printf("\nDigite a taxa de captura do pokémon a ser adicionado:");
+    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].captura);
+
+    printf("\nDigite a pré-evolução do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].preEvo);
+
+    printf("\nDigite a próxima evolução do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].prxEvo);
+
+    //faltou calcular o total do pokemon
+
+    (*numeroDePokemons)++;
+
+    listaPokemon[(*numeroDePokemons) + 1].nPokedex = numeroDePokemons;
+
+    printf("\nO Pokémon %s foi adicionado na Pokedex do jogo!\n", listaPokemon[(*numeroDePokemons) + 1].nome);
+
+    return;
+}//adicionarPokemonNaPokedex
+
+void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
+
+    char pokemonExcluido[40];
+    int confirmaExclusão = 0;
+    int indicePokemonExcluido = 0;
+
+    do{//nao sei como o usuario sairia caso nao quisesse mais excluir um pokemon
+        printf("\nDigite o nome do pokémon a ser excluido:");
+        leString(pokemonExcluido, 40);
+
+        for(int i = 0; i < ((*numeroDePokemons) - 1); i++){
+            if(strcasecmp(pokemonExcluido, listaPokemon[i].nome) == 0){
+                confirmaExclusão++;
+                indicePokemonExcluido = i;
+                (*numeroDePokemons)--;
+            }//if
+        }//for
+    }while(confirmaExclusão == 0);
+
+    //nao sei se apaga o que estava no vetor
+    listaPokemon = (Pokemon*) realloc(listaPokemon, ((*numeroDePokemons) - 1) * sizeof(Pokemon));
+
+    //nao sei apagar o pokemon
+
+    return;
+}//excluirPokemonDaPokedex
+
+void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
+
+    char pokemonPesquisado[40];
+    int pokemonEncontrado = 0;
+    char continuarNaProcura;
+
+    do{
+
+    printf("\nDigite o nome de um pokémon para pesquisá-lo na Pokedex:");
+    leString(pokemonPesquisado, 40);
+
+    for(int i = 0; i < numeroDePokemons; i++){
+        if(strcasecmp(pokemonPesquisado, listaPokemon[i].nome) == 0){
+            pokemonEncontrado++;
+        }//if
+
+        if(pokemonEncontrado > 0){
+            printf("\nPokemon encontrado!\n");
+            printf("Número na Pokedex:%d\n", listaPokemon[i].nPokedex);
+            printf("Nome:%s\n", listaPokemon[i].nome);
+            printf("Tipo 1:%s\n", listaPokemon[i].tipo1);
+            printf("Tipo 2:%s\n", listaPokemon[i].tipo2);
+            printf("Total:%d\n", listaPokemon[i].total);
+            printf("HP:%d\n", listaPokemon[i].hp);
+            printf("Ataque:%d\n", listaPokemon[i].atk);
+            printf("Defesa:%d\n", listaPokemon[i].def);
+            printf("Ataque Especial:%d\n", listaPokemon[i].spatack);
+            printf("Defesa Especial:%d\n", listaPokemon[i].spdef);
+            printf("Velocidade:%d\n", listaPokemon[i].speed);
+            printf("Geração:%d\n", listaPokemon[i].geracao);
+            printf("Lendário:%d\n", listaPokemon[i].lendario);
+            printf("Cor:%s\n", listaPokemon[i].cor);
+            printf("Altura:%.2f\n", listaPokemon[i].altura);
+            printf("Peso:%.2f\n", listaPokemon[i].peso);
+            printf("Taxa de Captura:%.2f%%\n", listaPokemon[i].captura);
+            printf("Pré-Evolução:%d\n", listaPokemon[i].preEvo);
+            printf("Próxima-Evolução:%d\n", listaPokemon[i].prxEvo);
+            break;
+        }//if
+    }//for
+
+    if(pokemonEncontrado == 0){
+        printf("\nO pokémon não foi encontrado na Pokedex! Deseja procurar novamente?(Digite S ou N):");
+        scanf("%c", &continuarNaProcura);
+    }//if
+
+    }while(continuarNaProcura == 'S' && pokemonEncontrado == 0);
+
+    return;
+}//pesquisaPokemonNaPokedex
+
+/*
+typedef struct Pokemon{
+    int nPokedex; // Número na pokedex
+    char nome[40]; // Nome do pokémon
+    char tipo1[10]; // Primeiro tipo do pokémon
+    char tipo2[10]; // Segundo tipo do pokémon (deve ser registrado "NULL" caso não tenha)
+    int total; // Soma total dos status base
+    int hp; // Tanto de vida
+    int atk; // Tanto de ataque
+    int def; // Tanto de defesa
+    int spatack; // Tanto de ataque especial
+    int spdef; // Tanto de defesa especial
+    int speed; // Tanto de velocidade
+    int geracao; // Geração a qual pertence o pokemon
+    int lendario; // Define se é lendario ou não a partir de booleano
+    char cor[10]; // Cor do pokemon
+    float altura; // Altura do pokemon
+    float peso; // Peso do pokemon
+    float captura; // Taxa de captura
+    int preEvo; // Pré evolução
+    int prxEvo; // Próxima evolução
+} Pokemon;
+*/
+
 int main(){
 
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
 
     FILE *arquivo;
-    Pokemon listaPokemon[MAX_POKEMON];
+    Pokemon* listaPokemon;
+    int numeroDePokemons = 722;
     int tamanhoPrimeiraLinhaCSV;
 
     arquivo = fopen("../pokedex.csv", "r+");
@@ -181,6 +359,8 @@ int main(){
     }
 
     tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
+
+    listaPokemon = (Pokemon*) malloc(numeroDePokemons * sizeof(Pokemon));
 
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
 
@@ -410,6 +590,8 @@ int main(){
     // Retorna o resultado
 
     
+
+    free(listaPokemon);
 
     return 0;
 }
