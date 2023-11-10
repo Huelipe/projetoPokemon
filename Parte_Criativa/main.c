@@ -8,7 +8,7 @@
 #include "estruturas.h"
 #include "funcoes.h"
 
-typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, NOVOJOGO9, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
+typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, NOVOJOGO9, TRANSICAO, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
 typedef enum GameLoad { CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
@@ -57,6 +57,11 @@ int main(){
     float scalePersonagem = 0.5;
 
     InitWindow(screenWidth, screenHeight, "Pokémon");
+
+    RenderTexture2D target = LoadRenderTexture(1280, 720);
+    float transitionRadius = 0.0f;
+    float maxRadius = sqrt(powf(1280, 2) + powf(720, 2)) / 2;
+
     Texture2D menu = LoadTexture("imagens/wallpaper.png");
     Texture2D novojogo = LoadTexture("imagens/frenteUtfpr.png");
     Texture2D professor = LoadTexture("imagens/professorOak.png");
@@ -69,8 +74,6 @@ int main(){
 
     GameScreen currentScreen = MENU;
     SetTargetFPS(targetfps); 
-
-
 
     while(!WindowShouldClose()){
 
@@ -169,8 +172,19 @@ int main(){
 
         case NOVOJOGO9:
             if(IsKeyPressed(KEY_ENTER)){
-                screensAtuais = 1;
+                currentScreen = TRANSICAO;
             }
+        break;
+
+        case TRANSICAO:
+        transitionRadius += 6.0f; // Ajuste o valor conforme necessário
+
+        if (transitionRadius > maxRadius) {
+            UnloadRenderTexture(target);
+            screensAtuais = 1;
+
+        }
+
         break;
 
         case CARREGARJOGO:
@@ -199,7 +213,6 @@ int main(){
         break;
 
     }
-
 
     BeginDrawing();
     ClearBackground(WHITE);
@@ -276,13 +289,30 @@ int main(){
 
         case NOVOJOGO9:
         DrawTexture(creditos, 0, 0, WHITE);
-        DrawText("- Projeto de Fundamentos de Programação 2 - ", 50, 200, 50, MAGENTA);
-        DrawText("> Pokémon: Uma aventura por Apucarana", 50, 270, 50, MAGENTA);
-        DrawText("> Prof. Muriel de Souza Godoi", 50, 340, 35, PURPLE);
-        DrawText("> Alunos:", 50, 380, 35, PURPLE);
-        DrawText("> Caio Vinícius Maciel Delgado", 50, 420, 35, PURPLE);
-        DrawText("> Felipe Ferrer Sorrilha", 50, 460, 35, PURPLE);
-        DrawText("> João Pedro Garcia Bronharo", 50, 500, 35, PURPLE);
+        DrawText("- Projeto de Fundamentos de Programação 2 - ", 50, 200, 50, DARKBLUE);
+        DrawText("> Pokémon: Uma aventura por Apucarana", 50, 270, 50, DARKBLUE);
+        DrawText("> Prof. Muriel de Souza Godoi", 50, 340, 35, DARKBLUE);
+        DrawText("> Alunos:", 50, 380, 35, DARKBLUE);
+        DrawText("> Caio Vinícius Maciel Delgado", 50, 420, 35, DARKBLUE);
+        DrawText("> Felipe Ferrer Sorrilha", 50, 460, 35, DARKBLUE);
+        DrawText("> João Pedro Garcia Bronharo", 50, 500, 35, DARKBLUE);
+        break;
+
+        case TRANSICAO:
+        BeginTextureMode(target);
+        ClearBackground(RAYWHITE);
+
+        DrawTexture(creditos, 0, 0, WHITE);
+
+        // DrawCircle com a cor verde claro (RGBA: 144, 238, 144, 255)
+        DrawCircle(screenWidth / 2, screenHeight / 2, transitionRadius, (Color){144, 238, 144, 255});
+        DrawText("Carregando...", 500, 300, 40, DARKBLUE);
+
+        EndTextureMode();
+
+        DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+
+
         break;
 
         case CARREGARJOGO:
@@ -307,13 +337,14 @@ int main(){
     EndDrawing();
     }
 
+
     if(screensAtuais == 1){
 
     Vector2 posicaoPersonagem = {550, 320};
 
     GameLoad screenLoad = CIDADE1;
     Texture2D cidade1 = LoadTexture("imagens/palletTown.png");
-    Texture2D opcoes = LoadTexture("imagens/opcoes.png");
+    Texture2D opcoes = LoadTexture("imagens/opcoesInGame.png");
     Texture2D personagem;
     if(opcaoGenero == 1){
         personagem = LoadTexture("imagens/ash.png");
@@ -341,7 +372,7 @@ int main(){
 
     case CIDADE1:
         DrawTexture(cidade1, 0, 0, WHITE);
-        DrawTexture(opcoes, 0, 520, WHITE);
+        DrawTexture(opcoes, 1024, 0, WHITE);
         DrawTextureEx(personagem, posicaoPersonagem, 0.0f, scalePersonagem, WHITE);
     break;
 
