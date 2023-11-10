@@ -374,6 +374,12 @@ int main(){
         DrawTexture(cidade1, 0, 0, WHITE);
         DrawTexture(opcoes, 1024, 0, WHITE);
         DrawTextureEx(personagem, posicaoPersonagem, 0.0f, scalePersonagem, WHITE);
+        DrawText("1-Batalhar", 1080, 60, 20, DARKGRAY);
+        DrawText("2-Caçar Pokémons", 1050, 165, 20, DARKGRAY);
+        DrawText("3-Visitar o Prof.", 1060, 280, 20, DARKGRAY);
+        DrawText("4-Visitar Pokedoca", 1047, 400, 20, DARKGRAY);
+        DrawText("5-Acessar bolsa", 1055, 515, 20, DARKGRAY);
+        DrawText("6-Salvar e Sair", 1055, 635, 20, DARKGRAY);
     break;
 
     }
