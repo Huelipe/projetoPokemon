@@ -352,15 +352,31 @@ int main(){
         personagem = LoadTexture("imagens/amy.png");
     }
     
-
+    pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
-        //criarpokemon(bulbasaur, nvl 5, etc)
+        criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures[26]);
+    }else if(opcaoPokemon == 2){
+        criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures[26]);
+    }else if(opcaoPokemon == 3){
+        criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures[26]);
     }
 
     switch(screenLoad){
 
     case CIDADE1:
+        if(IsKeyPressed(KEY_KP_1)){
 
+        }else if(IsKeyPressed(KEY_KP_2)){
+
+        }else if(IsKeyPressed(KEY_KP_3)){
+
+        }else if(IsKeyPressed(KEY_KP_4)){
+
+        }else if(IsKeyPressed(KEY_KP_5)){
+            //bolsa
+        }else if(IsKeyPressed(KEY_KP_6)){
+            //...
+        }
     break;
 
     }
@@ -379,7 +395,7 @@ int main(){
         DrawText("3-Visitar o Prof.", 1060, 280, 20, DARKGRAY);
         DrawText("4-Visitar Pokedoca", 1047, 400, 20, DARKGRAY);
         DrawText("5-Acessar bolsa", 1055, 515, 20, DARKGRAY);
-        DrawText("6-Salvar e Sair", 1055, 635, 20, DARKGRAY);
+        DrawText("6-Próxima região", 1055, 635, 20, DARKGRAY);
     break;
 
     }
