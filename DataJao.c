@@ -170,70 +170,67 @@ if(numSorteado <= chance){
 }
 
 void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
-
-    listaPokemon = (Pokemon*) realloc(listaPokemon, ((*numeroDePokemons) + 1) * sizeof(Pokemon));
-
-    printf("\nDigite o nome do pokémon a ser adicionado:");
-    leString(listaPokemon[(*numeroDePokemons) + 1].nome, 40);
-
-    printf("\nDigite o tipo 1 do pokémon a ser adicionado:");
-    leString(listaPokemon[(*numeroDePokemons) + 1].tipo1, 10);
-
-    printf("\nDigite o tipo 2 do pokémon a ser adicionado:");
-    leString(listaPokemon[(*numeroDePokemons) + 1].tipo2, 10);
-
-    printf("\nDigite os pontos de vida (hp) do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].hp);
-
-    printf("\nDigite os pontos de ataque do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].atk);
-
-    printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].def);
-
-    printf("\nDigite os pontos de ataque especial do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].spatack);
-
-    printf("\nDigite os pontos de defesa especial do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].spdef);
-
-    printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].def);
-
-    printf("\nDigite os pontos de velocidade do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].speed);
-
-    printf("\nDigite a geração do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].geracao);
-
-    printf("\nDigite se o pokémon a ser adicionado é lendário(digite 1) ou não(digite 0):");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].lendario);
-
-    printf("\nDigite a cor do pokémon a ser adicionado:");
-    leString(listaPokemon[(*numeroDePokemons) + 1].cor, 10);
-
-    printf("\nDigite a altura do pokémon a ser adicionado:")
-    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].altura);
-
-    printf("\nDigite o peso do pokémon a ser adicionado:");
-    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].peso);
-
-    printf("\nDigite a taxa de captura do pokémon a ser adicionado:");
-    scanf("%f", &listaPokemon[(*numeroDePokemons) + 1].captura);
-
-    printf("\nDigite a pré-evolução do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].preEvo);
-
-    printf("\nDigite a próxima evolução do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) + 1].prxEvo);
-
-    //faltou calcular o total do pokemon
-
+    
     (*numeroDePokemons)++;
 
-    listaPokemon[(*numeroDePokemons) + 1].nPokedex = numeroDePokemons;
+    listaPokemon = (Pokemon*) realloc(listaPokemon, (((*numeroDePokemons) - 1) * sizeof(Pokemon)));
 
-    printf("\nO Pokémon %s foi adicionado na Pokedex do jogo!\n", listaPokemon[(*numeroDePokemons) + 1].nome);
+    printf("\nDigite o nome do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) - 1].nome, 40);
+
+    printf("\nDigite o tipo 1 do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) - 1].tipo1, 10);
+
+    printf("\nDigite o tipo 2 do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) - 1].tipo2, 10);
+
+    printf("\nDigite os pontos de vida (hp) do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].hp);
+
+    printf("\nDigite os pontos de ataque do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].atk);
+
+    printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].def);
+
+    printf("\nDigite os pontos de ataque especial do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].spatack);
+
+    printf("\nDigite os pontos de defesa especial do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].spdef);
+
+    printf("\nDigite os pontos de velocidade do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].speed);
+
+    printf("\nDigite a geração do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].geracao);
+
+    printf("\nDigite se o pokémon a ser adicionado é lendário(digite 1) ou não(digite 0):");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].lendario);
+
+    printf("\nDigite a cor do pokémon a ser adicionado:");
+    leString(listaPokemon[(*numeroDePokemons) - 1].cor, 10);
+
+    printf("\nDigite a altura do pokémon a ser adicionado:")
+    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].altura);
+
+    printf("\nDigite o peso do pokémon a ser adicionado:");
+    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].peso);
+
+    printf("\nDigite a taxa de captura do pokémon a ser adicionado:");
+    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].captura);
+
+    printf("\nDigite a pré-evolução do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].preEvo);
+
+    printf("\nDigite a próxima evolução do pokémon a ser adicionado:");
+    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].prxEvo);
+
+    listaPokemon[(*numeroDePokemons) - 1].total = listaPokemon[(*numeroDePokemons) - 1].hp + listaPokemon[(*numeroDePokemons) - 1].atk + listaPokemon[(*numeroDePokemons) - 1].def + listaPokemon[(*numeroDePokemons) - 1].spdef + listaPokemon[(*numeroDePokemons) - 1].spatack + listaPokemon[(*numeroDePokemons) - 1].speed;
+
+    listaPokemon[(*numeroDePokemons) - 1].nPokedex = numeroDePokemons;
+
+    printf("\nO Pokémon %s foi adicionado na Pokedex do jogo!\n", listaPokemon[(*numeroDePokemons) - 1].nome);
 
     return;
 }//adicionarPokemonNaPokedex
@@ -316,29 +313,7 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     return;
 }//pesquisaPokemonNaPokedex
 
-/*
-typedef struct Pokemon{
-    int nPokedex; // Número na pokedex
-    char nome[40]; // Nome do pokémon
-    char tipo1[10]; // Primeiro tipo do pokémon
-    char tipo2[10]; // Segundo tipo do pokémon (deve ser registrado "NULL" caso não tenha)
-    int total; // Soma total dos status base
-    int hp; // Tanto de vida
-    int atk; // Tanto de ataque
-    int def; // Tanto de defesa
-    int spatack; // Tanto de ataque especial
-    int spdef; // Tanto de defesa especial
-    int speed; // Tanto de velocidade
-    int geracao; // Geração a qual pertence o pokemon
-    int lendario; // Define se é lendario ou não a partir de booleano
-    char cor[10]; // Cor do pokemon
-    float altura; // Altura do pokemon
-    float peso; // Peso do pokemon
-    float captura; // Taxa de captura
-    int preEvo; // Pré evolução
-    int prxEvo; // Próxima evolução
-} Pokemon;
-*/
+void 
 
 int main(){
 
