@@ -163,7 +163,7 @@ if(numSorteado <= chance){
 }
 }
 
-int main(){
+int Listagem(){
 
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
@@ -474,134 +474,153 @@ int main(){
 //COMECEI A PARTIR DAQUI AMIGOS
 
 typedef struct{
-    char nome[21];
-    char genero[11];
-    float nivel;
-    float DinheiroAtual;
-}JogadorStruct;
+    int *idPokeMochila;
+    int qntPokeMochila;
+}Mochila;
 
-typedef struct{
-    int Bananinha;
-    int Moranguinho;
-    int Laranjinha;
-}Frutas;
+int main(){
+    FILE* arquivoPokemonCSV;
+    arquivoPokemonCSV = fopen("../pokedex.csv", "r+");
+    int EscolheFuncao;
+    int EscolheSubFuncao;
+    int  tamanhoPrimeiraLinhaCSV;
+    Pokemon listaPokemon[MAX_POKEMON];
 
-void Jogador(){//so entrara nessa funcao ao iniciar o jogo
+    if (arquivoPokemonCSV == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    }
 
-    JogadorStruct Jogador;
-    Frutas EstoqueFrutas;
-    int EscolheGenero;
-    int ConfereVitoria = 0;
-    int ConfereMinigameVencido = 0; 
+    tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
 
-    printf("Seja bem vindo(a)! Digite seu nome para começar sua jornada: ");   
+    fseek(arquivoPokemonCSV, tamanhoPrimeiraLinhaCSV, SEEK_SET);
 
-    fgets(Jogador.nome, 20, stdin);//o jogador ira digitar o seu nome de exibicao do jogo 
-    Jogador.nome[strcspn(Jogador.nome,"\n")]='\0';
-    setbuf(stdin,NULL);
+    for(int i = 1; i < 722; i++){
+        fscanf(arquivoPokemonCSV, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
+    }//for
 
-    printf("\n");
+    fclose(arquivoPokemonCSV);
 
-    printf("Digite seu genero:\n1 -> Masculino\n2 -> Feminino\n");
+    Mochila mochila;
+    mochila.qntPokeMochila = 0;
 
-    scanf("%d", &EscolheGenero);//1 para masculino e 2 para feminino
+    do{
+    printf("MENU\n");
+    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Guia\n5 -> Configuracoes\n6 -> Sair do jogo\n");
 
-    switch(EscolheGenero){
-        case '1':
-            strcpy(Jogador.genero, "masculino");
+    printf("Digite uma das opcoes acima: ");
+    scanf("%d", &EscolheFuncao);
+
+    switch(EscolheFuncao){
+        case 1:
+            printf("\nSUBMENU POKEDEX\n");
+            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
+            scanf("%d", &EscolheSubFuncao);
+
+            switch(EscolheSubFuncao){
+                case 1:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 2:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 3:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 4:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 5:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                default:
+                    printf("Opcao nao encontrada!\n");
+
+                    break;    
+                }
+
+        break;        
+
+        case 2:
+            printf("\nSUBMENU COLECAO\n");        
+            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
+            scanf("%d", &EscolheSubFuncao);
+
+            switch(EscolheSubFuncao){
+                case 1:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 2:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 3:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 4:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                case 5:
+                    printf("Opcao nao encontrada!\n");
+                    break;
+
+                default:
+                    printf("Opcao nao encontrada!\n");
+
+                    break;    
+                }
+        break;
+
+        case 3:
+            printf("SUBMENU MOCHILA\n");
+            printf("1 -> Inserir Pokemon na mochila\n2 -> Trocar Pokemon inserido\n");
+            scanf("%d", &EscolheSubFuncao);
+
+                switch(EscolheSubFuncao){
+                    case 1:
+                        printf("Opcao nao encontrada!\n");
+                        break;
+
+                    case 2:
+                        printf("Opcao nao encontrada!\n");
+                        break;
+
+                    default:
+                        printf("Opcao nao encontrada!\n");
+
+                        break;        
+                }
+
             break;
 
-        case '2':
-            strcpy(Jogador.genero, "feminino");    
+        case 4:
+            printf("Opcao nao encontrada!\n");
             break;
+
+        case 5:
+            printf("SUBMENU CONFIGURACOES\n");
+            break;
+
+        case 6:
+            
+            break;      
 
         default:
-            //genero nao identificado
-            scanf("%d", &EscolheGenero);//escolhe novamente
-            break;
-    }//switch
+            printf("Opcao nao encontrada\n");
 
-    Jogador.nivel = 1;
-
-    Jogador.DinheiroAtual = 0;
-
-    EstoqueFrutas.Bananinha = 0;
-    EstoqueFrutas.Moranguinho = 0;
-    EstoqueFrutas.Laranjinha = 0;
-
-
-}//Jogador
-
-float Economia(float DinheiroAtual, int ConfereVitoria, int ConfereMinigameVencido, float GastosPokedoca, float GastosPokecentro, char JogadorNome){//sera executada ao vencer batalha, minigame ou ao gastar
-
-    float Pokemoeda;
-    int ConfereIniciante = 1;
-    int X;
-    int Y;
-
-    if(ConfereIniciante == 1){
-        //aqui seria legal se nos mostrassemos algumas das formas de se obter pokemoedas
-        printf("Ola %s! Este jogo possui um sistema de economia, aqui estão algumas das formas de se obter Pokemoedas:", JogadorNome);
-        printf("\nVencendo Batalhas\nVencendo Minigames\nVendendo Itens");
-    }else{
-        if(ConfereVitoria == 1){
-            Pokemoeda= Pokemoeda + X;//recebe por ter saido vitorioso de uma batalha
-        }
-        if(ConfereMinigameVencido == 1){
-            Pokemoeda = Pokemoeda + Y;//Recebe por ter vencido minigame
-        }
-        if(GastosPokedoca > 0 || GastosPokecentro > 0){
-            Pokemoeda = Pokemoeda - GastosPokedoca - GastosPokecentro;//Analisa todos os gastos e atualiza o dinheiro atual
-        }
-
+            break;        
     }
 
-    //a parte abaixo atualiza as variaveis para nao ocorrer uma mudanca errada na moeda atual
-    GastosPokecentro = 0;
-    GastosPokedoca = 0;
-    ConfereIniciante = 0;
-    ConfereMinigameVencido = 0;
-    ConfereVitoria = 0;
-
-    return;
-}//Economia
-
-
-void Pokedoca(float Pokemoeda, int Bananinha, int Moranguinho, int Laranjinha, char genero){
-
-    int EscolheGasto;
-    char Escolha;
-    char pronome[1];
-
-    if(strcmp(genero, "masculino")==0){
-        strcpy(pronome, "o");
-    }else{
-        strcpy(pronome, "a");
-    }
-    printf("Seja bem vind%c a Pokedoca! Aqui você pode comprar Pokebolas, Frutas e muitos outros itens!\n", pronome);
-
-    printf("Você está interessado em comprar algo? (Digite 'S' para sim e 'N' para não)\n");
-
-    scanf("%c", &Escolha);
-
-    switch(Escolha){
-        case 'S':
-        case 's':
-
-            break;
-
-        case 'N':
-        case 'n':
-
-            break;
-
-        default:
-            printf("escolha não identificada, digite novamente: ('S' para sim e 'N' para não)\n");
-            scanf("%c", &Escolha);
-
-    }
-
-    printf("oi");
+    }while(EscolheFuncao =! 6);                            
 
     return 0;
 }
+
