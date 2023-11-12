@@ -170,7 +170,7 @@ if(numSorteado <= chance){
 }
 
 void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
-    
+
     (*numeroDePokemons)++;
 
     listaPokemon = (Pokemon*) realloc(listaPokemon, ((*numeroDePokemons) * sizeof(Pokemon)));
@@ -240,6 +240,7 @@ void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
     char pokemonExcluido[40];
     int indiceDoPokemonExcluido;
     int confirmaExclusao = 0;
+    char continuarExcluindo;
 
     do{//nao sei como o usuario sairia caso nao quisesse mais excluir um pokemon
         printf("\nDigite o nome do pokémon a ser excluido:");
@@ -250,22 +251,28 @@ void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
                 printf("\nO pokémon %s foi excluído!\n", pokemonExcluido);
                 confirmaExclusao++;
                 indiceDoPokemonExcluido = i;
+                
                 for(int j = i; j < (*numeroDePokemons) - 1; j++){
                     listaPokemon[j] = listaPokemon[j + 1];
                 }//for
+                
                 (*numeroDePokemons)--;
                 listaPokemon = (Pokemon*) realloc(listaPokemon,(*numeroDePokemons) * sizeof(Pokemon));
+                
+                for(int i = indiceDoPokemonExcluido; i < (*numeroDePokemons); i++){
+                    listaPokemon[i].nPokedex = listaPokemon[i].nPokedex - 1;
+                }//for  
+                
                 break;
             }//if
         }//for
 
-      //  if()
+        if(confirmaExclusao == 0){
+            printf("\nNenhum pokémon foi encontrado! Deseja digitar novamente?(digite S ou N):");
+            scanf("%c", &continuarExcluindo);
+        }//if
 
-    for(int i = indiceDoPokemonExcluido; i < (*numeroDePokemons); i++){
-        listaPokemon[i].nPokedex = listaPokemon[i].nPokedex - 1;
-    }//for  
-
-    }while(confirmaExclusao == 0);
+    }while(continuarExcluindo == 's' || continuarExcluindo == 'S');
 
     return;
 }//excluirPokemonDaPokedex
@@ -333,6 +340,45 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     return;
 }//pesquisaPokemonNaPokedex
+
+void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
+
+    char pokemonAlterado[40];
+    int opcao;
+
+    printf("\nVocê escolheu alterar um pokémon na Pokedex.\n");
+    printf("Digite o nome do pokémon que você quer alterar:");
+    leString(pokemonAlterado, 40);
+
+    for(int i = 0; i < numeroDePokemons, i++){
+        if(strcasecmp(pokemonAlterado, listaPokemon[i].nome) == 0){
+            printf("\nO pokémon %s foi encontrado!\n", pokemonAlterado);
+            printf("Você deseja alterar qual atributo dele?\n");
+            printf("Nome - digite 1\n");
+            printf("Tipo 1 - digite 2\n");
+            printf("Tipo 2 - digite 3\n");
+            printf("Total - digite 4\n");
+            printf("HP - 5 digite 5\n");
+            printf("Ataque - digite 6\n");
+            printf("Defesa - digite 7\n");
+            printf("Ataque Especial - digite 8\n");
+            printf("Defesa Especial - digite 9\n");
+            printf("Velocidade - digite 10\n");
+            printf("Geração - digite 11\n");
+            printf("Lendário - digite 12\n");
+            printf("Cor - digite 13\n");
+            printf("Altura - digite 14\n");
+            printf("Peso - digite 15\n");
+            printf("Taxa de Captura - digite 16\n");
+            printf("Pré-Evolução - digite 17\n");
+            printf("Próxima Evolução - digite 18\n");
+            printf("Digite o número conforme o que você deseja alterar:");
+            scanf("%d", &opcao);
+        }//if
+    }//for
+
+    return;
+}//alteraPokemonNaPokedex
 
 int main(){
 
@@ -607,6 +653,7 @@ int main(){
             switch(EscolheSubFuncao){
                 case 1:
                     adicionarPokemonNaPokedex(listaPokemon, &numeroDePokemons);
+                    printf("\n\nNome:%s\n\n",listaPokemon[numeroDePokemons - 1].nome);
                     break;
 
                 case 2:
