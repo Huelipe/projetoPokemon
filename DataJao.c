@@ -169,6 +169,7 @@ if(numSorteado <= chance){
 }
 }
 
+
 void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
 
     (*numeroDePokemons)++;
@@ -350,7 +351,7 @@ void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     printf("Digite o nome do pokémon que você quer alterar:");
     leString(pokemonAlterado, 40);
 
-    for(int i = 0; i < numeroDePokemons, i++){
+    for(int i = 0; i < numeroDePokemons; i++){
         if(strcasecmp(pokemonAlterado, listaPokemon[i].nome) == 0){
             printf("\nO pokémon %s foi encontrado!\n", pokemonAlterado);
             printf("Você deseja alterar qual atributo dele?\n");
