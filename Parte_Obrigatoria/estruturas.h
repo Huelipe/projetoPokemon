@@ -80,5 +80,9 @@ int fraquezas[8];
 int imunidades[3];
 } tipos;
 
+typedef struct Colecao{
+int numDoPokemon;
+} Colecao;
+
 
 #endif

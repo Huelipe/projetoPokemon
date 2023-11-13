@@ -118,7 +118,7 @@ void vetorDePokebolas(struct Pokebola pokebolas[4]) {
     pokebolas[3].catchRate = 10000;
 }
 
-void vetorDeTiposDePokemon(struct Tipos tipos[18]) {
+/*void vetorDeTiposDePokemon(struct Tipos tipos[18]) {
 
 strcpy(tipos[0].nome, "Inseto");
 strcpy(tipos[1].nome, "Normal");
@@ -325,3 +325,4 @@ for (int i = 0; i < 8; i++) {
 
 
 }
+*/

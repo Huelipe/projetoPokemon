@@ -10,14 +10,17 @@
 
 int main(){
 
-    int MAX_POKEMON = 722;
 
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
 
     FILE *arquivo;
-    Pokemon listaPokemon[MAX_POKEMON];
+    Pokemon* listaPokemon;
+    int numeroDePokemons = 721;
     int tamanhoPrimeiraLinhaCSV;
+
+    Colecao* colecaoDePokemons;
+    int totalPokesNaColecao = 0;
 
     arquivo = fopen("../pokedex.csv", "r+");
     // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
@@ -29,6 +32,8 @@ int main(){
 
     tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
 
+    listaPokemon = (Pokemon*) malloc(numeroDePokemons * sizeof(Pokemon));
+
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
 
     for(int i = 1; i < 722; i++){
@@ -37,7 +42,7 @@ int main(){
 
     fclose(arquivo);
 
-	    int EscolheFuncao;
+	int EscolheFuncao;
     int EscolheSubFuncao;
 
     do{
