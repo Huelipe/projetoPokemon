@@ -341,18 +341,24 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     return;
 }//pesquisaPokemonNaPokedex
 
+//funcao utilizada para alterar o pokemon na pokedex
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
-    char pokemonPesquisado[40];
+    //variaveis utilizdas para alterar o pokemon na pokedex
+    char pokemonPesquisado[40];//nome do pokemon a ser alterado
     Pokemon pokemonAlterado;
-    int opcao;
+    int opcao;//opcao de atributo a ser alterado no pokemon
 
+    //solicita o nome do pokemon a ser alterado na pokedex
     printf("\nVocê escolheu alterar um pokémon na Pokedex.\n");
     printf("Digite o nome do pokémon que você quer alterar:");
     leString(pokemonPesquisado, 40);
 
+    //verifica se o nome pesquisado esta na pokedex
     for(int i = 0; i < numeroDePokemons; i++){
+        //caso o pokemon for encontrado na pokedex, mostra ao usuario um menu com os atributos que podem ser alterados
         if(strcasecmp(pokemonPesquisado, listaPokemon[i].nome) == 0){
+            //menu que permite ao usuario escolher o que quer alterar no pokemon
             do{
             printf("\nO pokémon %s foi encontrado!\n", pokemonPesquisado);
             printf("Você deseja alterar qual atributo dele?\n");

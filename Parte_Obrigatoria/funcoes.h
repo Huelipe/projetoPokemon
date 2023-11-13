@@ -2,7 +2,6 @@
 #ifndef FUNCOES_H
 #define FUNCOES_H
 
-
 // Início das funções 
 void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, nature natures[25]);
 
@@ -27,5 +26,9 @@ void listarPokemonsDaPokedex(Pokemon* listaPokemon, int numeroDePokemons);
 void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons);
 
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons);
+
+void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArquivo);
+
+void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo);
 
 #endif
