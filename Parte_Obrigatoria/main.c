@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -9,7 +8,6 @@
 #include "funcoes.h"
 
 int main(){
-
 
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
