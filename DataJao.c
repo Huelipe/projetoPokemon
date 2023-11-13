@@ -169,7 +169,6 @@ if(numSorteado <= chance){
 }
 }
 
-
 void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
 
     (*numeroDePokemons)++;
@@ -344,37 +343,165 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
-    char pokemonAlterado[40];
+    char pokemonPesquisado[40];
+    Pokemon pokemonAlterado;
     int opcao;
 
     printf("\nVocê escolheu alterar um pokémon na Pokedex.\n");
     printf("Digite o nome do pokémon que você quer alterar:");
-    leString(pokemonAlterado, 40);
+    leString(pokemonPesquisado, 40);
 
     for(int i = 0; i < numeroDePokemons; i++){
-        if(strcasecmp(pokemonAlterado, listaPokemon[i].nome) == 0){
-            printf("\nO pokémon %s foi encontrado!\n", pokemonAlterado);
+        if(strcasecmp(pokemonPesquisado, listaPokemon[i].nome) == 0){
+            do{
+            printf("\nO pokémon %s foi encontrado!\n", pokemonPesquisado);
             printf("Você deseja alterar qual atributo dele?\n");
             printf("Nome - digite 1\n");
             printf("Tipo 1 - digite 2\n");
             printf("Tipo 2 - digite 3\n");
-            printf("Total - digite 4\n");
-            printf("HP - 5 digite 5\n");
-            printf("Ataque - digite 6\n");
-            printf("Defesa - digite 7\n");
-            printf("Ataque Especial - digite 8\n");
-            printf("Defesa Especial - digite 9\n");
-            printf("Velocidade - digite 10\n");
-            printf("Geração - digite 11\n");
-            printf("Lendário - digite 12\n");
-            printf("Cor - digite 13\n");
-            printf("Altura - digite 14\n");
-            printf("Peso - digite 15\n");
-            printf("Taxa de Captura - digite 16\n");
-            printf("Pré-Evolução - digite 17\n");
-            printf("Próxima Evolução - digite 18\n");
-            printf("Digite o número conforme o que você deseja alterar:");
+            printf("HP - 5 digite 4\n");
+            printf("Ataque - digite 5\n");
+            printf("Defesa - digite 6\n");
+            printf("Ataque Especial - digite 7\n");
+            printf("Defesa Especial - digite 8\n");
+            printf("Velocidade - digite 9\n");
+            printf("Geração - digite 10\n");
+            printf("Lendário - digite 11\n");
+            printf("Altura - digite 12\n");
+            printf("Peso - digite 13\n");
+            printf("Taxa de Captura - digite 14\n");
+            printf("Voltar ao menu - digite 15\n");
+            printf("Digite o número desejado:");
             scanf("%d", &opcao);
+        
+            switch(opcao){
+            case 1:
+                printf("\nVocê escolheu alterar o nome do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o nome que você deseja colocar:");
+                leString(pokemonAlterado.nome, 40);
+                strcpy(listaPokemon[i].nome, pokemonAlterado.nome);
+                printf("\nNome alterado!\n");
+                break;
+            
+            case 2:
+                printf("\nVocê escolheu alterar o tipo 1 do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o tipo 1 que você deseja colocar:");
+                leString(pokemonAlterado.tipo1, 10);
+                strcpy(listaPokemon[i].tipo1, pokemonAlterado.tipo1);
+                printf("\nTipo 1 alterado!\n");
+            break;
+
+            case 3:
+                printf("\nVocê escolheu alterar o tipo 2 do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o tipo 2 que você deseja colocar:");
+                leString(pokemonAlterado.tipo2, 10);
+                strcpy(listaPokemon[i].tipo2, pokemonAlterado.tipo2);
+                printf("\nTipo 2 alterado!\n");
+            break;
+
+            case 4:
+                printf("\nVocê escolheu alterar a vida do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a vida que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.hp);
+                listaPokemon[i].hp = pokemonAlterado.hp;
+                printf("\nVida alterada!\n");
+            break;
+
+            case 5:
+                printf("\nVocê escolheu alterar o ataque do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o ataque que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.atk);
+                listaPokemon[i].atk = pokemonAlterado.atk;
+                printf("\nAtaque alterado!\n");
+            break;
+
+            case 6:
+                printf("\nVocê escolheu alterar a defesa do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a defesa que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.def);
+                listaPokemon[i].def = pokemonAlterado.def;
+                printf("\nDefesa alterada!\n");
+            break;
+
+            case 7:
+                printf("\nVocê escolheu alterar o ataque especial do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o ataque especial que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.spatack);
+                listaPokemon[i].spatack = pokemonAlterado.spatack;
+                printf("\nAtaque especial alterado!\n");
+            break;
+
+            case 8:
+                printf("\nVocê escolheu alterar a defesa especial do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a defesa especial que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.spdef);
+                listaPokemon[i].spdef = pokemonAlterado.spdef;
+                printf("\nDefesa especial alterada!\n");
+            break;
+
+            case 9:
+                printf("\nVocê escolheu alterar a velocidade do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a velocidade que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.speed);
+                listaPokemon[i].speed = pokemonAlterado.speed;
+                printf("\nVelocidade alterada!\n");
+            break;
+
+            case 10:
+                printf("\nVocê escolheu alterar a geração do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a geração que você deseja colocar:");
+                scanf("%d", &pokemonAlterado.geracao);
+                listaPokemon[i].geracao = pokemonAlterado.geracao;
+                printf("\nGeração alterada!\n");
+            break;
+
+            case 11:
+                printf("\nVocê escolheu mudar se o pokémon %s é lendário ou não!\n", listaPokemon[i].nome);
+                printf("Digite 1 se o pokémon será lendário ou 0 se o pokémon não será lendário:");
+                scanf("%d", &pokemonAlterado.lendario);
+                listaPokemon[i].lendario = pokemonAlterado.lendario;
+                if(pokemonAlterado.lendario == 1){
+                    printf("\nO pokémon %s agora é lendário!\n", listaPokemon[i].nome);
+                }else{
+                    printf("\nO pokémon %s agora não é lendário!\n", listaPokemon[i].nome);
+                }//else
+            break;
+
+            case 12:
+                printf("\nVocê escolheu alterar a altura do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a altura que você deseja colocar:");
+                scanf("%f", &pokemonAlterado.altura);
+                listaPokemon[i].altura = pokemonAlterado.altura;
+                printf("\nAltura alterada!\n");
+            break;
+
+            case 13:
+                printf("\nVocê escolheu alterar o peso do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite o peso que você deseja colocar:");
+                scanf("%f", &pokemonAlterado.peso);
+                listaPokemon[i].peso = pokemonAlterado.peso;
+                printf("\nPeso alterado!\n");
+            break;
+
+            case 14:
+                printf("\nVocê escolheu alterar a taxa de captura do pokémon %s!\n", listaPokemon[i].nome);
+                printf("Digite a taxa de captura que você deseja colocar:");
+                scanf("%f", &pokemonAlterado.captura);
+                listaPokemon[i].captura = pokemonAlterado.captura;
+                printf("\nTaxa de captura alterada!\n");
+            break;
+
+            case 15:
+                listaPokemon[i].total = listaPokemon[i].hp + listaPokemon[i].atk + listaPokemon[i].def + listaPokemon[i].spdef + listaPokemon[i].spatack + listaPokemon[i].speed;
+                printf("\nVoltando para o menu...\n");
+                return;
+            break;
+
+            default:
+                printf("\nOpção não encontrada! Digite novamente!\n");
+                break;
+            }//switch
+            }while(opcao != 15);
         }//if
     }//for
 
@@ -386,15 +513,16 @@ int main(){
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
 
-    FILE *arquivo;
+    FILE* arquivoCSV;
+    FILE* arquivoBinario;
     Pokemon* listaPokemon;
     int numeroDePokemons = 721;
     int tamanhoPrimeiraLinhaCSV;
 
-    arquivo = fopen("../pokedex.csv", "r+");
+    arquivoCSV = fopen("../pokedex.csv", "r+");
     // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
 
-    if (arquivo == NULL) {
+    if (arquivoCSV == NULL) {
         perror("Erro ao abrir o arquivo");
         return 1;
     }
@@ -403,13 +531,13 @@ int main(){
 
     listaPokemon = (Pokemon*) malloc(numeroDePokemons * sizeof(Pokemon));
 
-    fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
+    fseek(arquivoCSV, tamanhoPrimeiraLinhaCSV, SEEK_SET);
 
     for(int i = 0; i < numeroDePokemons; i++){
-        fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
+        fscanf(arquivoCSV, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
     }//for
 
-    fclose(arquivo);
+    fclose(arquivoCSV);
 
     printf("Nome: %s\n", listaPokemon[0].nome);
     printf("HP: %i\n", listaPokemon[0].hp);
@@ -640,7 +768,7 @@ int main(){
 
     do{
     printf("MENU\n");
-    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Guia\n5 -> Configuracoes\n6 -> Sair do jogo\n");
+    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Exportar dados para CSV\n5 -> Configuracoes\n6 -> Sair do jogo\n");
 
     printf("Digite uma das opcoes acima: ");
     scanf("%d", &EscolheFuncao);
@@ -666,7 +794,7 @@ int main(){
                     break;
 
                 case 4:
-                    printf("Opcao nao encontrada!\n");
+                    alteraPokemonNaPokedex(listaPokemon, numeroDePokemons);
                     break;
 
                 case 5:
@@ -674,7 +802,7 @@ int main(){
                     break;
 
                 default:
-                    printf("Opcao nao encontrada!\n");
+                    printf("Opcao não encontrada!\n");
 
                     break;    
                 }
@@ -730,14 +858,13 @@ int main(){
 
                     default:
                         printf("Opcao nao encontrada!\n");
-
                         break;        
                 }
 
             break;
 
         case 4:
-            printf("Opcao nao encontrada!\n");
+            
             break;
 
         case 5:
@@ -745,8 +872,10 @@ int main(){
             break;
 
         case 6:
+            arquivoBinario = fopen("arquivoBinario.bin", "wb");
             
-            break;      
+            fwrite(listaPokemon, sizeof(Pokemon), numeroDePokemons, arquivoBinario);
+        break;      
 
         default:
             printf("Opcao nao encontrada\n");
