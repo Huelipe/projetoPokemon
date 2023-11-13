@@ -1,4 +1,3 @@
-/*
 //bibliotecas utilizadas nas funcoes
 #include "funcoes.h"
 #include <stdlib.h>
@@ -411,14 +410,6 @@ void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
     printf("\nDigite a taxa de captura do pokémon a ser adicionado:");
     scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].captura);
 
-    //solicita a pre-evolucao do novo pokemon da pokedex
-    printf("\nDigite a pré-evolução do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].preEvo);
-
-    //solicita a proxima evolucao do novo pokemon da pokedex
-    printf("\nDigite a próxima evolução do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].prxEvo);
-
     //calcula o total do novo pokemon da pokedex
     listaPokemon[(*numeroDePokemons) - 1].total = listaPokemon[(*numeroDePokemons) - 1].hp + listaPokemon[(*numeroDePokemons) - 1].atk + listaPokemon[(*numeroDePokemons) - 1].def + listaPokemon[(*numeroDePokemons) - 1].spdef + listaPokemon[(*numeroDePokemons) - 1].spatack + listaPokemon[(*numeroDePokemons) - 1].speed;
 
@@ -544,8 +535,6 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
             printf("Altura:%.2f\n", listaPokemon[i].altura);
             printf("Peso:%.2f\n", listaPokemon[i].peso);
             printf("Taxa de Captura:%.2f%%\n", listaPokemon[i].captura);
-            printf("Pré-Evolução:%d\n", listaPokemon[i].preEvo);
-            printf("Próxima-Evolução:%d\n", listaPokemon[i].prxEvo);
             break;
         }//if
     }//for
@@ -562,7 +551,6 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     return;
 }//pesquisaPokemonNaPokedex
-
 
 //funcao utilizada para alterar o pokemon na pokedex
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
@@ -772,4 +760,56 @@ void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     return;
 }//alteraPokemonNaPokedex
-*/
+
+void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArquivo){
+    FILE *arquivo = fopen(nomeArquivo, "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Escreve o cabeçalho no arquivo CSV com os espaçamentos
+    fprintf(arquivo, "numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura\n");
+
+    // Escreve os dados no arquivo CSV com os espaçamentos
+    for (int i = 0; i < tamanho; i++) {
+        fprintf(arquivo, "%-7d,%-12s,%-9s,%-9s,%-5d,%-3d,%-6d,%-6d,%-15d,%-16d,%-11d,%-7d,%-8d,%-8s,%-8.2f,%-8.2f,%-13.2f\n",
+            pokemon[i].nPokedex, pokemon[i].nome, pokemon[i].tipo1, pokemon[i].tipo2,
+            pokemon[i].total, pokemon[i].hp, pokemon[i].atk, pokemon[i].def,
+            pokemon[i].spatack, pokemon[i].spdef, pokemon[i].speed, pokemon[i].geracao,
+            pokemon[i].lendario, pokemon[i].cor, pokemon[i].altura, pokemon[i].peso,
+            pokemon[i].captura);
+    }
+
+    fclose(arquivo);
+
+    printf("Pokedex exportada para %s com sucesso.\n", nomeArquivo);
+}// Exporta sua Pokedex para um arquivo .csv
+
+void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo){
+    FILE *arquivo = fopen(nomeArquivo, "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Escreve o cabeçalho no arquivo CSV com os mesmos espaçamentos da função exportarPokemonParaCSV
+    fprintf(arquivo, "numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura\n");
+
+    // Escreve os dados da coleção no arquivo CSV com os mesmos espaçamentos
+    for (int i = 0; i < totalPokesNaColecao; i++) {
+        int numDoPokemon = colecaoDePokemons[i].numDoPokemon;
+        fprintf(arquivo, "%-7d,%-12s,%-9s,%-9s,%-5d,%-3d,%-6d,%-6d,%-15d,%-16d,%-11d,%-7d,%-8d,%-8s,%-8.2f,%-8.2f,%-13.2f\n",
+            i + 1, listaPokemon[numDoPokemon].nome, listaPokemon[numDoPokemon].tipo1, listaPokemon[numDoPokemon].tipo2,
+            listaPokemon[numDoPokemon].total, listaPokemon[numDoPokemon].hp, listaPokemon[numDoPokemon].atk, listaPokemon[numDoPokemon].def,
+            listaPokemon[numDoPokemon].spatack, listaPokemon[numDoPokemon].spdef, listaPokemon[numDoPokemon].speed, listaPokemon[numDoPokemon].geracao,
+            listaPokemon[numDoPokemon].lendario, listaPokemon[numDoPokemon].cor, listaPokemon[numDoPokemon].altura, listaPokemon[numDoPokemon].peso,
+            listaPokemon[numDoPokemon].captura);
+    }
+
+    fclose(arquivo);
+
+    printf("Coleção exportada para %s com sucesso.\n", nomeArquivo);
+}// Exporta sua coleção para um arquivo .csv
