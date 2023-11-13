@@ -57,7 +57,7 @@ int main(){
     }
 
     Colecao colecao;
-    colecao.dadosPokemon = (Pokemon*) malloc(722 * sizeof(Pokemon));
+    colecao.dadosPokemom = (Pokemon*) malloc(722 * sizeof(Pokemon));
     colecao.qtdPokemonsCapturados = 0;
 
     Mochila mochila;
@@ -187,7 +187,7 @@ int main(){
         }//switch final
     }while(opcao != 7);
 
-      
+
     fclose(arquivoPokemonCSV);
     
     return 0;
@@ -434,5 +434,3 @@ void listarPokemonsMochila(Colecao* colecao, Mochila* mochila){
 
     return;
 }//listarPokemonsMochila
-
-
