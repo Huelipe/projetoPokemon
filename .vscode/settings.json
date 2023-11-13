@@ -58,6 +58,11 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
-    "funcoes.h": "c"
+    "funcoes.h": "c",
+    "raylib.h": "c",
+    "stdlib.h": "c",
+    "string.h": "c",
+    "math.h": "c",
+    "stdio.h": "c"
   }
 }
