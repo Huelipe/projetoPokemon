@@ -352,7 +352,7 @@ int main(){
         personagem = LoadTexture("imagens/amy.png");
     }
     
-    pokemonCapturado pokemonInicial;
+/*pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
         criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures[26]);
     }else if(opcaoPokemon == 2){
@@ -360,6 +360,7 @@ int main(){
     }else if(opcaoPokemon == 3){
         criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures[26]);
     }
+*/    
 
     switch(screenLoad){
 

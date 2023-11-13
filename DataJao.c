@@ -492,6 +492,7 @@ void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
             break;
 
             case 15:
+                listaPokemon[i].total = listaPokemon[i].hp + listaPokemon[i].atk + listaPokemon[i].def + listaPokemon[i].spdef + listaPokemon[i].spatack + listaPokemon[i].speed;
                 printf("\nVoltando para o menu...\n");
                 return;
             break;
@@ -767,7 +768,7 @@ int main(){
 
     do{
     printf("MENU\n");
-    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Guia\n5 -> Configuracoes\n6 -> Sair do jogo\n");
+    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Exportar dados para CSV\n5 -> Configuracoes\n6 -> Sair do jogo\n");
 
     printf("Digite uma das opcoes acima: ");
     scanf("%d", &EscolheFuncao);
@@ -857,14 +858,13 @@ int main(){
 
                     default:
                         printf("Opcao nao encontrada!\n");
-
                         break;        
                 }
 
             break;
 
         case 4:
-            printf("Opcao nao encontrada!\n");
+            
             break;
 
         case 5:
