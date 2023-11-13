@@ -171,11 +171,7 @@ if(numSorteado <= chance){
 
 typedef struct Colecao{
 int numDoPokemon;
-int posicaoLista;
 } Colecao;
-
-Colecao* colecaoDePokemons;
-int totalPokesNaColecao = 0;
 
 void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao, int numeroDePokemons, Pokemon* listaPokemon){
     printf("Digite o nome do Pokémon: ");
@@ -187,6 +183,7 @@ void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaCol
     int idDoPokemon = -1;
 
     for (int i = 0; i < numeroDePokemons; i++) {
+        
         if(strcasecmp(nome, listaPokemon[i].nome) == 0) {
             printf("Achei\n");
             idDoPokemon = listaPokemon[i-1].nPokedex;
@@ -242,7 +239,7 @@ void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao
     for(int i = 0; i < totalPokesNaColecao; i++) {
         if(strcasecmp(nome, listaPokemon[colecaoDePokemons[i].numDoPokemon].nome) == 0) {
             printf("O que você deseja alterar?\n");
-            printf("1- Nome\n2- Tipo 1\n3- Tipo 2\n4- HP\n5- Ataque\n6- Defesa\n7- Ataque Especial\n8- Defesa Especial\n9- Speed\n10- Lendario\n11- Geracao\n12- Altura\n13- Peso\n14- Captura\n");
+            printf(" 1- Nome\n 2- Tipo 1\n 3- Tipo 2\n 4- HP\n 5- Ataque\n 6- Defesa\n 7- Ataque Especial\n 8- Defesa Especial\n 9- Speed\n10- Lendario\n11- Geracao\n12- Altura\n13- Peso\n14- Captura\n15- Sair\n");
             printf("Opcao: ");
             int opcao;
             scanf("%i", &opcao);
@@ -352,7 +349,12 @@ void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao
             listaPokemon[colecaoDePokemons[i].numDoPokemon].captura = novoValor10;
             break;
 
-            default:;
+            case 15:
+            listaPokemon[colecaoDePokemons[i].numDoPokemon].total = listaPokemon[colecaoDePokemons[i].numDoPokemon].hp + listaPokemon[colecaoDePokemons[i].numDoPokemon].atk + listaPokemon[colecaoDePokemons[i].numDoPokemon].def + listaPokemon[colecaoDePokemons[i].numDoPokemon].spatack + listaPokemon[colecaoDePokemons[i].numDoPokemon].spdef + listaPokemon[colecaoDePokemons[i].numDoPokemon].speed;
+            return;
+            break;
+
+            default:
             printf("Opção não encontrada...\n");
             break;
             }
@@ -367,7 +369,7 @@ void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColec
         return;
     }
 
-    printf("Digite o número do Pokémon que deseja excluir da coleção: ");
+    printf("Digite o Id do Pokémon que deseja excluir da coleção: ");
     int numDoPokemon;
     scanf("%d", &numDoPokemon);
 
@@ -618,6 +620,9 @@ int main(){
     Pokemon* listaPokemon;
     int numeroDePokemons = 721;
     int tamanhoPrimeiraLinhaCSV;
+
+    Colecao* colecaoDePokemons;
+    int totalPokesNaColecao = 0;
 
     arquivo = fopen("../pokedex.csv", "r+");
     // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
