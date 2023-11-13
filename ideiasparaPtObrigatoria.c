@@ -57,7 +57,7 @@ int main(){
     }
 
     Colecao colecao;
-    colecao.dadosPokemom = (Pokemon*) malloc(722 * sizeof(Pokemon));
+    colecao.dadosPokemon = (Pokemon*) malloc(722 * sizeof(Pokemon));
     colecao.qtdPokemonsCapturados = 0;
 
     Mochila mochila;
