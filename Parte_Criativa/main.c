@@ -8,6 +8,8 @@
 #include "estruturas.h"
 #include "funcoes.h"
 
+//gcc -o teste main.c -lraylib -lm
+
 typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVOJOGO5, NOVOJOGO6, NOVOJOGO7, NOVOJOGO8, NOVOJOGO9, TRANSICAO, CARREGARJOGO, CONFIGURACOES, ESC } GameScreen;
 typedef enum GameLoad { CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
