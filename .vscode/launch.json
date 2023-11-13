@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Pichau/OneDrive/Documentos/GitHub/projetoPokemon",
-      "program": "c:/Users/Pichau/OneDrive/Documentos/GitHub/projetoPokemon/build/Debug/outDebug",
+      "cwd": "c:/Users/Jão/OneDrive/Documentos/GitHub/projetoPokemon",
+      "program": "c:/Users/Jão/OneDrive/Documentos/GitHub/projetoPokemon/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
