@@ -1,3 +1,1 @@
 numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura
-1      ,Pikachu     ,Electric ,NULL     ,320  ,35 ,55    ,40    ,50             ,50              ,90         ,1      ,0       ,Amarelo ,0.41    ,6.00    ,190.00       
-2      ,Charizard   ,Fire     ,Voador   ,534  ,78 ,84    ,78    ,109            ,85              ,100        ,1      ,0       ,Red     ,1.70    ,90.50   ,45.00        
