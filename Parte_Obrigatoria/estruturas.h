@@ -19,8 +19,6 @@ typedef struct Pokemon{
     float altura; // Altura do pokemon
     float peso; // Peso do pokemon
     float captura; // Taxa de captura
-    int preEvo; // Pré evolução
-    int prxEvo; // Próxima evolução
 } Pokemon; // Estrutura que define o pokemon na pokedex
 
 typedef struct PokemonCapturado{

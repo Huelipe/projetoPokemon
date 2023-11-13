@@ -28,4 +28,8 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons);
 
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons);
 
+void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArquivo);
+
+void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo);
+
 #endif

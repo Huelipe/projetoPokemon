@@ -21,7 +21,6 @@ int main(){
     int totalPokesNaColecao = 0;
 
     arquivo = fopen("../pokedex.csv", "r+");
-    // Sugiro que mudem isso aqui para o caminho .csv no computador de vocês, por enquanto
 
     if (arquivo == NULL) {
         perror("Erro ao abrir o arquivo");
@@ -44,9 +43,12 @@ int main(){
     int EscolheFuncao;
     int EscolheSubFuncao;
 
+    const char *nomeArquivo1 = "DadosPokedex.csv";
+    const char *nomeArquivo2 = "DadosMochila.csv";
+
     do{
     printf("MENU\n");
-    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Guia\n5 -> Configuracoes\n6 -> Sair do jogo\n");
+    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Exportar Dados\n5 -> Sair do jogo\n");
 
     printf("Digite uma das opcoes acima: ");
     scanf("%d", &EscolheFuncao);
@@ -72,7 +74,7 @@ int main(){
                     break;
 
                 case 4:
-                    printf("Opcao nao encontrada!\n");
+                    printf("Opcao nao encontrada\n");
                     break;
 
                 case 5:
@@ -143,16 +145,13 @@ int main(){
             break;
 
         case 4:
-            printf("Opcao nao encontrada!\n");
+            exportarPokemonParaCSV(listaPokemon, numeroDePokemons, nomeArquivo1);
+            exportarColecaoParaCSV(colecaoDePokemons, totalPokesNaColecao, listaPokemon, nomeArquivo2);
             break;
 
         case 5:
-            printf("SUBMENU CONFIGURACOES\n");
-            break;
-
-        case 6:
-            
-            break;      
+            //salvar e sair
+            break;   
 
         default:
             printf("Opcao nao encontrada\n");
