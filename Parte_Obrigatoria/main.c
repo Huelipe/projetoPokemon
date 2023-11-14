@@ -20,14 +20,12 @@ int main(){
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
     int totalPokesNaColecao = 0; //numero total de pokemons da colecao
 
-<<<<<<< HEAD
     Mochila mochila[6];
     int totalMochila = 0;
 
     arquivo = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
-=======
+    
     arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
->>>>>>> 8825cffbb71fce44ded6415fe93c5aa557e9ce75
 
     if (arquivo == NULL) {
         perror("Erro ao abrir o arquivo");
