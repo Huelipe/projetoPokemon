@@ -868,7 +868,7 @@ void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArqu
  * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
  * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
  * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
- * @param nomeArquivo 
+ * @param nomeArquivo nome do arquivo onde ficará salvo os dados exportados
  */
 void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo){
     FILE *arquivo = fopen(nomeArquivo, "w");
@@ -897,7 +897,16 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
     printf("Coleção exportada para %s com sucesso.\n", nomeArquivo);
 }// Exporta sua coleção para um arquivo .csv
 
-
+/**
+ * @brief 
+ * 
+ * @param mochila 
+ * @param colecaoDePokemons 
+ * @param totalPokeColecao 
+ * @param listaPokemon 
+ * @param totalPokemons 
+ * @param totalMochila 
+ */
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila){
 
     int PosicaoNoVetor;
