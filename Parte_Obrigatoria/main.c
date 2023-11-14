@@ -20,6 +20,9 @@ int main(){
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
     int totalPokesNaColecao = 0; //numero total de pokemons da colecao
 
+    Mochila mochila[6];
+    int totalMochila = 0;
+
     arquivo = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
 
     if (arquivo == NULL) {
@@ -140,21 +143,26 @@ int main(){
         case 3://caso o usuario escolha o submenu da mochila, entra no submenu da mochila
             //submenu da mochila
             printf("SUBMENU MOCHILA\n");
-            printf("1 -> Inserir Pokemon na mochila\n2 -> Trocar Pokemon inserido\n");
+            printf("Na mochila só podem conter até 6 Pokémons!\n");
+            printf("1 -> Inserir Pokémon na mochila\n2 -> Listar mochila\n3 -> Excluir da mochila\n");
             scanf("%d", &EscolheSubFuncao);
 
                 //analisa a escolha do submenu mochila
                 switch(EscolheSubFuncao){
                     case 1://funcao de adicionar pokemon na mochila
-                        printf("Opcao nao encontrada!\n");
+                        InserirNaMochila(mochila, colecaoDePokemons, &totalPokesNaColecao, listaPokemon, numeroDePokemons, &totalMochila);
                         break;
 
-                    case 2://funcao de trocar pokemon da mochila
-                        printf("Opcao nao encontrada!\n");
+                    case 2://funcao de listar pokemon da mochila
+                        ListaMochila(mochila, listaPokemon, totalMochila, numeroDePokemons);
                         break;
+
+                    case 3:
+
+                        break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima
-                        printf("Opcao nao encontrada!\n");
+                        
                         break;        
                 }//switch
 

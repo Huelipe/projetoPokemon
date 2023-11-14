@@ -217,7 +217,8 @@ void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaCol
     //realoca o vetor dinamico de pokemons da colecao para o novo numero de pokemons
     *colecaoDePokemons = (Colecao*)realloc(*colecaoDePokemons, (*totalPokesNaColecao) * sizeof(Colecao));
     //salva o id do pokemon na variavel numDoPokemon da struct colecao de pokemons
-    (*colecaoDePokemons)[*totalPokesNaColecao - 1].numDoPokemon = idDoPokemon;
+    colecaoDePokemons[*totalPokesNaColecao - 1]->numDoPokemon = idDoPokemon;
+    printf("Passou aqui\n");
 }//adicionarPokemonNaColecao
 
 void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon){

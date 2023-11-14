@@ -74,4 +74,8 @@ typedef struct Colecao{
 int numDoPokemon;
 } Colecao;
 
+typedef struct{
+    int IdPokeMochila;
+}Mochila;
+
 #endif
