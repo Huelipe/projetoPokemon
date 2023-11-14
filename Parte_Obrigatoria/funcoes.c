@@ -41,7 +41,13 @@ void criarPokemon(Pokemon pokemonNaDex, pokemonCapturado* pselvagem, int lvl, na
     pselvagem->Status.atual = 1;
 }
 
-//funcao utilizada para ler string
+
+/**
+ * @brief le a string recebida por parametro e a salva
+ * 
+ * @param string string onde sera salvo o que foi lido pelo teclado
+ * @param tamanho tamanho da string a ser salva
+ */
 void leString(char string[], int tamanho){
 
     setbuf(stdin,NULL);//zera o buffer
@@ -51,7 +57,15 @@ void leString(char string[], int tamanho){
     return;
 }//leString
 
-//funcao utilizada para adicionar pokemons na colecao do jogo
+
+/**
+ * @brief funcao utilizada para adicionar pokemons na colecao do jogo
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ */
 void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao, int numeroDePokemons, Pokemon* listaPokemon){
     
     //recebe o nome do pokemon a ser adicionado
@@ -95,7 +109,14 @@ void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaCol
     (*colecaoDePokemons)[*totalPokesNaColecao - 1].numDoPokemon = idDoPokemon;
 }//adicionarPokemonNaColecao
 
-//funcao utilizada para listar os pokemons da colecao
+
+/**
+ * @brief funcao utilizada para listar os pokemons da colecao
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ */
 void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon){
     //mostra o numero do pokemon na colecao, o nome, e o id dele na pokedex ao usuario
     for (int i = 0; i < totalPokesNaColecao; i++) {
@@ -103,7 +124,14 @@ void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao,
     }//for
 }//listaPokemonsNaColecao
 
-//funcao utilizada para pesquisar pokemons na colecao
+
+/**
+ * @brief funcao utilizada para pesquisar pokemons na colecao
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ */
 void pesquisaPorPokemonNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon){
     //recebe o nome do pokemon a ser pesquisado na colecao
     printf("Digite o nome do Pokémon: ");
@@ -120,7 +148,14 @@ void pesquisaPorPokemonNaColecao(Colecao* colecaoDePokemons, int totalPokesNaCol
     }//for
 }//pesquisaPorPokemonNaColecao
 
-//funcao que altera os pokemons da colecao
+
+/**
+ * @brief funcao que altera os pokemons da colecao
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ */
 void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon){
     //recebe o nome do pokemon que vai ser alterado na colecao
     printf("Digite o nome do Pokémon: ");
@@ -297,7 +332,12 @@ void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao
     }//for
 }//alterarPokemonDaColecao
 
-//funcao utilizada para excluir os pokemons da colecao
+/**
+ * @brief funcao utilizada para excluir os pokemons da colecao
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ */
 void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao){
     //verifica se existem pokemons na colecao, caso nao exista mostra ao usuario que a colecao ta vazia
     if (*totalPokesNaColecao == 0) {
@@ -340,8 +380,12 @@ void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColec
     printf("Pokémon removido da coleção com sucesso.\n");
 }//excluirPokemonDaColecao
 
-
-//funcao utilizada para adicionar pokemons na pokedex
+/**
+ * @brief funcao utilizada para adicionar pokemons na pokedex
+ * 
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ */
 void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
 
     //aumenta o numero de pokemons da pokedex
@@ -422,7 +466,12 @@ void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
     return;
 }//adicionarPokemonNaPokedex
 
-//funcao utilizada para excluir o pokemon da pokedex
+/**
+ * @brief funcao utilizada para excluir o pokemon da pokedex
+ * 
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ */
 void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
 
     //variaveis utilizadas na exclusao do pokemon da pokedex
@@ -479,7 +528,13 @@ void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
     return;
 }//excluirPokemonDaPokedex
 
-//funcao utilizada para listar os pokemons da pokedex
+
+/**
+ * @brief funcao utilizada para listar os pokemons da pokedex
+ * 
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ */
 void listarPokemonsDaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     //mostra ao usuario que ele escolheu listar os pokemons da pokedex
@@ -495,7 +550,13 @@ void listarPokemonsDaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     return;
 }//listarPokemonsDaPokedex
 
-//funcao utilizada para pesquisar pokemons na pokedex
+
+/**
+ * @brief funcao utilizada para pesquisar pokemons na pokedex
+ * 
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ */
 void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     //variaveis utilizadas para pesquisar o pokemon
@@ -552,7 +613,13 @@ void pesquisaPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     return;
 }//pesquisaPokemonNaPokedex
 
-//funcao utilizada para alterar o pokemon na pokedex
+
+/**
+ * @brief funcao utilizada para alterar o pokemon na pokedex
+ * 
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que salva o numero de pokemons da pokedex
+ */
 void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
     //variaveis utilizdas para alterar o pokemon na pokedex
@@ -761,6 +828,14 @@ void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
     return;
 }//alteraPokemonNaPokedex
 
+
+/**
+ * @brief Funcao utilizada para exportar os dados dos pokemons da pokedex para um arquivo texto .csv
+ * 
+ * @param pokemon 
+ * @param tamanho 
+ * @param nomeArquivo 
+ */
 void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArquivo){
     FILE *arquivo = fopen(nomeArquivo, "w");
 
@@ -787,6 +862,14 @@ void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArqu
     printf("Pokedex exportada para %s com sucesso.\n", nomeArquivo);
 }// Exporta sua Pokedex para um arquivo .csv
 
+/**
+ * @brief Funcao utilizada para exportar os dados dos pokemons da colecao para um arquivo texto .csv
+ * 
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param nomeArquivo 
+ */
 void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo){
     FILE *arquivo = fopen(nomeArquivo, "w");
 
