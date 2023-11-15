@@ -169,6 +169,7 @@ int main(){
                 //analisa a escolha do submenu mochila
                 switch(EscolheSubFuncao){
                     case 1://funcao de adicionar pokemon na mochila
+                        printf("PORQUE TA DANDO ERRO NISSO\n");
                         InserirNaMochila(mochila, colecaoDePokemons, &totalPokesNaColecao, listaPokemon, numeroDePokemons, &totalMochila);
                         break;
 
@@ -177,7 +178,7 @@ int main(){
                         break;
 
                     case 3:
-                        ExcluirDaMochila(mochila, &totalMochila, &totalPokesNaColecao, colecaoDePokemons);
+                        ExcluirMochila(mochila, colecaoDePokemons, &totalPokesNaColecao, &totalMochila, listaPokemon, numeroDePokemons);
                         break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima

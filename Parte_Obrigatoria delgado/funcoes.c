@@ -1052,7 +1052,9 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int
     for(int i=0; i < TotalPokemons;i++){
         for(int j=0; j < 6;j++){
             if(mochila[j].IdPokeMochila == listaPokemon[i].nPokedex){
-                printf("%s | ID: %d\n", listaPokemon[i].nome, listaPokemon[i].nPokedex);
+                printf("%d  |%s | ID: %d\n", j+1, listaPokemon[i].nome, listaPokemon[i].nPokedex);
+            }else{
+            printf("%d  |      | \n", j+1,);
             }
         }
     }
@@ -1060,17 +1062,21 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int
     return;
 }
 
-void ExcluirDaMochila(Mochila* mochila, int* totalMochila, int* totalPokesNaColecao, Colecao* colecaoDePokemons){
+void ExcluirMochila(Mochila* mochila, Pokemon* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons){
 
     int EscolhePosicao;
 
-    printf("Digite de qual posição da mochila você deseja remover o Pokémon: ");
+    printf("Digite a posição em que você deseja retirar o Pokémon da mochila: ");
     scanf("%d", &EscolhePosicao);
 
-    *totalPokesNaColecao++;
-    colecaoDePokemons[*totalPokesNaColecao - 1].numDoPokemon = mochila[EscolhePosicao - 1].IdPokeMochila;
-    mochila[EscolhePosicao - 1].IdPokeMochila = 0;
-    *totalMochila--;
+    for(int i=0;i <totalPokemons;i++){
+        if(mochila[EscolhePosicao-1].IdPokeMochila == listaPokemon[i].nPokedex){
+            *totalPokesNaColecao++;
+            colecaoDePokemons[(*totalPokesNaColecao) - 1].nPokedex = mochila[EscolhePosicao-1].IdPokeMochila;
+            *totalMochila--;
+            mochila[EscolhePosicao-1].IdPokeMochila = 0;
+        }
+    }
 
     return;
 }
