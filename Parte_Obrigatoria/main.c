@@ -68,7 +68,6 @@ int main(){
 
     }
 
-
     //variaveis utilizadas no menu do jogo
     int EscolheFuncao;
     int EscolheSubFuncao;

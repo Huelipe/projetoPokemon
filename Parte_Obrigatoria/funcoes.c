@@ -860,6 +860,31 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
     printf("Coleção exportada para %s com sucesso.\n", nomeArquivo);
 }// Exporta sua coleção para um arquivo .csv
 
+void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
+                                    //cria a variavel utilizada para salvar o indice do pokemon excluido
+                                int indiceParaExclusao = -1;
+                                indiceParaExclusao = j;
+
+                                //caso o numero do id do pokemon digitado nao corresponder a nenhum pokemon da colecao, mostra ao usuario que o pokemon nao foi encontrado
+                                if (indiceParaExclusao == -1) {//verifica se a variavel indiceParaExclusao foi alterada ou nao
+                                    printf("Pokémon não encontrado na coleção.\n");
+                                    return;
+                                }//if
+
+                                // Movendo os elementos restantes para preencher o espaço do Pokémon excluído
+                                for (int t = indiceParaExclusao; t < *totalPokeColecao - 1; t++) {
+                                    (colecaoDePokemons)[t] = (colecaoDePokemons)[t + 1];
+                                }//for
+
+                                // Reduzindo o tamanho da coleção após a exclusão
+                                *totalPokeColecao -= 1;
+                                colecaoDePokemons = (Colecao*)realloc(colecaoDePokemons, (*totalPokeColecao) * sizeof(Colecao));
+
+                                //mostra ao usuario que o pokemon foi removido da colecao
+                                printf("Pokémon removido da coleção com sucesso.\n");
+                                return;
+}
+
 /**
  * @brief 
  * 
@@ -892,7 +917,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[0].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
@@ -915,7 +940,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[1].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
@@ -938,7 +963,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[2].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
@@ -961,7 +986,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[3].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
@@ -984,7 +1009,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[4].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
@@ -1007,7 +1032,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             mochila[5].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
                             *totalMochila++;
-                            
+                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        

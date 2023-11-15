@@ -30,8 +30,12 @@ void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArqu
 
 void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, const char *nomeArquivo);
 
+void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokemons, int *totalPokeColecao);
+
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila);
 
 void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int TotalPokemons);
+
+void ExcluiDaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila);
 
 #endif
