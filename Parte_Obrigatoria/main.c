@@ -12,10 +12,10 @@ int main(){
     srand(time(NULL));
     // Código necessário para funcionamento do randomizador
 
-    FILE *arquivoCSV; //ponteiro para tratar o .csv
-    FILE* arquivoBinarioPokedex;
-    FILE* arquivoBinarioColecao;
-    FILE* arquivoBinarioMochila;
+    FILE *arquivo; //ponteiro para tratar o .csv
+    FILE *arquivoBinarioPokedex;
+    FILE *arquivoBinarioColecao;
+    FILE *arquivoBinarioMochila;
     Pokemon* listaPokemon; //lista de pokemons para armazenar os pokemons lidos do .csv
     int numeroDePokemons = 721; //numero total de pokemons
     int tamanhoPrimeiraLinhaCSV; //variavel para o tamanho da primeira linha do .csv, utilizada no fseek para pular a leitura da primeira linha
@@ -25,49 +25,49 @@ int main(){
 
     Mochila mochila[6];
     int totalMochila = 0;
-
+    
     arquivoBinarioPokedex = fopen("Pokedex.dat", "rb");
     arquivoBinarioColecao = fopen("Colecao.dat", "rb");
     arquivoBinarioMochila = fopen("Mochila.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
-        arquivoCSV = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
-        arquivoCSV = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            arquivo = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
 
-        tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
-        //calcula o numero de bytes da primeira linha do .csv para utilizar na funcao fseek
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    } //verifica se houve erro na abertura do arquivo
 
-        fseek(arquivoCSV, tamanhoPrimeiraLinhaCSV, SEEK_SET);
-        //pula o "ponteiro" da leitura do .csv para a segunda linha, de acordo com o numero de bytes da primeira linha
-
-        //le o arquivo .csv
-        for(int i = 0; i < numeroDePokemons; i++){
-            fscanf(arquivoCSV, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
-        }//for
-        
-        if (arquivoCSV == NULL) {
-            perror("Erro ao abrir o arquivo");
-            return 1;
-        } //verifica se houve erro na abertura do arquivo
-    
-    }else{
-    
-        fread(listaPokemon, sizeof(Pokemon), numeroDePokemons, arquivoBinarioPokedex);
-        fread(colecaoDePokemons, sizeof(Colecao), totalPokesNaColecao, arquivoBinarioColecao);
-        fread(mochila, sizeof(Mochila), totalMochila, arquivoBinarioMochila);
-    
-    }//else
+    tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
+    //calcula o numero de bytes da primeira linha do .csv para utilizar na funcao fseek
 
     listaPokemon = (Pokemon*) malloc(numeroDePokemons * sizeof(Pokemon));
     //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
     colecaoDePokemons = (Colecao*) malloc(totalPokesNaColecao * sizeof(Colecao));
     //aloca dinamicamente a coleção para o numero de pokemons na colecao
 
-    fclose(arquivoCSV);
-    fclose(arquivoBinarioPokedex);
-    fclose(arquivoBinarioColecao);
-    fclose(arquivoBinarioMochila);
-    //fecha os arquivos
+    fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
+    //pula o "ponteiro" da leitura do .csv para a segunda linha, de acordo com o numero de bytes da primeira linha
+
+    for(int i = 0; i < numeroDePokemons; i++){
+        fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
+    }//for
+    //le o arquivo .csv
+
+    fclose(arquivo);
+    }else{
+    
+        fread(listaPokemon, sizeof(Pokemon), numeroDePokemons, arquivoBinarioPokedex);
+        fread(colecaoDePokemons, sizeof(Colecao), totalPokesNaColecao, arquivoBinarioColecao);
+        fread(mochila, sizeof(Mochila), totalMochila, arquivoBinarioMochila);
+
+        fclose(arquivoBinarioPokedex);
+        fclose(arquivoBinarioColecao);
+        fclose(arquivoBinarioMochila);
+        //fecha os arquivos
+
+    }
+
 
     //variaveis utilizadas no menu do jogo
     int EscolheFuncao;

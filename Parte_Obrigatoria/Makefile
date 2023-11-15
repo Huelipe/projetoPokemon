@@ -15,5 +15,3 @@ clean:
 
 run:
 	./main
-
-
