@@ -26,14 +26,14 @@ int main(){
 
     Dados dadosSalvos;
 
-    arquivoBinarioPokedex = fopen("Pokedex.dat", "rb");
-    arquivoBinarioColecao = fopen("Colecao.dat", "rb");
-    arquivoBinarioMochila = fopen("Mochila.dat", "rb");
-    arquivoBinarioDados = fopen("Dados.dat", "rb");
+    arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
         printf("Passei 1");
-            arquivo = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
             dadosSalvos.totalMochila = 0;
             dadosSalvos.numeroDePokemons = 721;
             dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
@@ -72,7 +72,7 @@ int main(){
 
         fread(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
         fread(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
-        fread(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
+        fread(mochila, sizeof(Mochila), 6, arquivoBinarioMochila);
 
         fclose(arquivoBinarioDados);
         fclose(arquivoBinarioPokedex);
@@ -87,8 +87,9 @@ int main(){
     int EscolheSubFuncao;
 
     //variaveis utilizadas para definir os arquivos onde será salvo os dados exportados
-    const char *nomeArquivo1 = "DadosPokedex.csv";
-    const char *nomeArquivo2 = "DadosMochila.csv";
+    const char *nomeArquivo1 = "DadosCSV/DadosPokedex.csv";
+    const char *nomeArquivo2 = "DadosCSV/DadosColecao.csv";
+    const char *nomeArquivo3 = "DadosCSV/DadosMochila.csv";
 
     do{
     //menu do jogo
@@ -205,17 +206,18 @@ int main(){
         case 4:
             exportarPokemonParaCSV(listaPokemon, dadosSalvos.numeroDePokemons, nomeArquivo1); //exporta dados da pokedex para um arquivo .csv
             exportarColecaoParaCSV(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, nomeArquivo2); //expora dados da coleção para um arquivo .csv
+            exportarMochilaParaCSV(mochila, listaPokemon, dadosSalvos.totalMochila, nomeArquivo3);
             break;
 
         case 5:
-            arquivoBinarioPokedex = fopen("Pokedex.dat", "wb");
-            arquivoBinarioColecao = fopen("Colecao.dat", "wb");
-            arquivoBinarioMochila = fopen("Mochila.dat", "wb");
-            arquivoBinarioDados = fopen("Dados.dat", "wb");
+            arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "wb");
+            arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "wb");
+            arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "wb");
+            arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "wb");
 
             fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
             fwrite(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
-            fwrite(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
+            fwrite(mochila, sizeof(Mochila), 6, arquivoBinarioMochila);
             fwrite(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
 
             fclose(arquivoBinarioPokedex);

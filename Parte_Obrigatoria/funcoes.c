@@ -1,5 +1,5 @@
 //bibliotecas utilizadas nas funcoes
-#include "funcoes.h"
+#include "estruturas.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -846,7 +846,7 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 
     // Escreve os dados da coleção no arquivo CSV com os mesmos espaçamentos
     for (int i = 0; i < totalPokesNaColecao; i++) {
-        int numDoPokemon = colecaoDePokemons[i].numDoPokemon;
+        int numDoPokemon = colecaoDePokemons[i].numDoPokemon -1;
         fprintf(arquivo, "%-7d,%-12s,%-9s,%-9s,%-5d,%-3d,%-6d,%-6d,%-15d,%-16d,%-11d,%-7d,%-8d,%-8s,%-8.2f,%-8.2f,%-13.2f\n",
             i + 1, listaPokemon[numDoPokemon].nome, listaPokemon[numDoPokemon].tipo1, listaPokemon[numDoPokemon].tipo2,
             listaPokemon[numDoPokemon].total, listaPokemon[numDoPokemon].hp, listaPokemon[numDoPokemon].atk, listaPokemon[numDoPokemon].def,
@@ -859,6 +859,37 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 
     printf("Coleção exportada para %s com sucesso.\n", nomeArquivo);
 }// Exporta sua coleção para um arquivo .csv
+
+void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, const char *nomeArquivo){
+    FILE *arquivo = fopen(nomeArquivo, "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Escreve o cabeçalho no arquivo CSV com os mesmos espaçamentos da função exportarPokemonParaCSV
+    fprintf(arquivo, "numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura\n");
+
+    for(int i = 0; i < totalMochila; i++) {
+        int idPokemonMochila = mochila[i].IdPokeMochila;
+
+        if (idPokemonMochila != -1) {  // Verifica se há um Pokémon na posição da mochila
+            int numDoPokemon = idPokemonMochila;
+            fprintf(arquivo, "%-7d,%-12s,%-9s,%-9s,%-5d,%-3d,%-6d,%-6d,%-15d,%-16d,%-11d,%-7d,%-8d,%-8s,%-8.2f,%-8.2f,%-13.2f\n",
+                i + 1, listaPokemon[numDoPokemon].nome, listaPokemon[numDoPokemon].tipo1, listaPokemon[numDoPokemon].tipo2,
+                listaPokemon[numDoPokemon].total, listaPokemon[numDoPokemon].hp, listaPokemon[numDoPokemon].atk, listaPokemon[numDoPokemon].def,
+                listaPokemon[numDoPokemon].spatack, listaPokemon[numDoPokemon].spdef, listaPokemon[numDoPokemon].speed, listaPokemon[numDoPokemon].geracao,
+                listaPokemon[numDoPokemon].lendario, listaPokemon[numDoPokemon].cor, listaPokemon[numDoPokemon].altura, listaPokemon[numDoPokemon].peso,
+                listaPokemon[numDoPokemon].captura);
+        }
+    }
+
+    fclose(arquivo);
+
+    printf("Mochila exportada para %s com sucesso.\n", nomeArquivo);
+}
+
 
 void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
                                     //cria a variavel utilizada para salvar o indice do pokemon excluido
@@ -1033,6 +1064,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                             ConfereInserido++;
                             *totalMochila++;
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            break;
                         }
                     }
             }        
