@@ -1059,3 +1059,18 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int
 
     return;
 }
+
+void ExcluirDaMochila(Mochila* mochila, int* totalMochila, int* totalPokesNaColecao, Colecao* colecaoDePokemons){
+
+    int EscolhePosicao;
+
+    printf("Digite de qual posição da mochila você deseja remover o Pokémon: ");
+    scanf("%d", &EscolhePosicao);
+
+    *totalPokesNaColecao++;
+    colecaoDePokemons[*totalPokesNaColecao - 1].numDoPokemon = mochila[EscolhePosicao - 1].IdPokeMochila;
+    mochila[EscolhePosicao - 1].IdPokeMochila = 0;
+    *totalMochila--;
+
+    return;
+}
