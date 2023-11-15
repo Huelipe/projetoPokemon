@@ -137,7 +137,7 @@ int main(){
                     break;
 
                 case 2://funcao de listar pokemons da colecao 
-                    listaPokemonsNaColecao(colecaoDePokemons, totalPokesNaColecao, listaPokemon);
+                    listaPokemonsNaColecao(colecaoDePokemons, totalPokesNaColecao, listaPokemon, numeroDePokemons);
                     break;
 
                 case 3://funcao de pesquisar pokemons na colecao
@@ -169,7 +169,6 @@ int main(){
                 //analisa a escolha do submenu mochila
                 switch(EscolheSubFuncao){
                     case 1://funcao de adicionar pokemon na mochila
-                        printf("PORQUE TA DANDO ERRO NISSO\n");
                         InserirNaMochila(mochila, colecaoDePokemons, &totalPokesNaColecao, listaPokemon, numeroDePokemons, &totalMochila);
                         break;
 

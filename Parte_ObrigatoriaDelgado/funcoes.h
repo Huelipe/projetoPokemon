@@ -8,7 +8,7 @@ void leString(char string[], int tamanho);
 
 void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao, int numeroDePokemons, Pokemon* listaPokemon);
 
-void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon);
+void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, int numeroDePokemons);
 
 void pesquisaPorPokemonNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon);
 
@@ -36,6 +36,6 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPo
 
 void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int TotalPokemons);
 
-void ExcluirMochila(Mochila* mochila, Pokemon* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons);
+void ExcluirMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons);
 
 #endif
