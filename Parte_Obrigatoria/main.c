@@ -16,22 +16,27 @@ int main(){
     FILE *arquivoBinarioPokedex;
     FILE *arquivoBinarioColecao;
     FILE *arquivoBinarioMochila;
+    FILE *arquivoBinarioDados;
     Pokemon* listaPokemon; //lista de pokemons para armazenar os pokemons lidos do .csv
-    int numeroDePokemons = 721; //numero total de pokemons
-    int tamanhoPrimeiraLinhaCSV; //variavel para o tamanho da primeira linha do .csv, utilizada no fseek para pular a leitura da primeira linha
+    int tamanhoPrimeiraLinhaCSV;
 
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
-    int totalPokesNaColecao = 0; //numero total de pokemons da colecao
 
     Mochila mochila[6];
-    int totalMochila = 0;
-    
-    arquivoBinarioPokedex = fopen("Pokedex.dat", "rb");
-    arquivoBinarioColecao = fopen("Colecao.dat", "rb");
-    arquivoBinarioMochila = fopen("Mochila.dat", "rb");
+
+    Dados dadosSalvos;
+
+    arquivoBinarioPokedex = fopen("../Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("../Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("../Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("../Dados.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
+        printf("Passei 1");
             arquivo = fopen("../pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            dadosSalvos.totalMochila = 0;
+            dadosSalvos.numeroDePokemons = 721;
+            dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
 
     if (arquivo == NULL) {
         perror("Erro ao abrir o arquivo");
@@ -41,26 +46,35 @@ int main(){
     tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
     //calcula o numero de bytes da primeira linha do .csv para utilizar na funcao fseek
 
-    listaPokemon = (Pokemon*) malloc(numeroDePokemons * sizeof(Pokemon));
+    listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
     //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
-    colecaoDePokemons = (Colecao*) malloc(totalPokesNaColecao * sizeof(Colecao));
+    colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
     //aloca dinamicamente a coleção para o numero de pokemons na colecao
 
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
     //pula o "ponteiro" da leitura do .csv para a segunda linha, de acordo com o numero de bytes da primeira linha
 
-    for(int i = 0; i < numeroDePokemons; i++){
+    for(int i = 0; i < dadosSalvos.numeroDePokemons; i++){
         fscanf(arquivo, "%d ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%d ,%s ,%f ,%f ,%f \n", &listaPokemon[i].nPokedex, listaPokemon[i].nome, listaPokemon[i].tipo1, listaPokemon[i].tipo2, &listaPokemon[i].total, &listaPokemon[i].hp, &listaPokemon[i].atk, &listaPokemon[i].def, &listaPokemon[i].spatack, &listaPokemon[i].spdef, &listaPokemon[i].speed, &listaPokemon[i].geracao, &listaPokemon[i].lendario, listaPokemon[i].cor, &listaPokemon[i].altura, &listaPokemon[i].peso, &listaPokemon[i].captura);
     }//for
     //le o arquivo .csv
 
     fclose(arquivo);
     }else{
-    
-        fread(listaPokemon, sizeof(Pokemon), numeroDePokemons, arquivoBinarioPokedex);
-        fread(colecaoDePokemons, sizeof(Colecao), totalPokesNaColecao, arquivoBinarioColecao);
-        fread(mochila, sizeof(Mochila), totalMochila, arquivoBinarioMochila);
+        printf("Passei 2");
 
+        fread(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
+
+        listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
+        //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
+        colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
+        //aloca dinamicamente a coleção para o numero de pokemons na colecao
+
+        fread(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
+        fread(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
+        fread(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
+
+        fclose(arquivoBinarioDados);
         fclose(arquivoBinarioPokedex);
         fclose(arquivoBinarioColecao);
         fclose(arquivoBinarioMochila);
@@ -96,24 +110,24 @@ int main(){
             //analisa a escolha no submenu da pokedex
             switch(EscolheSubFuncao){
                 case 1://funcao de adicionar pokemons na pokedex
-                    adicionarPokemonNaPokedex(listaPokemon, &numeroDePokemons);
-                    printf("\n\nNome:%s\n\n",listaPokemon[numeroDePokemons - 1].nome);
+                    adicionarPokemonNaPokedex(listaPokemon, &dadosSalvos.numeroDePokemons);
+                    printf("\n\nNome:%s\n\n",listaPokemon[dadosSalvos.numeroDePokemons - 1].nome);
                     break;
 
                 case 2://funcao de listar pokemons da pokedex
-                    listarPokemonsDaPokedex(listaPokemon, numeroDePokemons);
+                    listarPokemonsDaPokedex(listaPokemon, dadosSalvos.numeroDePokemons);
                     break;
 
                 case 3://funcao de pesquisar pokemons na pokedex
-                    pesquisaPokemonNaPokedex(listaPokemon, numeroDePokemons);
+                    pesquisaPokemonNaPokedex(listaPokemon, dadosSalvos.numeroDePokemons);
                     break;
 
                 case 4://funcao de alterar pokemons na pokedex
-                    alteraPokemonNaPokedex(listaPokemon, numeroDePokemons);
+                    alteraPokemonNaPokedex(listaPokemon, dadosSalvos.numeroDePokemons);
                     break;
 
                 case 5://funcao de excluir pokemons da pokedex
-                    excluirPokemonDaPokedex(listaPokemon, &numeroDePokemons);
+                    excluirPokemonDaPokedex(listaPokemon, &dadosSalvos.numeroDePokemons);
                     break;
 
                 default://caso o usuario nao digite nenhuma opcao acima
@@ -133,23 +147,23 @@ int main(){
             //analisa a escolha no submenu da colecao
             switch(EscolheSubFuncao){
                 case 1://funcao de adicionar pokemons na colecao
-                    adicionarPokemonNaColecao(&colecaoDePokemons, &totalPokesNaColecao, numeroDePokemons, listaPokemon);
+                    adicionarPokemonNaColecao(&colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, dadosSalvos.numeroDePokemons, listaPokemon);
                     break;
 
                 case 2://funcao de listar pokemons da colecao 
-                    listaPokemonsNaColecao(colecaoDePokemons, totalPokesNaColecao, listaPokemon);
+                    listaPokemonsNaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon);
                     break;
 
                 case 3://funcao de pesquisar pokemons na colecao
-                    pesquisaPorPokemonNaColecao(colecaoDePokemons, totalPokesNaColecao, listaPokemon);
+                    pesquisaPorPokemonNaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon);
                     break;
 
                 case 4://funcao de alterar pokemons da colecao
-                    alterarPokemonDaColecao(colecaoDePokemons, totalPokesNaColecao, listaPokemon);
+                    alterarPokemonDaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon);
                     break;
 
                 case 5://funcao de excluir pokemons da colecao
-                    excluirPokemonDaColecao(&colecaoDePokemons, &totalPokesNaColecao);
+                    excluirPokemonDaColecao(&colecaoDePokemons, &dadosSalvos.totalPokesNaColecao);
                     break;
 
                 default://caso o usuario nao digite nenhuma das opcoes acima
@@ -169,11 +183,11 @@ int main(){
                 //analisa a escolha do submenu mochila
                 switch(EscolheSubFuncao){
                     case 1://funcao de adicionar pokemon na mochila
-                        InserirNaMochila(mochila, colecaoDePokemons, &totalPokesNaColecao, listaPokemon, numeroDePokemons, &totalMochila);
+                        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila);
                         break;
 
                     case 2://funcao de listar pokemon da mochila
-                        ListaMochila(mochila, listaPokemon, totalMochila, numeroDePokemons);
+                        ListaMochila(mochila, listaPokemon, dadosSalvos.totalMochila, dadosSalvos.numeroDePokemons);
                         break;
 
                     case 3:
@@ -188,22 +202,25 @@ int main(){
             break;
 
         case 4:
-            exportarPokemonParaCSV(listaPokemon, numeroDePokemons, nomeArquivo1); //exporta dados da pokedex para um arquivo .csv
-            exportarColecaoParaCSV(colecaoDePokemons, totalPokesNaColecao, listaPokemon, nomeArquivo2); //expora dados da coleção para um arquivo .csv
+            exportarPokemonParaCSV(listaPokemon, dadosSalvos.numeroDePokemons, nomeArquivo1); //exporta dados da pokedex para um arquivo .csv
+            exportarColecaoParaCSV(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, nomeArquivo2); //expora dados da coleção para um arquivo .csv
             break;
 
         case 5:
             arquivoBinarioPokedex = fopen("Pokedex.dat", "wb");
             arquivoBinarioColecao = fopen("Colecao.dat", "wb");
             arquivoBinarioMochila = fopen("Mochila.dat", "wb");
+            arquivoBinarioDados = fopen("Dados.dat", "wb");
 
-            fwrite(listaPokemon, sizeof(Pokemon), numeroDePokemons, arquivoBinarioPokedex);
-            fwrite(colecaoDePokemons, sizeof(Colecao), totalPokesNaColecao, arquivoBinarioColecao);
-            fwrite(mochila, sizeof(Mochila), totalMochila, arquivoBinarioMochila);
+fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
+fwrite(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
+fwrite(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
+fwrite(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
 
             fclose(arquivoBinarioPokedex);
             fclose(arquivoBinarioColecao);
             fclose(arquivoBinarioMochila);
+            fclose(arquivoBinarioDados);
             //fecha os arquivos
             break;
 

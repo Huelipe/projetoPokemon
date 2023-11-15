@@ -21,40 +21,11 @@ typedef struct Pokemon{
     float captura; // Taxa de captura
 } Pokemon; // Estrutura que define o pokemon na pokedex
 
-typedef struct PokemonCapturado{
-    float ivsHP; 
-    float ivsAtk;
-    float ivsDef;
-    float ivsSpatack;
-    float ivsSpDef;
-    float ivsSpeed;
-    float evsHP;
-    float evsAtk;
-    float evsDef;
-    float evsSpatack;
-    float evsSpDef;
-    float evsSpeed;
-    float evstotal; 
-    float HP;
-    float HPATUAL;
-    float Atk;
-    float Def;
-    float Spatack;
-    float SpDef;
-    float Speed;
-    float LvlAtual; // Level atual
-    char move1[20]; // Ataque 1
-    char move2[20]; // Ataque 2
-    char move3[20]; // Ataque 3
-    char move4[20]; // Ataque 4
-    char nature[20];
-    union{
-        char tipo[10];
-        int id;
-        float atual; // (1 ou 10), (esta com status ou não)
-    } Status;
-    // Union para definir se um pokémon está paralisado, intoxicado, com sono ou congelado, condições que facilitam na batalha e a capturar
-} pokemonCapturado;
+typedef struct Dados{  
+    int totalMochila;
+    int numeroDePokemons;
+    int totalPokesNaColecao;
+} Dados;
 
 typedef struct Pokebola{
 float catchRate;

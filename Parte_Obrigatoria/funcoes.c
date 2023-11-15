@@ -1059,3 +1059,10 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int
 
     return;
 }
+
+void ExcluiDaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila){
+
+
+
+    return;
+}
