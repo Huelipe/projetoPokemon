@@ -26,10 +26,10 @@ int main(){
 
     Dados dadosSalvos;
 
-    arquivoBinarioPokedex = fopen("../Pokedex.dat", "rb");
-    arquivoBinarioColecao = fopen("../Colecao.dat", "rb");
-    arquivoBinarioMochila = fopen("../Mochila.dat", "rb");
-    arquivoBinarioDados = fopen("../Dados.dat", "rb");
+    arquivoBinarioPokedex = fopen("Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("Dados.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
         printf("Passei 1");
@@ -184,6 +184,7 @@ int main(){
                 switch(EscolheSubFuncao){
                     case 1://funcao de adicionar pokemon na mochila
                         InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila);
+
                         break;
 
                     case 2://funcao de listar pokemon da mochila
@@ -212,10 +213,10 @@ int main(){
             arquivoBinarioMochila = fopen("Mochila.dat", "wb");
             arquivoBinarioDados = fopen("Dados.dat", "wb");
 
-fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
-fwrite(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
-fwrite(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
-fwrite(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
+            fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
+            fwrite(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
+            fwrite(mochila, sizeof(Mochila), dadosSalvos.totalMochila, arquivoBinarioMochila);
+            fwrite(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
 
             fclose(arquivoBinarioPokedex);
             fclose(arquivoBinarioColecao);
