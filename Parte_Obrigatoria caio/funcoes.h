@@ -36,6 +36,6 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPo
 
 void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int TotalPokemons);
 
-void ExcluiDaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila);
+void ExcluirDaMochila(Mochila* mochila, int* totalMochila, int* totalPokesNaColecao, Colecao* colecaoDePokemons);
 
 #endif

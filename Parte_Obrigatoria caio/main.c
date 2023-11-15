@@ -177,7 +177,7 @@ int main(){
                         break;
 
                     case 3:
-
+                        ExcluirDaMochila(mochila, &totalMochila, &totalPokesNaColecao, colecaoDePokemons);
                         break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima
