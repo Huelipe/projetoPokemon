@@ -23,6 +23,7 @@ int main(){
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
 
     Mochila mochila[6];
+    int IndiceMochila[6];
 
     Dados dadosSalvos;
 
@@ -152,7 +153,7 @@ int main(){
                     break;
 
                 case 2://funcao de listar pokemons da colecao 
-                    listaPokemonsNaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon);
+                    listaPokemonsNaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons);
                     break;
 
                 case 3://funcao de pesquisar pokemons na colecao
@@ -189,11 +190,11 @@ int main(){
                         break;
 
                     case 2://funcao de listar pokemon da mochila
-                        ListaMochila(mochila, listaPokemon, dadosSalvos.totalMochila, dadosSalvos.numeroDePokemons);
+                        ListaMochila(mochila, listaPokemon, dadosSalvos.numeroDePokemons);
                         break;
 
                     case 3:
-
+                        ExcluirMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, &dadosSalvos.totalMochila, listaPokemon, dadosSalvos.numeroDePokemons);
                         break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima

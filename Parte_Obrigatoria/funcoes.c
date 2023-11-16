@@ -79,12 +79,76 @@ void adicionarPokemonNaColecao(Colecao** colecaoDePokemons, int* totalPokesNaCol
  * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
  * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
  * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param numeroDePokemons variavel que indica o numero total de pokemons
  */
-void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon){
-    //mostra o numero do pokemon na colecao, o nome, e o id dele na pokedex ao usuario
-    for (int i = 0; i < totalPokesNaColecao; i++) {
-        printf("| %i | Nome: %-12s | Id: %i\n", i + 1, listaPokemon[colecaoDePokemons[i].numDoPokemon - 1].nome, colecaoDePokemons[i].numDoPokemon);
-    }//for
+void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, int numeroDePokemons){
+
+    int escolheLista;
+    char escolheTipo[21];
+    int escolheGeracao;
+
+    printf("\nVocê escolheu listar os pokémons da Coleção!\nVocê deseja listá-los de qual maneira?\n1 -> Todos os Pokémons\n2 -> Listar por tipo\n3 -> Listar por Geração\n");
+
+    scanf("%d", &escolheLista);//seleciona o modo de exibição da lista
+
+    switch(escolheLista){
+        case 1:
+        //mostra o numero do pokemon na colecao, o nome, e o id dele na pokedex ao usuario
+        for (int i = 0; i < totalPokesNaColecao; i++) {
+            printf("| %i | Nome: %-12s | Id: %i\n", i + 1, listaPokemon[colecaoDePokemons[i].numDoPokemon - 1].nome, colecaoDePokemons[i].numDoPokemon);
+        }//for
+
+        break;
+
+        case 2:
+
+        printf("Digite o tipo que você deseja listar: ");
+        leString(escolheTipo, 21);
+
+        printf("\nLista de Pokémons do tipo %s:\n", escolheTipo);
+
+        for(int i =0; i < numeroDePokemons; i++){
+            for(int j = 0; j < totalPokesNaColecao; j++){
+                if(strcasecmp(escolheTipo,listaPokemon[i].tipo1)==0 || strcasecmp(escolheTipo,listaPokemon[i].tipo2)==0){
+                    if(colecaoDePokemons[j].numDoPokemon==listaPokemon[i].nPokedex){
+                        printf("| %i | Nome: %-12s | Id: %i\n", j + 1, listaPokemon[colecaoDePokemons[j].numDoPokemon - 1].nome, colecaoDePokemons[j].numDoPokemon);
+                    }    
+                }
+            }
+        }
+
+        break;
+
+        case 3:
+
+        printf("Digite a Geração dos Pokémons que você deseja listar: ");
+        scanf("%d", &escolheGeracao);
+
+        printf("\nLista de Pokémons da %dª Geração:\n", escolheGeracao);
+
+        for(int i =1; i < numeroDePokemons; i++){
+                for(int j = 0; j < totalPokesNaColecao; j++){
+                if(escolheGeracao == listaPokemon[i].geracao){
+                    if(colecaoDePokemons[j].numDoPokemon==listaPokemon[i].nPokedex){
+                        printf("| %i | Nome: %-12s | Id: %i\n", j + 1, listaPokemon[colecaoDePokemons[j].numDoPokemon - 1].nome, colecaoDePokemons[j].numDoPokemon);
+                    }    
+                }
+            }
+        }   
+
+        break;
+
+        default:
+
+        printf("A opção de listagem escolhida não foi encontrada!\n");
+
+        break;
+
+        printf("\n");
+
+    }
+
+    return;
 }//listaPokemonsNaColecao
 
 
@@ -500,15 +564,62 @@ void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons){
  */
 void listarPokemonsDaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 
-    //mostra ao usuario que ele escolheu listar os pokemons da pokedex
-    printf("\nVocê escolheu listar os pokémons da Pokedex!\nAqui estão todos os pokémons da Pokedex!\n");
-    
-    //lista os pokemons disponiveis na pokedex, mostrando o nome e o id de cada um
-    for(int i = 0; i < numeroDePokemons; i++){
-        printf("%d - %s\n", listaPokemon[i].nPokedex, listaPokemon[i].nome);
-    }//for
+    int escolheLista;
+    char escolheTipo[21];
+    int escolheGeracao;
 
-    printf("\n");
+    //mostra ao usuario que ele escolheu listar os pokemons da pokedex
+    printf("\nVocê escolheu listar os pokémons da Pokedex!\nVocê deseja listá-los de qual maneira?\n1 -> Todos os Pokémons\n2 -> Listar por tipo\n3 -> Listar por Geração\n");
+    scanf("%d", &escolheLista);//seleciona o modo de exibição da lista
+
+    switch(escolheLista){
+        case 1:
+        //lista os pokemons disponiveis na pokedex, mostrando o nome e o id de cada um
+        for(int i = 0; i < numeroDePokemons; i++){
+            printf("%d - %s\n", listaPokemon[i].nPokedex, listaPokemon[i].nome);
+        }//for
+
+        break;
+
+        case 2:
+
+        printf("Digite o tipo que você deseja listar: ");
+        leString(escolheTipo, 21);
+
+        printf("\nLista de Pokémons do tipo %s:\n", escolheTipo);
+
+        for(int i =0; i < numeroDePokemons; i++){
+            if(strcasecmp(escolheTipo,listaPokemon[i].tipo1)==0 || strcasecmp(escolheTipo,listaPokemon[i].tipo2)==0){
+                printf("%d - %s\n", listaPokemon[i].nPokedex, listaPokemon[i].nome);
+            }
+        }
+
+        break;
+
+        case 3:
+
+        printf("Digite a Geração dos Pokémons que você deseja listar: ");
+        scanf("%d", &escolheGeracao);
+
+        printf("\nLista de Pokémons da %dª Geração:\n", escolheGeracao);
+
+        for(int i =0; i < numeroDePokemons; i++){
+            if(escolheGeracao == listaPokemon[i].geracao){
+                printf("%d - %s\n", listaPokemon[i].nPokedex, listaPokemon[i].nome);
+            }
+        }   
+
+        break;
+
+        default:
+
+        printf("A opção de listagem escolhida não foi encontrada!\n");
+
+        break;
+
+        printf("\n");
+
+    }
 
     return;
 }//listarPokemonsDaPokedex
@@ -891,7 +1002,7 @@ void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMo
 }
 
 
-void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
+void tirarColecaoInserirMochila(int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
                                     //cria a variavel utilizada para salvar o indice do pokemon excluido
                                 int indiceParaExclusao = -1;
                                 indiceParaExclusao = j;
@@ -932,13 +1043,13 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
     char nomeDigitado[40];
     int ConfereInserido = 0;
 
-    printf("Digite a posicao na mochila que voce deseja o inserir: ");
+    printf("Digite a posição na mochila que voce deseja o inserir: ");
     scanf("%d", &PosicaoNoVetor);
 
     switch(PosicaoNoVetor){
         case 1:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -947,21 +1058,21 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[0].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;
 
         case 2:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -970,21 +1081,21 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[1].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;
 
         case 3:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -993,21 +1104,21 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[2].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;
 
         case 4:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -1016,21 +1127,21 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[3].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;
 
         case 5:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -1039,21 +1150,21 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[4].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;
 
         case 6:
 
-        printf("Digite o nome do pokemon a ser inserido: ");
+        printf("Digite o nome do Pokémon a ser inserido: ");
         leString(nomeDigitado, 40);
 
         for(int i=0;i < totalPokemons;i++){
@@ -1062,15 +1173,14 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[5].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
                             ConfereInserido++;
-                            *totalMochila++;
-                            tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                            break;
+                            *totalMochila += 1;
+                            tirarColecaoInserirMochila(j, colecaoDePokemons, totalPokeColecao);
                         }
                     }
             }        
         }
         if(ConfereInserido == 0){
-                printf("Pokemons nao encontrado na colecao!\n");
+                printf("\nPokémon nao encontrado na coleção!\n");
         }
 
         break;                                
@@ -1079,12 +1189,12 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
     return;
 }
 
-void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int TotalPokemons){
+void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int TotalPokemons){
 
     for(int i=0; i < TotalPokemons;i++){
         for(int j=0; j < 6;j++){
             if(mochila[j].IdPokeMochila == listaPokemon[i].nPokedex){
-                printf("%s | ID: %d\n", listaPokemon[i].nome, listaPokemon[i].nPokedex);
+                printf("%d |%10s | ID: %d\n", j + 1, listaPokemon[i].nome, listaPokemon[i].nPokedex);
             }
         }
     }
@@ -1092,9 +1202,22 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int
     return;
 }
 
-void ExcluiDaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila){
+void ExcluirMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons){
 
+    int EscolhePosicao;
 
+    printf("Digite a posição em que você deseja retirar o Pokémon da mochila: ");
+    scanf("%d", &EscolhePosicao);
+
+    for(int i=0;i <totalPokemons;i++){
+        if(mochila[EscolhePosicao-1].IdPokeMochila == listaPokemon[i].nPokedex){
+            *totalPokesNaColecao += 1;
+            colecaoDePokemons[(*totalPokesNaColecao) - 1].numDoPokemon = mochila[EscolhePosicao-1].IdPokeMochila;
+            *totalMochila -= 1;
+            mochila[EscolhePosicao-1].IdPokeMochila = 0;
+            printf("O Pokémon %s foi retirado de mochila e adicionado de volta à Coleção!\n", listaPokemon[i].nome);
+        }
+    }
 
     return;
 }
