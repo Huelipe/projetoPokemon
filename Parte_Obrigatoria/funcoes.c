@@ -430,76 +430,76 @@ void adicionarPokemonNaPokedex(Pokemon** listaPokemon, int* numeroDePokemons){
     (*numeroDePokemons)++;
 
     //realoca o vetor dinamico de pokemons da pokedex para o novo numero de pokemons
-    *listaPokemon = (Pokemon**) realloc(listaPokemon, ((*numeroDePokemons) * sizeof(Pokemon*)));
+    *listaPokemon = (Pokemon*) realloc(*listaPokemon, ((*numeroDePokemons) * sizeof(Pokemon)));
 
     //solicita o nome do novo pokemon da pokedex
     printf("\nDigite o nome do pokémon a ser adicionado:");
-    leString(*listaPokemon[(*numeroDePokemons) - 1].nome, 40);
+    leString((*listaPokemon)[(*numeroDePokemons) - 1].nome, 40);
 
     //solicita o tipo 1 do novo pokemon da pokedex
     printf("\nDigite o tipo 1 do pokémon a ser adicionado:");
-    leString(*listaPokemon[(*numeroDePokemons) - 1].tipo1, 10);
+    leString((*listaPokemon)[(*numeroDePokemons) - 1].tipo1, 10);
 
     //solicita o tipo 2 do novo pokemon da pokedex
     printf("\nDigite o tipo 2 do pokémon a ser adicionado:");
-    leString(*listaPokemon[(*numeroDePokemons) - 1].tipo2, 10);
+    leString((*listaPokemon)[(*numeroDePokemons) - 1].tipo2, 10);
 
     //solicita a vida do novo pokemon da pokedex
     printf("\nDigite os pontos de vida (hp) do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].hp);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].hp);
 
     //solicita o ataque do novo pokemon da pokedex
     printf("\nDigite os pontos de ataque do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].atk);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].atk);
 
     //solicita a defesa do novo pokemon da pokedex
     printf("\nDigite os pontos de defesa do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].def);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].def);
 
     //solicita o ataque especial do novo pokemon da pokedex
     printf("\nDigite os pontos de ataque especial do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].spatack);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].spatack);
 
     //solicita a defesa especial do novo pokemon da pokedex
     printf("\nDigite os pontos de defesa especial do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].spdef);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].spdef);
 
     //solicita a velocidade do novo pokemon da pokedex
     printf("\nDigite os pontos de velocidade do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].speed);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].speed);
 
     //solicita a geracao do novo pokemon da pokedex
     printf("\nDigite a geração do pokémon a ser adicionado:");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].geracao);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].geracao);
 
     //solicita o lendario do novo pokemon da pokedex
     printf("\nDigite se o pokémon a ser adicionado é lendário(digite 1) ou não(digite 0):");
-    scanf("%d", &listaPokemon[(*numeroDePokemons) - 1].lendario);
+    scanf("%d", &(*listaPokemon)[(*numeroDePokemons) - 1].lendario);
 
     //solicita a cor do novo pokemon da pokedex
     printf("\nDigite a cor do pokémon a ser adicionado:");
-    leString(listaPokemon[(*numeroDePokemons) - 1].cor, 10);
+    leString((*listaPokemon)[(*numeroDePokemons) - 1].cor, 10);
 
     //solicita a altura do novo pokemon da pokedex
     printf("\nDigite a altura do pokémon a ser adicionado:");
-    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].altura);
+    scanf("%f", &(*listaPokemon)[(*numeroDePokemons) - 1].altura);
 
     //solicita o peso do novo pokemon da pokedex
     printf("\nDigite o peso do pokémon a ser adicionado:");
-    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].peso);
+    scanf("%f", &(*listaPokemon)[(*numeroDePokemons) - 1].peso);
 
     //solicita a taxa de captura do novo pokemon da pokedex
     printf("\nDigite a taxa de captura do pokémon a ser adicionado:");
-    scanf("%f", &listaPokemon[(*numeroDePokemons) - 1].captura);
+    scanf("%f", &(*listaPokemon)[(*numeroDePokemons) - 1].captura);
 
     //calcula o total do novo pokemon da pokedex
-    *listaPokemon[(*numeroDePokemons) - 1].total = *listaPokemon[(*numeroDePokemons) - 1].hp + *listaPokemon[(*numeroDePokemons) - 1].atk + *listaPokemon[(*numeroDePokemons) - 1].def + *listaPokemon[(*numeroDePokemons) - 1].spdef + *listaPokemon[(*numeroDePokemons) - 1].spatack + *listaPokemon[(*numeroDePokemons) - 1].speed;
+    (*listaPokemon)[(*numeroDePokemons) - 1].total = (*listaPokemon)[(*numeroDePokemons) - 1].hp + (*listaPokemon)[(*numeroDePokemons) - 1].atk + (*listaPokemon)[(*numeroDePokemons) - 1].def + (*listaPokemon)[(*numeroDePokemons) - 1].spdef + (*listaPokemon)[(*numeroDePokemons) - 1].spatack + (*listaPokemon)[(*numeroDePokemons) - 1].speed;
 
     //salva o numero do pokemon na pokedex de acordo com o numero de pokemons
-    *listaPokemon[(*numeroDePokemons) - 1].nPokedex = (*numeroDePokemons);
+    (*listaPokemon)[(*numeroDePokemons) - 1].nPokedex = (*numeroDePokemons);
 
     //mostra ao usuario que o pokemon foi adicionado na pokedex
-    printf("\nO Pokémon %s foi adicionado na Pokedex do jogo!\n", *listaPokemon[(*numeroDePokemons) - 1].nome);
+    printf("\nO Pokémon %s foi adicionado na Pokedex do jogo!\n", (*listaPokemon)[(*numeroDePokemons) - 1].nome);
 
     return;
 }//adicionarPokemonNaPokedex
@@ -928,9 +928,9 @@ void alteraPokemonNaPokedex(Pokemon* listaPokemon, int numeroDePokemons){
 /**
  * @brief Funcao utilizada para exportar os dados dos pokemons da pokedex para um arquivo texto .csv
  * 
- * @param pokemon 
- * @param tamanho 
- * @param nomeArquivo 
+ * @param pokemon vetor da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param tamanho variavel que salva o numero de pokemons da pokedex
+ * @param nomeArquivo nome do arquivo onde ficará salvo os dados exportados
  */
 void exportarPokemonParaCSV(Pokemon pokemon[], int tamanho, const char *nomeArquivo){
     FILE *arquivo = fopen(nomeArquivo, "w");
@@ -993,6 +993,14 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
     printf("Coleção exportada para %s com sucesso.\n", nomeArquivo);
 }// Exporta sua coleção para um arquivo .csv
 
+/**
+ * @brief funcao utilizada para exportar os dados da mochila para um arquivo .csv
+ * 
+ * @param mochila variavel utilizada para armazenar os ids dos pokemons da mochila
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param totalMochila variavel que salva o numero total de pokemons na mochila
+ * @param nomeArquivo nome do arquivo onde ficará salvo os dados exportados
+ */
 void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, const char *nomeArquivo){
     
     //abre o arquivo para escrita
@@ -1026,7 +1034,13 @@ void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMo
     printf("Mochila exportada para %s com sucesso.\n", nomeArquivo);
 }//exportarMochilaParaCSV
 
-
+/**
+ * @brief funcao utilizada para tirar um pokemon da colecao, quando ele for inserido na mochila
+ * 
+ * @param j variavel que salva o indice do pokemon excluido
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokeColecao variavel que salva o numero total de pokemons da colecao
+ */
 void tirarColecao(int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
     //cria a variavel utilizada para salvar o indice do pokemon excluido
     int indiceParaExclusao = -1;
@@ -1050,17 +1064,17 @@ void tirarColecao(int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
     //mostra ao usuario que o pokemon foi removido da colecao
     printf("Pokémon inserido na mochila com sucesso.\n");
     return;
-}
+}//tirarColecao
 
 /**
- * @brief 
+ * @brief funcao utilizada para inserir um pokemon na mochila
  * 
- * @param mochila 
- * @param colecaoDePokemons 
- * @param totalPokeColecao 
- * @param listaPokemon 
- * @param totalPokemons 
- * @param totalMochila 
+ * @param mochila variavel utilizada para armazenar os ids dos pokemons da mochila
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokeColecao variavel que salva o numero total de pokemons da colecao
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param totalPokemons variavel que salva o numero de pokemons da pokedex
+ * @param totalMochila variavel que salva o numero total de pokemons na mochila
  */
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila){
 
@@ -1214,6 +1228,13 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
     return;
 }
 
+/**
+ * @brief funcao utilizada para listar os pokemons da mochila
+ * 
+ * @param mochila variavel utilizada para armazenar os ids dos pokemons da mochila
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param TotalPokemons variavel que salva o numero de pokemons da pokedex
+ */
 void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int TotalPokemons){
 
     for(int i=0; i < TotalPokemons;i++){
@@ -1227,6 +1248,16 @@ void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int TotalPokemons){
     return;
 }
 
+/**
+ * @brief funcao utilizada para excluir pokemons da mochila
+ * 
+ * @param mochila variavel utilizada para armazenar os ids dos pokemons da mochila
+ * @param colecaoDePokemons vetor dinamico da estrutura Colecao no qual sera salvo o id(pokedex) dos pokemons da colecao
+ * @param totalPokesNaColecao variavel que salva o numero total de pokemons da colecao
+ * @param totalMochila variavel que salva o numero total de pokemons na mochila
+ * @param listaPokemon vetor dinamico da estrutura Pokemon no qual sera salvo todas as informacoes de cada pokemon da pokedex
+ * @param totalPokemons variavel que salva o numero de pokemons da pokedex
+ */
 void ExcluirMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons){
 
     int EscolhePosicao;

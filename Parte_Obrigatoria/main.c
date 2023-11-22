@@ -101,10 +101,10 @@ int main(){
     do{
     //menu do jogo
     printf("MENU POKÉMON\n");
-    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Exportar Dados\n5 -> Sair do jogo\n");
+    printf("1 -> Pokedex\n2 -> Coleção\n3 -> Mochila\n4 -> Exportar Dados\n5 -> Sair do jogo\n");
 
     //recebe a opcao do menu do usuario
-    printf("Digite uma das opcoes acima: ");
+    printf("Digite uma das opções acima: ");
     scanf("%d", &EscolheFuncao);
 
     //caso escolha Pokedex no menu, entra no submenu da Pokedex
@@ -112,14 +112,13 @@ int main(){
         case 1:
             //submenu da Pokedex
             printf("\nSUBMENU POKEDEX\n");
-            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
+            printf("1 -> Inserir Pokémons\n2 -> Listar Pokémons\n3 -> Pesquisar Pokémons\n4 -> Alterar Pokémons\n5 -> Excluir Pokémons\n");
             scanf("%d", &EscolheSubFuncao);
 
             //analisa a escolha no submenu da pokedex
             switch(EscolheSubFuncao){
                 case 1://funcao de adicionar pokemons na pokedex
                     adicionarPokemonNaPokedex(&listaPokemon, &dadosSalvos.numeroDePokemons);
-                    printf("\n\nNome:%s\n\n",listaPokemon[dadosSalvos.numeroDePokemons - 1].nome);
                     break;
 
                 case 2://funcao de listar pokemons da pokedex
@@ -148,8 +147,8 @@ int main(){
 
         case 2://caso o usuario escolha o submenu da colecao, entra no submenu da colecao
             //submenu colecao
-            printf("\nSUBMENU COLECAO\n");
-            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
+            printf("\nSUBMENU COLEÇÃO\n");
+            printf("1 -> Inserir Pokémons\n2 -> Listar Pokémons\n3 -> Pesquisar Pokémons\n4 -> Alterar Pokémons\n5 -> Excluir Pokémons\n");
             scanf("%d", &EscolheSubFuncao);
 
             //analisa a escolha no submenu da colecao
@@ -175,7 +174,7 @@ int main(){
                     break;
 
                 default://caso o usuario nao digite nenhuma das opcoes acima
-                    printf("Opcao nao encontrada!\n");
+                    printf("Opção não encontrada!\n");
 
                     break;    
                 }//switch
@@ -204,7 +203,7 @@ int main(){
                         break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima
-                        
+                        printf("Opção não encontrada!\n");
                         break;        
                 }//switch
 
@@ -239,7 +238,7 @@ int main(){
 
         //caso o usuario nao digite nenhuma das opcoes do menu principal
         default:
-            printf("Opcao nao encontrada\n");
+            printf("Opção não encontrada\n");
 
             break;        
     }//switch
