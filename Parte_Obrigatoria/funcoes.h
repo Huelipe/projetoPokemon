@@ -16,7 +16,7 @@ void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao
 
 void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao);
 
-void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons);
+void adicionarPokemonNaPokedex(Pokemon** listaPokemon, int* numeroDePokemons);
 
 void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons);
 
@@ -32,7 +32,7 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 
 void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, const char *nomeArquivo);
 
-void tirarColecaoInserirMochila(int j, Colecao* colecaoDePokemons, int *totalPokeColecao);
+void tirarColecao(int j, Colecao* colecaoDePokemons, int *totalPokeColecao);
 
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila);
 
