@@ -50,8 +50,17 @@ int main(){
 
     listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
     //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
+    if(listaPokemon == NULL){
+        printf("Erro: Memória Pokedex Insuficiente!\n");
+        exit(1);
+    }//if
+
     colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
     //aloca dinamicamente a coleção para o numero de pokemons na colecao
+    if(colecaoDePokemons == NULL){
+        printf("Erro: Memória Colecao Insuficiente!\n");
+        exit(1);
+    }//if
 
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
     //pula o "ponteiro" da leitura do .csv para a segunda linha, de acordo com o numero de bytes da primeira linha
@@ -73,8 +82,17 @@ int main(){
 
         listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
         //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
+        if(listaPokemon == NULL){
+            printf("Erro: Memória Pokedex Insuficiente!\n");
+            exit(1);
+        }//if
+        
         colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
         //aloca dinamicamente a coleção para o numero de pokemons na colecao
+        if(colecaoDePokemons == NULL){
+            printf("Erro: Memória Colecao Insuficiente!\n");
+            exit(1);
+        }//if
 
         //le os arquivos binarios da pokedex, da colecao e da mochila
         fread(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
@@ -87,6 +105,8 @@ int main(){
         fclose(arquivoBinarioMochila);
         //fecha os arquivos
 
+        //mensagem de boas vindas nas demais vezes
+        printf("\n\nSeja bem-vindo de volta ao jogo de Pokémon!\n\n");
     }//else
 
     //variaveis utilizadas no menu do jogo
@@ -195,7 +215,7 @@ int main(){
                         break;
 
                     case 2://funcao de listar pokemon da mochila
-                        ListaMochila(mochila, listaPokemon, dadosSalvos.numeroDePokemons);
+                        ListaMochila(dadosSalvos.totalMochila, mochila, listaPokemon, dadosSalvos.numeroDePokemons);
                         break;
 
                     case 3://funcao de excluir pokemon da mochila
@@ -219,9 +239,28 @@ int main(){
         case 5://caso o usuario saia do jogo
             //abre os arquivos binários para escrita
             arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "wb");
+            if(arquivoBinarioPokedex == NULL){
+                printf("Erro ao abrir o arquivo Pokedex!\n");
+                exit(1);
+            }//if
+
             arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "wb");
+            if(arquivoBinarioColecao == NULL){
+                printf("Erro ao abrir o arquivo Colecao!\n");
+                exit(1);
+            }//if
+            
             arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "wb");
+            if(arquivoBinarioMochila == NULL){
+                printf("Erro ao abrir o arquivo Mochila!\n");
+                exit(1);
+            }//if
+            
             arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "wb");
+            if(arquivoBinarioDados == NULL){
+                printf("Erro ao abrir o arquivo Dados!\n");
+                exit(1);
+            }//if
 
             //escreve os dados nos arquivos binários
             fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
