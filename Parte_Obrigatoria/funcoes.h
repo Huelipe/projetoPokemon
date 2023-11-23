@@ -12,7 +12,7 @@ void listaPokemonsNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 
 void pesquisaPorPokemonNaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon);
 
-void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon);
+void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao, Pokemon* listaPokemon, int totalPokemon);
 
 void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao);
 
