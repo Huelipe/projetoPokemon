@@ -970,7 +970,7 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 }// Exporta sua coleção para um arquivo .csv
 
 void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokemons, int *totalPokeColecao){
-                                    //cria a variavel utilizada para salvar o indice do pokemon excluido
+                                //cria a variavel utilizada para salvar o indice do pokemon excluido
                                 int indiceParaExclusao = -1;
                                 indiceParaExclusao = j;
 
@@ -997,7 +997,7 @@ void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokem
 /**
  * @brief 
  * 
- * @param mochila 
+ * @param mochila
  * @param colecaoDePokemons 
  * @param totalPokeColecao 
  * @param listaPokemon 
@@ -1006,189 +1006,185 @@ void tirarColecaoInserirMochila(Mochila* mochila, int j, Colecao* colecaoDePokem
  */
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPokeColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila){
 
-    int PosicaoNoVetor;
-    char nomeDigitado[40];
-    int ConfereInserido = 0;
+    int PosicaoNoVetor;//variável que indicará a posição em que o Pokémon será inserido na mochila
+    char nomeDigitado[40];//nome do Pokemon a ser inserido na mochila
+    int ConfereInserido = 0;//contador que confere se o Pokemon foi inserido na mochila
 
     printf("Digite a posicao na mochila que voce deseja o inserir: ");
-    scanf("%d", &PosicaoNoVetor);
+    scanf("%d", &PosicaoNoVetor);//recebe a posição em que o Pokémon será inserido na mochila
 
     switch(PosicaoNoVetor){
         case 1:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//recebe o nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[0].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            *totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[0].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            *totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;
 
         case 2:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[1].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            *totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[1].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            *totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;
 
         case 3:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[2].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            *totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[2].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            *totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;
 
         case 4:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[3].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            *totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[3].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            *totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;
 
         case 5:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[4].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            *totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[4].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            *totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;
 
         case 6:
 
         printf("Digite o nome do pokemon a ser inserido: ");
-        leString(nomeDigitado, 40);
+        leString(nomeDigitado, 40);//recebe o nome do Pokemon a ser inserido na mochila
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){
+            if(strcasecmp(nomeDigitado,listaPokemon[i].nome)==0){//confere se o nome do pokemon digitado esta incluso na pokedex
                     for(int j=0;j < *totalPokeColecao;j++){
-                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
-                            mochila[5].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
-                            ConfereInserido++;
-                            totalMochila += 1;
+                        if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){//confere se o pokemon digitado esta dentro da colecao
+                            mochila[5].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;//iguala o id do pokemon da posicao escolhida ao id do nome do pokemon inserido
+                            ConfereInserido++;//acrescenta uma unidade no contador que confere se o Pokemon foi adicionado
+                            totalMochila += 1;//acrescenta uma unidade no total de Pokemons dentro da mochila
                             tirarColecaoInserirMochila(mochila, j, colecaoDePokemons, totalPokeColecao);
-                        }
-                    }
-            }        
-        }
-        if(ConfereInserido == 0){
+                        }//if
+                    }//for
+            }//if        
+        }//for
+        if(ConfereInserido == 0){//caso o pokemon nao tenha sido inserido a seguinte mensagem sera exibida
                 printf("Pokemons nao encontrado na colecao!\n");
-        }
+        }//if
 
         break;                                
 
-    }
+    }//switch
     return;
-}
+}//InserirNaMochila
 
 void ListaMochila(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, int TotalPokemons){
-
-    int gravaPosicao;
 
     for(int j=0; j < 6;j++){
         for(int i=0; i < TotalPokemons;i++){
             if(mochila[j].IdPokeMochila == listaPokemon[i].nPokedex){
-                printf("%d  |%s | ID: %d\n", j+1, listaPokemon[i].nome, listaPokemon[i].nPokedex);
-                gravaPosicao++;
-            }
-        }
-    }
+                printf("%d  |%s | ID: %d\n", j+1, listaPokemon[i].nome, listaPokemon[i].nPokedex);//exibe o pokemon com base na posicao dele na mochila, seu nome e seu id na pokedex
+            }//if
+        }//for
+    }//for
 
     return;
-}
+}//ListaMochila
 
 void ExcluirMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, int* totalMochila, Pokemon* listaPokemon, int totalPokemons){
 
-    int EscolhePosicao;
+    int EscolhePosicao;//variavel que recebe a posicao em que o pokemon sera retirado
 
     printf("Digite a posição em que você deseja retirar o Pokémon da mochila: ");
-    scanf("%d", &EscolhePosicao);
+    scanf("%d", &EscolhePosicao);//recebe a posicao em que o pokemon sera retirado
 
     for(int i=0;i <totalPokemons;i++){
-        if(mochila[EscolhePosicao-1].IdPokeMochila == listaPokemon[i].nPokedex){
-            printf("passou aqui\n");
-            *totalPokesNaColecao += 1;
-            colecaoDePokemons[(*totalPokesNaColecao) - 1].numDoPokemon = mochila[EscolhePosicao-1].IdPokeMochila;
-            *totalMochila -= 1;
-            mochila[EscolhePosicao-1].IdPokeMochila = 0;
+        if(mochila[EscolhePosicao-1].IdPokeMochila == listaPokemon[i].nPokedex){//caso o id do pokemon dentro da mochila esteja na pokedex
+            *totalPokesNaColecao += 1;//adicionara uma unidade no total de pokemons na colecao
+            colecaoDePokemons[(*totalPokesNaColecao) - 1].numDoPokemon = mochila[EscolhePosicao-1].IdPokeMochila;//o pokemon que retornara a colecao sera o mesmo que foi retirado da mochila
+            *totalMochila -= 1;//diminui uma unidade do total de pokemons da mochila
+            mochila[EscolhePosicao-1].IdPokeMochila = 0;//iguala o id do pokemon retirado com 0, visto que nenhum pokemon possui esse id
             printf("O Pokémon %s foi retirado de mochila e adicionado de volta à Coleção!\n", listaPokemon[i].nome);
-        }
-    }
+        }//if
+    }//for
 
     return;
-}
+}//ExckuirMochila
