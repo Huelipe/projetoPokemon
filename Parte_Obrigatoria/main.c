@@ -186,7 +186,7 @@ int main(){
                     break;
 
                 case 4://funcao de alterar pokemons da colecao
-                    alterarPokemonDaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons);
+                    alterarPokemonDaColecao(&colecaoDePokemons, dadosSalvos.totalPokesNaColecao, &listaPokemon, dadosSalvos.numeroDePokemons);
                     break;
 
                 case 5://funcao de excluir pokemons da colecao
