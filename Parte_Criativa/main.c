@@ -14,12 +14,24 @@ typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVO
 typedef enum GameLoad { CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
-
 #define MAX_POKEMON 722 
 
 int main(){
 
     srand(time(NULL));
+
+    nature natures[25];
+    Pokebola pokebolas[4];
+
+    vetorDeNatures(natures);
+    vetorDePokebolas(pokebolas);
+
+    Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
+
+    Mochila mochila[6];
+    int IndiceMochila[6];
+
+    Dados dadosSalvos;
 
     //Carrega a pokedex
     FILE *arquivo;
@@ -354,15 +366,16 @@ int main(){
         personagem = LoadTexture("imagens/amy.png");
     }
     
-/*pokemonCapturado pokemonInicial;
+pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
-        criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures[26]);
+        criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures);
+        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila);
     }else if(opcaoPokemon == 2){
-        criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures[26]);
+        criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures);
     }else if(opcaoPokemon == 3){
-        criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures[26]);
+        criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures);
     }
-*/    
+
 
     switch(screenLoad){
 

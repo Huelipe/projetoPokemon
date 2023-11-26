@@ -23,7 +23,7 @@ typedef struct Pokemon{
     int prxEvo; // Próxima evolução
 } Pokemon; // Estrutura que define o pokemon na pokedex
 
-typedef struct PokemonCapturado{
+typedef struct pokemonCapturado{
     float ivsHP; 
     float ivsAtk;
     float ivsDef;
@@ -58,12 +58,18 @@ typedef struct PokemonCapturado{
     // Union para definir se um pokémon está paralisado, intoxicado, com sono ou congelado, condições que facilitam na batalha e a capturar
 } pokemonCapturado;
 
+typedef struct Dados{  
+    int totalMochila;
+    int numeroDePokemons;
+    int totalPokesNaColecao;
+} Dados;
+
 typedef struct Pokebola{
 float catchRate;
 char nome[20];
 } Pokebola;
 
-typedef struct natureza{
+typedef struct nature{
 char nome[20];
 float modAtk;
 float modDef;
@@ -72,13 +78,13 @@ float modSpdef;
 float modSpeed;
 } nature;
 
-typedef struct tipos{
-int idTipo;
-char nome[10];
-int resistencias[8];
-int fraquezas[8];
-int imunidades[3];
-} tipos;
+typedef struct Colecao{
+int numDoPokemon;
+} Colecao;
+
+typedef struct{
+    int IdPokeMochila;
+}Mochila;
 
 
 #endif

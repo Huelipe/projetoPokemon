@@ -13,54 +13,44 @@ int main(){
     // Código necessário para funcionamento do randomizador
 
     FILE *arquivo; //ponteiro para tratar o .csv
-    FILE *arquivoBinarioPokedex;//ponteiro para tratar arquivo binario da pokedex
-    FILE *arquivoBinarioColecao;//ponteiro para tratar arquivo binario da colecao
-    FILE *arquivoBinarioMochila;//ponteiro para tratar arquivo binario da mochila
-    FILE *arquivoBinarioDados;//ponteiro para tratar arquivo binario dos numeros de pokedex, colecao, mochila
+    FILE *arquivoBinarioPokedex;
+    FILE *arquivoBinarioColecao;
+    FILE *arquivoBinarioMochila;
+    FILE *arquivoBinarioDados;
     Pokemon* listaPokemon; //lista de pokemons para armazenar os pokemons lidos do .csv
-    int tamanhoPrimeiraLinhaCSV;//variavel para salvar o tamanho da primeira linha .csv
+    int tamanhoPrimeiraLinhaCSV;
 
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
 
-    //variavel para salvar id na mochila
     Mochila mochila[6];
+    int IndiceMochila[6];
 
-    //variavel para salvar os dados: numero de pokedex, colecoa e mochila
     Dados dadosSalvos;
 
-    //abre os binarios para leitura
     arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "rb");
     arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "rb");
     arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "rb");
     arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
-        arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
-        dadosSalvos.totalMochila = 0;//numero total de pokemons da mochila
-        dadosSalvos.numeroDePokemons = 721;//numero total de pokemons da pokedex
-        dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
+        printf("Passei 1");
+            arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            dadosSalvos.totalMochila = 0;
+            dadosSalvos.numeroDePokemons = 721;
+            dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
 
-        if (arquivo == NULL) {
-            perror("Erro ao abrir o arquivo");
-            return 1;
-        } //verifica se houve erro na abertura do arquivo
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    } //verifica se houve erro na abertura do arquivo
 
     tamanhoPrimeiraLinhaCSV = sizeof("numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura");
     //calcula o numero de bytes da primeira linha do .csv para utilizar na funcao fseek
 
     listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
     //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
-    if(listaPokemon == NULL){
-        printf("Erro: Memória Pokedex Insuficiente!\n");
-        exit(1);
-    }//if
-
     colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
     //aloca dinamicamente a coleção para o numero de pokemons na colecao
-    if(colecaoDePokemons == NULL){
-        printf("Erro: Memória Colecao Insuficiente!\n");
-        exit(1);
-    }//if
 
     fseek(arquivo, tamanhoPrimeiraLinhaCSV, SEEK_SET);
     //pula o "ponteiro" da leitura do .csv para a segunda linha, de acordo com o numero de bytes da primeira linha
@@ -71,30 +61,16 @@ int main(){
     //le o arquivo .csv
 
     fclose(arquivo);
-
-    //mensagem de boas vindas na primeira vez
-    printf("\n\nBem-vindo ao jogo de Pokémon!\n\n");
-
     }else{
+        printf("Passei 2");
 
-        //le os arquivos binarios com os dados
         fread(&dadosSalvos, sizeof(Dados), 1, arquivoBinarioDados);
 
         listaPokemon = (Pokemon*) malloc(dadosSalvos.numeroDePokemons * sizeof(Pokemon));
         //aloca dinamicamente a lista de pokemons para o numero de pokemons do jogo
-        if(listaPokemon == NULL){
-            printf("Erro: Memória Pokedex Insuficiente!\n");
-            exit(1);
-        }//if
-        
         colecaoDePokemons = (Colecao*) malloc(dadosSalvos.totalPokesNaColecao * sizeof(Colecao));
         //aloca dinamicamente a coleção para o numero de pokemons na colecao
-        if(colecaoDePokemons == NULL){
-            printf("Erro: Memória Colecao Insuficiente!\n");
-            exit(1);
-        }//if
 
-        //le os arquivos binarios da pokedex, da colecao e da mochila
         fread(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
         fread(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
         fread(mochila, sizeof(Mochila), 6, arquivoBinarioMochila);
@@ -105,9 +81,7 @@ int main(){
         fclose(arquivoBinarioMochila);
         //fecha os arquivos
 
-        //mensagem de boas vindas nas demais vezes
-        printf("\n\nSeja bem-vindo de volta ao jogo de Pokémon!\n\n");
-    }//else
+    }
 
     //variaveis utilizadas no menu do jogo
     int EscolheFuncao;
@@ -120,11 +94,11 @@ int main(){
 
     do{
     //menu do jogo
-    printf("MENU POKÉMON\n");
-    printf("1 -> Pokedex\n2 -> Coleção\n3 -> Mochila\n4 -> Exportar Dados\n5 -> Sair do jogo\n");
+    printf("MENU\n");
+    printf("1 -> Pokedex\n2 -> Colecao\n3 -> Mochila\n4 -> Exportar Dados\n5 -> Sair do jogo\n");
 
     //recebe a opcao do menu do usuario
-    printf("Digite uma das opções acima: ");
+    printf("Digite uma das opcoes acima: ");
     scanf("%d", &EscolheFuncao);
 
     //caso escolha Pokedex no menu, entra no submenu da Pokedex
@@ -132,13 +106,14 @@ int main(){
         case 1:
             //submenu da Pokedex
             printf("\nSUBMENU POKEDEX\n");
-            printf("1 -> Inserir Pokémons\n2 -> Listar Pokémons\n3 -> Pesquisar Pokémons\n4 -> Alterar Pokémons\n5 -> Excluir Pokémons\n");
+            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
             scanf("%d", &EscolheSubFuncao);
 
             //analisa a escolha no submenu da pokedex
             switch(EscolheSubFuncao){
                 case 1://funcao de adicionar pokemons na pokedex
-                    adicionarPokemonNaPokedex(&listaPokemon, &dadosSalvos.numeroDePokemons);
+                    adicionarPokemonNaPokedex(listaPokemon, &dadosSalvos.numeroDePokemons);
+                    printf("\n\nNome:%s\n\n",listaPokemon[dadosSalvos.numeroDePokemons - 1].nome);
                     break;
 
                 case 2://funcao de listar pokemons da pokedex
@@ -167,8 +142,8 @@ int main(){
 
         case 2://caso o usuario escolha o submenu da colecao, entra no submenu da colecao
             //submenu colecao
-            printf("\nSUBMENU COLEÇÃO\n");
-            printf("1 -> Inserir Pokémons\n2 -> Listar Pokémons\n3 -> Pesquisar Pokémons\n4 -> Alterar Pokémons\n5 -> Excluir Pokémons\n");
+            printf("\nSUBMENU COLECAO\n");
+            printf("1 -> Inserir Pokemons\n2 -> Listar Pokemons\n3 -> Pesquisar Pokemons\n4 -> Alterar Pokemons\n5 -> Excluir Pokemons\n");
             scanf("%d", &EscolheSubFuncao);
 
             //analisa a escolha no submenu da colecao
@@ -186,7 +161,7 @@ int main(){
                     break;
 
                 case 4://funcao de alterar pokemons da colecao
-                    alterarPokemonDaColecao(&colecaoDePokemons, dadosSalvos.totalPokesNaColecao, &listaPokemon, dadosSalvos.numeroDePokemons);
+                    alterarPokemonDaColecao(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon);
                     break;
 
                 case 5://funcao de excluir pokemons da colecao
@@ -194,7 +169,7 @@ int main(){
                     break;
 
                 default://caso o usuario nao digite nenhuma das opcoes acima
-                    printf("Opção não encontrada!\n");
+                    printf("Opcao nao encontrada!\n");
 
                     break;    
                 }//switch
@@ -215,54 +190,32 @@ int main(){
                         break;
 
                     case 2://funcao de listar pokemon da mochila
-                        ListaMochila(dadosSalvos.totalMochila, mochila, listaPokemon, dadosSalvos.numeroDePokemons);
+                        ListaMochila(mochila, listaPokemon, dadosSalvos.numeroDePokemons);
                         break;
 
-                    case 3://funcao de excluir pokemon da mochila
+                    case 3:
                         ExcluirMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, &dadosSalvos.totalMochila, listaPokemon, dadosSalvos.numeroDePokemons);
                         break;    
 
                     default://caso o usuario nao digite nenhuma das opcoes acima
-                        printf("Opção não encontrada!\n");
+                        
                         break;        
                 }//switch
 
             break;
 
-        case 4://caso o usuario queira exportar os dados do jogo para um arquivo .csv
-            //exporta os arquivos para csv
+        case 4:
             exportarPokemonParaCSV(listaPokemon, dadosSalvos.numeroDePokemons, nomeArquivo1); //exporta dados da pokedex para um arquivo .csv
-            exportarColecaoParaCSV(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, nomeArquivo2); //exporta dados da coleção para um arquivo .csv
-            exportarMochilaParaCSV(mochila, listaPokemon, dadosSalvos.totalMochila, nomeArquivo3);//exporta dados da mochila para arquivo csv
+            exportarColecaoParaCSV(colecaoDePokemons, dadosSalvos.totalPokesNaColecao, listaPokemon, nomeArquivo2); //expora dados da coleção para um arquivo .csv
+            exportarMochilaParaCSV(mochila, listaPokemon, dadosSalvos.totalMochila, nomeArquivo3);
             break;
 
-        case 5://caso o usuario saia do jogo
-            //abre os arquivos binários para escrita
+        case 5:
             arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "wb");
-            if(arquivoBinarioPokedex == NULL){
-                printf("Erro ao abrir o arquivo Pokedex!\n");
-                exit(1);
-            }//if
-
             arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "wb");
-            if(arquivoBinarioColecao == NULL){
-                printf("Erro ao abrir o arquivo Colecao!\n");
-                exit(1);
-            }//if
-            
             arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "wb");
-            if(arquivoBinarioMochila == NULL){
-                printf("Erro ao abrir o arquivo Mochila!\n");
-                exit(1);
-            }//if
-            
             arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "wb");
-            if(arquivoBinarioDados == NULL){
-                printf("Erro ao abrir o arquivo Dados!\n");
-                exit(1);
-            }//if
 
-            //escreve os dados nos arquivos binários
             fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
             fwrite(colecaoDePokemons, sizeof(Colecao), dadosSalvos.totalPokesNaColecao, arquivoBinarioColecao);
             fwrite(mochila, sizeof(Mochila), 6, arquivoBinarioMochila);
@@ -277,7 +230,7 @@ int main(){
 
         //caso o usuario nao digite nenhuma das opcoes do menu principal
         default:
-            printf("Opção não encontrada\n");
+            printf("Opcao nao encontrada\n");
 
             break;        
     }//switch

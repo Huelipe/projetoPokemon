@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void vetorDeNatures(struct natureza natures[26]) {
+void vetorDeNatures(nature natures[]){
 
 //Define todas as 25 naturezas do jogo
     strcpy(natures[1].nome, "Hardy");
@@ -118,9 +118,9 @@ void vetorDePokebolas(struct Pokebola pokebolas[4]) {
     pokebolas[3].catchRate = 10000;
 }
 
-void vetorDeTiposDePokemon(struct Tipos tipos[18]) {
+//void vetorDeTiposDePokemon(struct Tipos tipos[18]) {
 
-strcpy(tipos[0].nome, "Inseto");
+/*strcpy(tipos[0].nome, "Inseto");
 strcpy(tipos[1].nome, "Normal");
 strcpy(tipos[2].nome, "Fogo");
 strcpy(tipos[3].nome, "Agua");
@@ -325,3 +325,4 @@ for (int i = 0; i < 8; i++) {
 
 
 }
+*/
