@@ -1096,7 +1096,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
         case 1:
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido, listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome, listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[0].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
@@ -1113,7 +1113,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
         case 2:
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido,listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome,listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[1].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
@@ -1131,7 +1131,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
 
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido.,listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome,listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[2].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
@@ -1151,7 +1151,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
 
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido,listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome,listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[3].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
@@ -1169,7 +1169,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
 
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido,listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome,listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[4].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;
@@ -1187,7 +1187,7 @@ void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int *totalPo
         case 6:
 
         for(int i=0;i < totalPokemons;i++){
-            if(strcasecmp(pokemonASerInserido,listaPokemon[i].nome)==0){
+            if(strcasecmp(pokemonASerInserido.nome,listaPokemon[i].nome)==0){
                     for(int j=0;j < *totalPokeColecao;j++){
                         if(listaPokemon[i].nPokedex == colecaoDePokemons[j].numDoPokemon){
                             mochila[5].IdPokeMochila = colecaoDePokemons[j].numDoPokemon;

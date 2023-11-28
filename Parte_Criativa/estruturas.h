@@ -24,6 +24,7 @@ typedef struct Pokemon{
 } Pokemon; // Estrutura que define o pokemon na pokedex
 
 typedef struct pokemonCapturado{
+    char nome[20];
     float ivsHP; 
     float ivsAtk;
     float ivsDef;

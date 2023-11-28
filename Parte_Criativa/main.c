@@ -20,11 +20,11 @@ int main(){
 
     srand(time(NULL));
 
-    nature natures[25];
     Pokebola pokebolas[4];
-
-    vetorDeNatures(natures);
     vetorDePokebolas(pokebolas);
+
+    nature natures[25];
+    vetorDeNatures(natures);
 
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
 
@@ -49,6 +49,29 @@ int main(){
     }
 
     fclose(arquivo);
+
+    FILE *arquivoBinarioPokedex;
+    FILE *arquivoBinarioColecao;
+    FILE *arquivoBinarioMochila;
+    FILE *arquivoBinarioDados;
+
+    arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "rb");
+
+    if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
+        printf("Passei 1");
+            arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            dadosSalvos.totalMochila = 0;
+            dadosSalvos.numeroDePokemons = 721;
+            dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
+
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    } //verifica se houve erro na abertura do arquivo
+    }
 
     int screensAtuais = 0;
     int opcaoGenero;
@@ -369,11 +392,13 @@ int main(){
 pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
         criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures);
-        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila);
+        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }else if(opcaoPokemon == 2){
         criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures);
+        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }else if(opcaoPokemon == 3){
         criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures);
+        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }
 
 
