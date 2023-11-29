@@ -85,9 +85,9 @@ int main(){
     int EscolheSubFuncao;
 
     //variaveis utilizadas para definir os arquivos onde será salvo os dados exportados
-    const char *nomeArquivo1 = "DadosCSV/DadosPokedex.csv";
-    const char *nomeArquivo2 = "DadosCSV/DadosColecao.csv";
-    const char *nomeArquivo3 = "DadosCSV/DadosMochila.csv";
+    const char *nomeArquivo1 = "DadosPokedex.csv";
+    const char *nomeArquivo2 = "DadosColecao.csv";
+    const char *nomeArquivo3 = "DadosMochila.csv";
 
     do{
     //menu do jogo
@@ -208,10 +208,10 @@ int main(){
 
         case 5:
             //abre os arquivos para escrita binaria
-            arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "wb");
-            arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "wb");
-            arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "wb");
-            arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "wb");
+            arquivoBinarioPokedex = fopen("Pokedex.dat", "wb");
+            arquivoBinarioColecao = fopen("Colecao.dat", "wb");
+            arquivoBinarioMochila = fopen("Mochila.dat", "wb");
+            arquivoBinarioDados = fopen("Dados.dat", "wb");
 
             //escreve os dados do jogo
             fwrite(listaPokemon, sizeof(Pokemon), dadosSalvos.numeroDePokemons, arquivoBinarioPokedex);
