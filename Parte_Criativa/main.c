@@ -21,10 +21,8 @@ int main(){
     srand(time(NULL));
 
     Pokebola pokebolas[4];
-    vetorDePokebolas(pokebolas);
 
     nature natures[25];
-    vetorDeNatures(natures);
 
     Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
 
@@ -391,14 +389,8 @@ int main(){
     
 pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
-        criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures);
-        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }else if(opcaoPokemon == 2){
-        criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures);
-        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }else if(opcaoPokemon == 3){
-        criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures);
-        InserirNaMochila(mochila, colecaoDePokemons, &dadosSalvos.totalPokesNaColecao, listaPokemon, dadosSalvos.numeroDePokemons, &dadosSalvos.totalMochila, pokemonInicial);
     }
 
 
