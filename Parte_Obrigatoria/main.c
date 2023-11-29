@@ -26,10 +26,10 @@ int main(){
 
     Dados dadosSalvos;//salva os numeros da pokedex, colecao e da mochila
 
-    arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "rb");
-    arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "rb");
-    arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "rb");
-    arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "rb");
+    arquivoBinarioPokedex = fopen("Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("Dados.dat", "rb");
 
     if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
             arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
