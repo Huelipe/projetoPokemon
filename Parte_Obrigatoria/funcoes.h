@@ -16,7 +16,7 @@ void alterarPokemonDaColecao(Colecao* colecaoDePokemons, int totalPokesNaColecao
 
 void excluirPokemonDaColecao(Colecao** colecaoDePokemons, int* totalPokesNaColecao);
 
-void adicionarPokemonNaPokedex(Pokemon* listaPokemon, int* numeroDePokemons);
+void adicionarPokemonNaPokedex(Pokemon** listaPokemon, int* numeroDePokemons);
 
 void excluirPokemonDaPokedex(Pokemon* listaPokemon, int* numeroDePokemons);
 
