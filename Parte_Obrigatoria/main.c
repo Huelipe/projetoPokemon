@@ -58,6 +58,8 @@ int main(){
     }//for
     //le o arquivo .csv
 
+    printf("\n\nBem vindo ao jogo Pokémon!\n\n");
+
     fclose(arquivo);
     }else{
 
