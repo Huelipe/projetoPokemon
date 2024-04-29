@@ -14,12 +14,22 @@ typedef enum GameScreen { MENU, NOVOJOGO1, NOVOJOGO2, NOVOJOGO3, NOVOJOGO4, NOVO
 typedef enum GameLoad { CIDADE1 } GameLoad;
 #define MAX_CHARS 20 // Tamanho máximo da palavra a ser digitada
 
-
 #define MAX_POKEMON 722 
 
 int main(){
 
     srand(time(NULL));
+
+    Pokebola pokebolas[4];
+
+    nature natures[25];
+
+    Colecao* colecaoDePokemons; //armazena os ids dos pokemons na colecao
+
+    Mochila mochila[6];
+    int IndiceMochila[6];
+
+    Dados dadosSalvos;
 
     //Carrega a pokedex
     FILE *arquivo;
@@ -37,6 +47,29 @@ int main(){
     }
 
     fclose(arquivo);
+
+    FILE *arquivoBinarioPokedex;
+    FILE *arquivoBinarioColecao;
+    FILE *arquivoBinarioMochila;
+    FILE *arquivoBinarioDados;
+
+    arquivoBinarioPokedex = fopen("Arquivos_Binarios/Pokedex.dat", "rb");
+    arquivoBinarioColecao = fopen("Arquivos_Binarios/Colecao.dat", "rb");
+    arquivoBinarioMochila = fopen("Arquivos_Binarios/Mochila.dat", "rb");
+    arquivoBinarioDados = fopen("Arquivos_Binarios/Dados.dat", "rb");
+
+    if(arquivoBinarioPokedex == NULL && arquivoBinarioColecao == NULL && arquivoBinarioMochila == NULL){
+        printf("Passei 1");
+            arquivo = fopen("pokedex.csv", "r+"); //abre o arquivo .csv para leitura
+            dadosSalvos.totalMochila = 0;
+            dadosSalvos.numeroDePokemons = 721;
+            dadosSalvos.totalPokesNaColecao = 0; //numero total de pokemons da colecao
+
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    } //verifica se houve erro na abertura do arquivo
+    }
 
     int screensAtuais = 0;
     int opcaoGenero;
@@ -354,15 +387,12 @@ int main(){
         personagem = LoadTexture("imagens/amy.png");
     }
     
-/*pokemonCapturado pokemonInicial;
+pokemonCapturado pokemonInicial;
     if(opcaoPokemon == 1){
-        criarPokemon(listaPokemon[0], &pokemonInicial, 5, natures[26]);
     }else if(opcaoPokemon == 2){
-        criarPokemon(listaPokemon[3], &pokemonInicial, 5, natures[26]);
     }else if(opcaoPokemon == 3){
-        criarPokemon(listaPokemon[6], &pokemonInicial, 5, natures[26]);
     }
-*/    
+
 
     switch(screenLoad){
 

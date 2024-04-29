@@ -32,7 +32,7 @@ void exportarColecaoParaCSV(Colecao* colecaoDePokemons, int totalPokesNaColecao,
 
 void exportarMochilaParaCSV(Mochila* mochila, Pokemon* listaPokemon, int totalMochila, const char *nomeArquivo);
 
-void tirarColecao(int j, Colecao* colecaoDePokemons, int *totalPokeColecao);
+void tirarColecaoInserirMochila(int j, Colecao* colecaoDePokemons, int *totalPokeColecao);
 
 void InserirNaMochila(Mochila* mochila, Colecao* colecaoDePokemons, int* totalPokesNaColecao, Pokemon* listaPokemon, int totalPokemons, int* totalMochila);
 
